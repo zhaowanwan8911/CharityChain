@@ -1,0 +1,32 @@
+.navWraper{
+  width: 1200px;
+  margin: auto;
+  overflow: hidden;
+  .navTop{
+    font-size: 0;
+    border: 1px solid #333;
+    margin: 10px 0px;
+    div{
+      display: inline-block;
+      margin-left: 100px;
+      a{
+        color: #666;
+        font-size: 18px;
+        text-decoration: none;
+        line-height: 50px;
+        display: block;
+        padding: 0 10px;
+        &:hover{
+          color: cornflowerblue;
+        }
+      }
+    }
+  }
+  .navBto{
+    background: #eee;
+    font-size: 18px;
+    color: #666;
+    text-indent: 40px;
+    line-height: 50px;
+  }
+}
