@@ -17,11 +17,11 @@ class Account extends React.Component {
       <div className={styles.account}>
         <h2 className={styles.accountTitle}>钱包地址</h2>
         <div className={styles.accountInfo}>
-          {this.props.account.address}
+          {this.props.account.walletAddress}
         </div>
         <h2 className={styles.accountTitle}>钱包余额</h2>
         <div className={styles.accountInfo}>
-          <span>{this.props.account.money}</span> ont
+          <span>{this.props.account.balance}</span> ont
         </div>
         <div className={styles.operate} onClick={() => {this.props.operate()}}>{this.props.account.operateBtn}</div>
       </div>

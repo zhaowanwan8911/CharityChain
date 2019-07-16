@@ -40,9 +40,9 @@ class TableList extends React.Component {
                     return (
                       <tr key={index}>
                         {
-                          item.map((item1,index1) => {
+                          Object.keys(item).map((item1,index1) => {
                             return (
-                              <td key={index1}>{item1}</td>
+                              <td key={index1}>{item[item1]}</td>
                             )
                           })
                         }
