@@ -23,6 +23,10 @@ const Register = Loadable({
   loader: () => import('./components/Register/Register'),
   loading: Loading,
 })
+const HelpSeeker = Loadable({
+  loader: () => import('./components/HelpSeeker/HelpSeeker'),
+  loading: Loading,
+})
 
 const ChildRoute = () => (
   <div>
@@ -30,6 +34,7 @@ const ChildRoute = () => (
     <Route exact path="/" component={HomePage} />
     <Route exact path="/wallet" component={Wallet} />
     <Route exact path="/register" component={Register} />
+    <Route exact path="/help" component={HelpSeeker} />
     <Route path="*" component={Footer} />
   </div>
 )
