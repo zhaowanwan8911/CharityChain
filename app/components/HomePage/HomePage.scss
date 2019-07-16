@@ -1,0 +1,187 @@
+.bodyWrapper {
+  background: #f1f1f1;
+  padding-bottom: 20px;
+  .swiperWrapper {
+    // background: #1cabe2;
+    background: #000;
+    height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .fromWrapper {
+      width: 600px;
+      // height: 50px;
+      margin: 0 auto;
+      .choiseWrapper {
+        display: flex;
+        margin-bottom: 20px;
+        border-radius: 4px;
+        overflow: hidden;
+        .browseBtn {
+          background: #1cabe2;
+          width: 150px;
+          line-height: 50px;
+          text-align: center;
+          color: #fff;
+          // font-size: 24px;
+          cursor: pointer;
+        }    
+      }
+      .input {
+        width: 600px;
+        height: 50px;
+        line-height: 50px;
+        border: none;
+        background: #fff;
+        border-radius: 4px;
+        font-size: 18px;
+        span {
+          margin-left: 10px;
+        }
+        ::placeholder {
+          color: #666;
+          font-size: 18px;
+          margin-left: 10px;
+        }
+      }
+      .input:nth-child(1) {
+        width: 450px;
+        color: #666;
+        border-radius: 0;
+      }
+      .submit {
+        margin: 0 auto;
+        background: #1cabe2;
+        height: 50px;
+        width: 200px;
+        text-align: center;
+        line-height: 50px;
+        color: #fff;
+        border-radius: 4px;
+        // margin-top: 20px;
+        cursor: pointer;
+      }
+      .alert {
+        display: block;
+        color: red;
+        height: 30px;
+        line-height: 30px;
+        text-align: center;
+      }
+    }
+  }
+  .infoWrapper {
+    margin: 0 auto;
+    width: 1200px;
+    margin-top: 50px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    .newsWrapper {
+      width: 760px;
+      height: 500px;
+      .newImg {
+        width: 500px;
+        height: 100%;
+        background: yellow;
+      }
+      .newInfo {
+        background: #fff;
+        width: 260px;
+        padding: 20px;
+        position: relative;
+        .time {
+          display: block;
+          font-size: 14px;
+          margin-top: 20px;
+          margin-bottom: 10px;
+          color: #666;
+        }
+        .more {
+          position: absolute;
+          color: #1cabe2;
+          left: 20px;
+          bottom: 20px;
+        }
+      }
+    }
+    .blogWrapper {
+      width: 400px;
+      height: 500px;
+      flex-direction: column;
+      .blogImg {
+        width: 100%;
+        height: 280px;
+        background: yellow;
+      }
+      .blogInfo {
+        background: #fff;
+        height: 220px;
+        padding: 20px;
+        position: relative;
+        .time {
+          display: block;
+          font-size: 14px;
+          margin-top: 20px;
+          margin-bottom: 10px;
+          color: #666;
+        }
+        .text {
+          display: block;
+          margin-top: 10px;
+        }
+        .more {
+          position: absolute;
+          color: #1cabe2;
+          left: 20px;
+          bottom: 20px;
+        }
+      }
+    }
+    .videoWrapper {
+      margin-top: 40px;
+      width: 1200px;
+      height: 500px;
+      .videoImg {
+        width: 800px;
+        height: 100%;
+        background: yellow;
+      }
+      .videoInfo {
+        background: #fff;
+        width: 400px;
+        padding: 20px;
+        position: relative;
+        .time {
+          display: block;
+          font-size: 14px;
+          margin-top: 20px;
+          margin-bottom: 10px;
+          color: #666;
+        }
+        .text {
+          display: block;
+          margin-top: 10px;
+        }
+        .more {
+          position: absolute;
+          color: #1cabe2;
+          left: 20px;
+          bottom: 20px;
+        }
+      }
+    }
+  }
+  .infoWrapper > div {
+    box-sizing: border-box;
+    border-radius: 4px;
+    box-shadow: 0 1px 4px 1px rgba(0,0,0,.25);
+    background: #1cabe2;
+    display: flex;
+    overflow: hidden;
+    cursor: pointer;
+    h4 {
+      color: #999;
+    }
+  }
+}

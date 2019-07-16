@@ -11,6 +11,10 @@ const Nav = Loadable({
   loader: () => import('./components/Nav/Nav'),
   loading: Loading,
 })
+const Footer = Loadable({
+  loader: () => import('./components/Footer/Footer'),
+  loading: Loading,
+})
 const Wallet = Loadable({
   loader: () => import('./components/Wallet/Wallet'),
   loading: Loading,
@@ -21,6 +25,7 @@ const ChildRoute = () => (
     <Route path="*" component={Nav} />
     <Route exact path="/" component={HomePage} />
     <Route exact path="/wallet" component={Wallet} />
+    <Route path="*" component={Footer} />
   </div>
 )
 
