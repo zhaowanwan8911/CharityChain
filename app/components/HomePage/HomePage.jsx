@@ -4,6 +4,9 @@ import { connect } from 'react-redux'
 import { injectIntl } from 'react-intl'
 import { login } from '../../actions/login'
 // import classNames from 'classnames'
+import newsImg from './news.jpeg';
+import blogImg from './blog.jpg';
+import videoImg from './video.jpg';
 
 import styles from './HomePage.scss'
 
@@ -129,7 +132,9 @@ class Login extends React.Component {
         </div>
         <div className={styles.infoWrapper}>
           <div className={styles.newsWrapper}>
-            <div className={styles.newImg}>这里是放图片的</div>
+            <div className={styles.newImg}>
+              <img src={newsImg} alt=""/>
+            </div>
             <div className={styles.newInfo}>
               <h4>图片+新闻篇</h4>
               <span className={styles.time}>2019.09.09</span>
@@ -138,8 +143,10 @@ class Login extends React.Component {
             </div>
           </div>
           <div className={styles.blogWrapper}>
-            <div className={styles.blogImg}>这里是放图片的</div>
-              <div className={styles.blogInfo}>
+            <div className={styles.blogImg}>
+              <img src={blogImg} alt=""/>
+            </div>
+            <div className={styles.blogInfo}>
               <h4>图片+博客篇</h4>
               <span className={styles.time}>2019.09.09</span>
               <h3>银河系基金会大使侯旭辉的博客</h3>
@@ -148,8 +155,10 @@ class Login extends React.Component {
             </div>
           </div>
           <div className={styles.videoWrapper}>
-            <div className={styles.videoImg}>这里是放图片的</div>
-              <div className={styles.videoInfo}>
+            <div className={styles.videoImg}>
+              <img src={videoImg} alt=""/>
+            </div>
+            <div className={styles.videoInfo}>
               <h4>图片+视频篇</h4>
               <span className={styles.time}>2019.09.09</span>
               <h3>银河系基金会大使侯旭辉的爱心之旅</h3>
