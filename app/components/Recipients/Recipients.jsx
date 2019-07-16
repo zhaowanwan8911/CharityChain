@@ -9,41 +9,42 @@ import UserInfo from '../UserInfo/UserInfo'
 import Account from '../Account/Account'
 import Pagiation from '../Pagination/Pagination'
 
-import styles from './HelpSeeker.scss'
+import styles from './Recipients.scss'
 
 class HelpSeeker extends React.Component {
   constructor(props) {
     super(props)
     this.state = {}
     // 用户信息
-    this.userInfo = [
-      {
+    this.userInfo = {
+      name: {
         key: '姓名',
         value: '张之雅'
 
       },
-      {
+      guardian: {
         key: '监护人',
         value: '张志国'
 
       },
-      {
+      phone: {
         key: '联系方式',
         value: '18510601969'
 
       },
-      {
+      homeAddress: {
         key: '联系地址',
         value: '北京市海淀区'
 
       },
-    ]
-    // 账户余额
+    }
+    // 账户信息
     this.account = {
-      address: '09e599ecde6eec18608bdecd0cf0a54b02b',
-      money: 20,
+      walletAddress: '09e599ecde6eec18608bdecd0cf0a54b02b',
+      balance: 20,
       operateBtn: '发布申请',
     }
+    
     // 受助列表
     this.tableHeader = [
       {
@@ -64,24 +65,30 @@ class HelpSeeker extends React.Component {
       },
     ]
     this.tableData = [
-      [
-        '2019-08-15',
-        '09e599ecde6eec18608bdecd0cf0a54b02bc9d55239e1b1bd291558e5a6ef3fa',
-        'A15NzM9iE3VT9X8SGk5h3dii6GPFQh2vme',
-        '100 ont',
-      ],
-      [
-        '2019-08-15',
-        '09e599ecde6eec18608bdecd0cf0a54b02bc9d55239e1b1bd291558e5a6ef3fa',
-        'A15NzM9iE3VT9X8SGk5h3dii6GPFQh2vme',
-        '100 ont',
-      ],
-      [
-        '2019-08-15',
-        '09e599ecde6eec18608bdecd0cf0a54b02bc9d55239e1b1bd291558e5a6ef3fa',
-        'A15NzM9iE3VT9X8SGk5h3dii6GPFQh2vme',
-        '100 ont',
-      ],
+      {
+        time: '2019-08-15',
+        hashValue: '09e599ecde6eec18608bdecd0cf0a54b02bc9d55239e1b1bd291558e5a6ef3fa',
+        walletAddress: 'A15NzM9iE3VT9X8SGk5h3dii6GPFQh2vme',
+        amount: '100 ont',
+      },
+      {
+        time: '2019-08-15',
+        hashValue: '09e599ecde6eec18608bdecd0cf0a54b02bc9d55239e1b1bd291558e5a6ef3fa',
+        walletAddress: 'A15NzM9iE3VT9X8SGk5h3dii6GPFQh2vme',
+        amount: '100 ont',
+      },
+      {
+        time: '2019-08-15',
+        hashValue: '09e599ecde6eec18608bdecd0cf0a54b02bc9d55239e1b1bd291558e5a6ef3fa',
+        walletAddress: 'A15NzM9iE3VT9X8SGk5h3dii6GPFQh2vme',
+        amount: '100 ont',
+      },
+      {
+        time: '2019-08-15',
+        hashValue: '09e599ecde6eec18608bdecd0cf0a54b02bc9d55239e1b1bd291558e5a6ef3fa',
+        walletAddress: 'A15NzM9iE3VT9X8SGk5h3dii6GPFQh2vme',
+        amount: '100 ont',
+      },
     ]
     this.sessionName = '受捐记录'
   }
@@ -103,8 +110,8 @@ class HelpSeeker extends React.Component {
   }
   render() {
     return (
-      <div className={styles.helpInfo}>
-        <div className={styles.helper}>
+      <div className={styles.recipientsInfo}>
+        <div className={styles.recipients}>
           <div className={styles.sessionName}>
             个人钱包
           </div>
@@ -116,7 +123,7 @@ class HelpSeeker extends React.Component {
             operate={this.operate}
           />
         </div>
-        <div className={styles.helpRecord}>
+        <div className={styles.recipientsRecord}>
           <TableList
             tableHeader={this.tableHeader}
             tableData = {this.tableData}
