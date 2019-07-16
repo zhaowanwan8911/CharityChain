@@ -9,7 +9,9 @@ import styles from './Nav.scss'
 class Nav extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {}
+    this.state = {
+      hideNav: false,
+    }
     this.navList = [
       {
         name: '首页',
@@ -34,9 +36,28 @@ class Nav extends React.Component {
     ]
   }
 
+  componentDidMount = () => {
+    window.addEventListener('scroll', this.handleScroll.bind(this))
+  }
+  componentWillUnmount = () => {
+    window.removeEventListener('scroll', this.handleScroll.bind(this))
+  }
+  handleScroll = (e) => {
+    if (e.srcElement.scrollingElement.scrollTop > 100) {
+      this.setState({
+        hideNav: true,
+      })
+    } else {
+      this.setState({
+        hideNav: false,
+      })
+    }
+  }
+
   render() {
     return (
-      <div className={styles.navWraper}>
+      <div className={styles.navWraper} style={this.state.hideNav ? { height: '60px', position: 'fixed', top: '0', left: '0', zIndex: '999' } : { height: '160px' }}>
+        <div className={styles.logo} style={this.state.hideNav ? { display: 'none' } : { display: 'block' }}>嘿！朋友</div>
         <div className={styles.navTop}>
           {
             this.navList.map((item, index) => {
@@ -49,9 +70,6 @@ class Nav extends React.Component {
               )
             })
           }
-        </div>
-        <div className={styles.navBto}>
-          个人钱包
         </div>
       </div>
     )
