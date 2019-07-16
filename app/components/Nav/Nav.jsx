@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { injectIntl } from 'react-intl'
+import logo from './logo.png'
 
 import styles from './Nav.scss'
 
@@ -57,7 +58,9 @@ class Nav extends React.Component {
   render() {
     return (
       <div className={styles.navWraper} style={this.state.hideNav ? { height: '60px', position: 'fixed', top: '0', left: '0', zIndex: '999' } : { height: '160px' }}>
-        <div className={styles.logo} style={this.state.hideNav ? { display: 'none' } : { display: 'block' }}>嘿！朋友</div>
+        <div className={styles.logo} style={this.state.hideNav ? { display: 'none' } : { display: 'block' }}>
+          <img src={logo} alt="嘿！朋友" className={styles.logoImg}/>
+        </div>
         <div className={styles.navTop}>
           {
             this.navList.map((item, index) => {

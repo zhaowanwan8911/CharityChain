@@ -25,11 +25,11 @@ class UserInfo extends React.Component {
             <span>编辑</span>
           </div>
           {
-            this.props.userInfo.map((item, index) => {
+            Object.keys(this.props.userInfo).map((item, index) => {
               return (
                 <p key={index}>
-                  <span>{item.key}:</span>
-                  <span>{item.value}</span>
+                  <span>{this.props.userInfo[item].key}:</span>
+                  <span>{this.props.userInfo[item].value}</span>
                 </p>
               )
             })
