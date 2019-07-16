@@ -19,12 +19,17 @@ const Wallet = Loadable({
   loader: () => import('./components/Wallet/Wallet'),
   loading: Loading,
 })
+const Register = Loadable({
+  loader: () => import('./components/Register/Register'),
+  loading: Loading,
+})
 
 const ChildRoute = () => (
   <div>
     <Route path="*" component={Nav} />
     <Route exact path="/" component={HomePage} />
     <Route exact path="/wallet" component={Wallet} />
+    <Route exact path="/register" component={Register} />
     <Route path="*" component={Footer} />
   </div>
 )

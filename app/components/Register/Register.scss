@@ -1,0 +1,57 @@
+.content{
+  width: 1000px;
+  height: 500px;
+  margin: 20px auto;
+  border: 1px solid black;
+  .title{
+    height: 100px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 20px;
+    box-sizing: border-box;
+    .item{
+      background: #a7a7a7;
+      width: 200px;
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+  .form{
+    display: flex;
+    justify-content: space-around;
+    line-height: 50px;
+    .upload{
+      display: flex;
+      flex-direction: column;
+      input{
+        opacity: 0;
+      }
+      label{
+        height: 39px;
+        width: 121px;
+        border: 1px solid black;
+        border-radius: 6px;
+        margin-top: 0px;
+        text-align: center;
+        line-height: 37px;
+      }
+      img{
+        border: 1px solid black;
+        margin-top: 30px;
+      }
+    }
+  }
+  .done{
+    height: 50px;
+    width: 122px;
+    border: 1px solid black;
+    margin: 0 auto;
+    margin-top: 30px;
+    border-radius: 7px;
+    text-align: center;
+    line-height: 46px;
+  }
+}
