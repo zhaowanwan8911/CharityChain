@@ -1,1 +1,1 @@
-export const LOGIN = 'LOGIN'
+export const SET_WALLET_INFO = 'SET_WALLET_INFO'

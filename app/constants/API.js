@@ -1,1 +1,1 @@
-export const LOGIN = 'xx/xx/xx'
+export const API_GET_STAR_TEAM = '/team/star'
