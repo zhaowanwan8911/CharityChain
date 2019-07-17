@@ -19,11 +19,13 @@
         overflow: hidden;
         .browseBtn {
           background: #1cabe2;
-          width: 150px;
+          width: 118px;
           line-height: 50px;
           text-align: center;
           color: #fff;
           // font-size: 24px;
+          border-top-right-radius: 4px;
+          border-bottom-right-radius: 4px;
           cursor: pointer;
         }
       }
@@ -36,8 +38,6 @@
         border-radius: 4px;
         font-size: 18px;
         padding-left: 16px;
-        span {
-        }
         ::placeholder {
           color: #666;
           font-size: 18px;
@@ -45,7 +45,7 @@
         }
       }
       .input:nth-child(1) {
-        width: 450px;
+        width: 458px;
         color: #666;
         border-radius: 0;
       }
@@ -67,6 +67,57 @@
         height: 30px;
         line-height: 30px;
         text-align: center;
+      }
+      .roleSelect {
+        width: 590px;
+        height: 50px;
+        line-height: 50px;
+        margin: 20px 0;
+        border: none;
+        // background: #fff;
+        border-radius: 4px;
+        font-size: 18px;
+        // padding-left: 16px;
+        position: relative;
+        overflow: hidden;
+        .downImg {
+          width: 50px;
+          height: 50px;
+          position: absolute;
+          right: 20px;
+        }
+        ul {
+          list-style: none;
+          padding: 0;
+          display: flex;
+          justify-content: space-between;
+          .listItem {
+            display: flex;
+            flex: 1;
+            text-align: center;
+            line-height: 50px;
+            cursor: pointer;
+            color: #fff;
+            // color: #1cabe2;
+            justify-content: center;
+            align-items: center;
+            .drow {
+              width: 10px;
+              height: 10px;
+              border-radius: 50px;
+              background: #fff;
+              margin-right: 10px;
+            }
+          }
+          .itemActive {
+            // background: #1cabe2;
+            // color: #fff;
+            // color: #1cabe2;
+          }
+          .drowActive {
+            background: #1cabe2 !important;
+          }
+        }
       }
     }
   }
