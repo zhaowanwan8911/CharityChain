@@ -1,1 +1,2 @@
-export const API_GET_STAR_TEAM = '/team/star'
+export const API_LOGIN = '/user/login'
+export const API_REGISTER = '/user/register'

@@ -3,6 +3,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { injectIntl } from 'react-intl'
 import { setWalletInfo } from '../../actions/wallet'
+import { login } from '../../actions/login'
 // import classNames from 'classnames'
 import newsImg from './news.jpeg';
 import blogImg from './blog.jpg';
@@ -29,10 +30,17 @@ class HomePage extends React.Component {
   componentDidMount = () => {
     window.addEventListener('scroll', this.handleScroll.bind(this))
   }
+
   componentWillReceiveProps = (nextProps) => {
-    if (this.props.loginInfo !== nextProps.loginInfo) {
-      // this.loginInfoCheck(nextProps.loginInfo)
-      this.loginInfoCheck(0)
+    if (this.props.personalInfo !== nextProps.personalInfo) {
+      let path
+      if(nextProps.personalInfo.registered === "true"){
+        path = '/recipients'
+
+      }else{
+        path = '/register'
+      }
+      this.props.history.push(path)
     }
   }
   componentWillUnmount = () => {
@@ -89,8 +97,6 @@ class HomePage extends React.Component {
   }
   // 登录
   login = () => {
-    console.log(this.state.selectedFileList)
-    console.log(this.state.psword)
     Sleep.sleep(200).then(() => {
       FileHelper.readWalletFile(this.state.selectedFileList).then( ($walletFile) => {
         if($walletFile) {
@@ -102,14 +108,14 @@ class HomePage extends React.Component {
               walletFile: this.state.selectedFileList,
             }
             this.props.setWalletInfo(walletInfo)
+            this.props.login(Address)
+
           }else{
             console.log(info)
           }
         }
       })
     })
-
-
   }
   render() {
     return (
@@ -192,13 +198,15 @@ class HomePage extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    walletInfo: state.walletInfo,
+    walletInfo: state.wallet.walletInfo,
+    personalInfo: state.login.personalInfo,
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
     setWalletInfo: bindActionCreators(setWalletInfo, dispatch),
+    login: bindActionCreators(login, dispatch),
   }
 }
 
