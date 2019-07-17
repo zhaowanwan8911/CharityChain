@@ -8,8 +8,11 @@ import TableList from '../TableList/TableList'
 import UserInfo from '../UserInfo/UserInfo' 
 import Account from '../Account/Account'
 import Pagiation from '../Pagination/Pagination'
+import ReleaseHistory from '../ReleaseHistory/ReleaseHistory'
 
 import styles from './Recipients.scss'
+
+import PIC from './pic.jpg'
 
 class HelpSeeker extends React.Component {
   constructor(props) {
@@ -91,8 +94,46 @@ class HelpSeeker extends React.Component {
       },
     ]
     this.sessionName = '受捐记录'
+    // 发布历史记录
+    this.releaseHistory = [
+      {
+        pic: PIC,
+        title: '大卫·贝克汉姆探访了位于上海市郊的香花桥幼儿园',
+        time: '2019.09.09',
+        status: 0,
+      },
+      {
+        pic: PIC,
+        title: '大卫·贝克汉姆探访了位于上海市郊的香花桥幼儿园',
+        time: '2019.09.09',
+        status: 0,
+      },
+      {
+        pic: PIC,
+        title: '大卫·贝克汉姆探访了位于上海市郊的香花桥幼儿园',
+        time: '2019.09.09',
+        status: 0,
+      },
+      {
+        pic: PIC,
+        title: '大卫·贝克汉姆探访了位于上海市郊的香花桥幼儿园',
+        time: '2019.09.09',
+        status: 0,
+      },
+      {
+        pic: PIC,
+        title: '大卫·贝克汉姆探访了位于上海市郊的香花桥幼儿园',
+        time: '2019.09.09',
+        status: 1,
+      },
+      {
+        pic: PIC,
+        title: '大卫·贝克汉姆探访了位于上海市郊的香花桥幼儿园',
+        time: '2019.09.09',
+        status: 0,
+      },
+    ]
   }
-
   paging = (pageCurr) => {
     console.log(pageCurr)
     // 获取受捐记录的数据（根据页数）
@@ -136,6 +177,15 @@ class HelpSeeker extends React.Component {
               paging: this.paging,
             }}
           />
+        </div>
+        <div className={styles.releaseHistory}>
+          {
+            this.releaseHistory.map((item, index) => {
+              return (
+                <ReleaseHistory info={item} key={index}/>
+              )
+            })
+          }
         </div>
       </div>
     )
