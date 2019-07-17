@@ -17,10 +17,12 @@ class TableList extends React.Component {
     return (
       <div className={styles.tableWraper}>
         <div className={styles.tableContent}>
-          <div className={styles.sessionName}>{this.props.sessionName}</div>
-          <div className={styles.refresh} onClick={() => {this.props.refreshList}}>
-            刷新信息
-          </div>
+          {
+            this.props.sessionName ? <div className={styles.sessionName}>{this.props.sessionName}</div> : null
+          }
+          {
+            !this.props.hideRefresh ? <div className={styles.refresh} onClick={() => {this.props.refreshList}}> 刷新 </div> : null
+          }
           <div className={styles.tableList}>
             <table cellSpacing="0" cellPadding="0">
               <thead>
@@ -38,11 +40,11 @@ class TableList extends React.Component {
                 {
                   this.props.tableData.map((item, index) => {
                     return (
-                      <tr key={index}>
+                      <tr key={index} className={this.props.colorClass === "green" ? styles.green : this.props.colorClass === "red" ? styles.red : null}>
                         {
                           Object.keys(item).map((item1,index1) => {
                             return (
-                              <td key={index1}>{item[item1]}</td>
+                              item1 === "amount" ? <td key={index1}>{item[item1]} ont</td> : <td key={index1}>{item[item1]}</td>
                             )
                           })
                         }

@@ -31,6 +31,10 @@ const RecipientContent = Loadable({
   loader: () => import('./components/RecipientContent/RecipientContent'),
   loading: Loading,
 })
+const BusinessDetail = Loadable({
+  loader: () => import('./components/BusinessDetail/BusinessDetail'),
+  loading: Loading,
+})
 
 const ChildRoute = () => (
   <div>
@@ -40,6 +44,7 @@ const ChildRoute = () => (
     <Route exact path="/register" component={Register} />
     <Route exact path="/recipients" component={Recipients} />
     <Route exact path="/recipients/1" component={RecipientContent} />
+    <Route exact path="/business" component={BusinessDetail} />
     <Route path="*" component={Footer} />
   </div>
 )

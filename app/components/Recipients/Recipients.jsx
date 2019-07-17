@@ -72,25 +72,25 @@ class HelpSeeker extends React.Component {
         time: '2019-08-15',
         hashValue: '09e599ecde6eec18608bdecd0cf0a54b02bc9d55239e1b1bd291558e5a6ef3fa',
         walletAddress: 'A15NzM9iE3VT9X8SGk5h3dii6GPFQh2vme',
-        amount: '100 ont',
+        amount: '100',
       },
       {
         time: '2019-08-15',
         hashValue: '09e599ecde6eec18608bdecd0cf0a54b02bc9d55239e1b1bd291558e5a6ef3fa',
         walletAddress: 'A15NzM9iE3VT9X8SGk5h3dii6GPFQh2vme',
-        amount: '100 ont',
+        amount: '100',
       },
       {
         time: '2019-08-15',
         hashValue: '09e599ecde6eec18608bdecd0cf0a54b02bc9d55239e1b1bd291558e5a6ef3fa',
         walletAddress: 'A15NzM9iE3VT9X8SGk5h3dii6GPFQh2vme',
-        amount: '100 ont',
+        amount: '100',
       },
       {
         time: '2019-08-15',
         hashValue: '09e599ecde6eec18608bdecd0cf0a54b02bc9d55239e1b1bd291558e5a6ef3fa',
         walletAddress: 'A15NzM9iE3VT9X8SGk5h3dii6GPFQh2vme',
-        amount: '100 ont',
+        amount: '100',
       },
     ]
     this.sessionName = '受捐记录'
