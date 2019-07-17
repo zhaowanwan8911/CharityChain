@@ -43,8 +43,13 @@ class HomePage extends React.Component {
     if (this.props.personalInfo !== nextProps.personalInfo) {
       let path
       if(nextProps.personalInfo.registered === "true"){
-        path = '/recipients'
-
+        if(this.state.roleName === this.list[0].name){
+          path = "donator"
+        }else if (this.state.roleName === this.list[1].name){
+          path = "recipients"
+        }else {
+          path = "charity"
+        }
       }else{
         path = '/register'
       }
