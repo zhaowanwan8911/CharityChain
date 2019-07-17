@@ -6,7 +6,7 @@ import { injectIntl } from 'react-intl'
 import styles from './Wallet.scss'
 import GetWalletFileMsg from '../../constants/ont-wallet/info'
 import FileHelper from '../../constants/ont-wallet/file-generate-and-get'
-import Sleep from '../../constants/sleep'
+import Sleep from '../../constants/ont-wallet/sleep'
 import WalletTransaction from '../../constants/ont-wallet/transaction'
 
 class Login extends React.Component {

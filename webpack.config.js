@@ -1,6 +1,13 @@
 const path = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+
+const ProxyConfig = {
+  target: 'http://10.120.115.232:9999',
+  changeOrigin: true,
+  secure: false,
+}
+
 module.exports = {
   entry: [
     'babel-polyfill',
@@ -78,6 +85,11 @@ module.exports = {
     inline: true,
     compress: false,
     open: true,
+    proxy: {
+      '/user/register/*': ProxyConfig,
+      '/user/login/*': ProxyConfig,
+      '/user/info/*': ProxyConfig,
+    },
   },
   plugins: [
     new HtmlWebpackPlugin({

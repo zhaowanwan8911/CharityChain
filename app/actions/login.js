@@ -1,8 +1,38 @@
+import {
+  API_LOGIN,
+  API_REGISTER
+} from '../constants/API'
+import RestfulAPIUtils from '../Utils/RestfuAPIUtils'
 import * as types from '../constants/ActionTypes'
 
-export const login = (file, password) => {
+export const login = ($address) => {
   return async (dispatch) => {
-    dispatch({ type: types.LOGIN, payload: { file: file, password: password } })
+    try {
+      const result = await RestfulAPIUtils.get(API_LOGIN, { params: { walletAddress: $address, role: 'donator' } })
+      if (result.status === 200) {
+        dispatch({ type: types.LOGIN, payload: result.data })
+      } else {
+        throw result.status.message
+      }
+    } catch (e) {
+      console.error(e)
+    }
   }
 }
 
+export const register = ($personalInfo) => {
+  console.log($personalInfo)
+  return async (dispatch) => {
+    try {
+      const result = await RestfulAPIUtils.post(API_REGISTER, $personalInfo)
+      console.log(result)
+      if (result.status === 200) {
+        //dispatch({ type: types.LOGIN, payload: result.data })
+      } else {
+        throw result.status.message
+      }
+    } catch (e) {
+      console.error(e)
+    }
+  }
+}

@@ -6,6 +6,7 @@ import { injectIntl } from 'react-intl'
 import classNames from 'classnames'
 
 import styles from './Register.scss'
+import {register} from "../../actions/login";
 
 class Register extends React.Component {
   constructor(props) {
@@ -15,15 +16,17 @@ class Register extends React.Component {
     }
   }
 
-  setDonateTrue = () => {
-    this.setState({
-      donate: true,
-    })
-  }
-  setDonateFalse = () => {
-    this.setState({
-      donate: false,
-    })
+  toRegister = () => {
+    const personalInfo = {
+      name:'Jayne',
+      role:'donator',
+      gender:'女',
+      profession: '程序员',
+      phone: '13145645876',
+      wallet_address: 'AL6YBSSi9rJwkxSHc3K6tq8Ze53Nji4aRP',
+      address:'北京市海淀区',
+    }
+    this.props.register(personalInfo)
   }
   render() {
     return (
@@ -50,15 +53,13 @@ class Register extends React.Component {
                 </div>
                 <div className={styles.upload}>
                   <input type="file" name="file" id="file" />
-                  <label for="file" >上传头像</label> 
+                  <label for="file" >上传头像</label>
                   <img src="" height="200" width="300" alt="Image preview..."/>
                 </div>
               </div>
-                <div className={styles.done}>
-                  <input type="submit" value="完成" ></input>
-                </div>
-                
+              <div className={styles.done} onClick={() => this.toRegister()}>完成</div>
               </form>
+
             </div>
             :
             <div className={styles.donate}>
@@ -81,14 +82,14 @@ class Register extends React.Component {
                 </div>
                 <div className={styles.upload}>
                   <input type="file" name="file" id="file" />
-                  <label for="file" >上传头像</label> 
+                  <label for="file" >上传头像</label>
                   <img src="" height="200" width="300" alt="Image preview..."/>
                 </div>
               </div>
                 <div className={styles.done}>
                   <input type="submit" value="完成" ></input>
                 </div>
-                
+
               </form>
             </div>
         }
@@ -104,6 +105,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    register: bindActionCreators(register, dispatch),
   }
 }
 
