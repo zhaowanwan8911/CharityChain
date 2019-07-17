@@ -6,8 +6,12 @@
   height: 160px;
   box-shadow: 0 10px 8px 0 rgba(0,0,0,.1);
   .logo {
-    // background: url('./logo.png');
+    box-sizing: border-box;
+    padding: 20px;
     height: 100px;
+    .logoImg {
+      height: 60px;
+    }
   }
   .navTop{
     background: #fff;
