@@ -30,11 +30,9 @@ class HomePage extends React.Component {
     this.list = [
       {name: '捐赠者'},
       {name: '求助者'},
-      {name: '慈善机构'},
-      {name: '执行机构'},
-      {name: '供应商'}
+      {name: '机构'},
     ]
-      
+
   }
 
   componentDidMount = () => {
@@ -119,12 +117,22 @@ class HomePage extends React.Component {
           let info = GetWalletFileMsg.decryptWalletFile($walletFile, this.state.psword)
           if(info.isGetInfo) {
             const Address = info.ontid.substring(8)
+            let role
+            if(this.state.roleName === this.list[0].name){
+              role = "donator"
+            }else if (this.state.roleName === this.list[1].name){
+              role = "recipients"
+            }else {
+              role = "charity"
+            }
             const walletInfo = {
               address: Address,
               walletFile: this.state.selectedFileList,
+              role: role
             }
             this.props.setWalletInfo(walletInfo)
-            this.props.login(Address)
+
+            this.props.login(Address,role)
 
           }else{
             console.log(info)

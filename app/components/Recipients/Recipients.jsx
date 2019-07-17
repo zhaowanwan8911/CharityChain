@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { injectIntl } from 'react-intl'
 
 import TableList from '../TableList/TableList'
-import UserInfo from '../UserInfo/UserInfo' 
+import UserInfo from '../UserInfo/UserInfo'
 import Account from '../Account/Account'
 import Pagiation from '../Pagination/Pagination'
 import ReleaseHistory from '../ReleaseHistory/ReleaseHistory'
@@ -13,6 +13,8 @@ import ReleaseHistory from '../ReleaseHistory/ReleaseHistory'
 import styles from './Recipients.scss'
 
 import PIC from './pic.jpg'
+import {setWalletInfo} from "../../actions/wallet";
+import {login} from "../../actions/login";
 
 class HelpSeeker extends React.Component {
   constructor(props) {
@@ -47,7 +49,7 @@ class HelpSeeker extends React.Component {
       balance: 20,
       operateBtn: '发布申请',
     }
-    
+
     // 受助列表
     this.tableHeader = [
       {
@@ -157,10 +159,9 @@ class HelpSeeker extends React.Component {
             个人钱包
           </div>
           <UserInfo
-            userInfo={this.userInfo}
           />
           <Account
-            account={this.account}
+            buttonName="发布申请"
             operate={this.operate}
           />
         </div>
@@ -194,6 +195,8 @@ class HelpSeeker extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
+    walletInfo: state.wallet.walletInfo,
+    personalInfo: state.login.personalInfo,
   }
 }
 
