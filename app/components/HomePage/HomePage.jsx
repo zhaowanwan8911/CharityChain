@@ -2,6 +2,7 @@ import React from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { injectIntl } from 'react-intl'
+import { setWalletInfo } from '../../actions/wallet'
 import { login } from '../../actions/login'
 // import classNames from 'classnames'
 import newsImg from './news.jpeg';
@@ -9,8 +10,12 @@ import blogImg from './blog.jpg';
 import videoImg from './video.jpg';
 
 import styles from './HomePage.scss'
+import Sleep from "../../constants/ont-wallet/sleep";
+import FileHelper from "../../constants/ont-wallet/file-generate-and-get";
+import GetWalletFileMsg from "../../constants/ont-wallet/info";
 
-class Login extends React.Component {
+
+class HomePage extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -21,14 +26,21 @@ class Login extends React.Component {
       success: true,
     }
   }
-  
+
   componentDidMount = () => {
     window.addEventListener('scroll', this.handleScroll.bind(this))
   }
+
   componentWillReceiveProps = (nextProps) => {
-    if (this.props.loginInfo !== nextProps.loginInfo) {
-      // this.loginInfoCheck(nextProps.loginInfo)
-      this.loginInfoCheck(0)
+    if (this.props.personalInfo !== nextProps.personalInfo) {
+      let path
+      if(nextProps.personalInfo.registered === "true"){
+        path = '/recipients'
+
+      }else{
+        path = '/register'
+      }
+      this.props.history.push(path)
     }
   }
   componentWillUnmount = () => {
@@ -85,13 +97,25 @@ class Login extends React.Component {
   }
   // 登录
   login = () => {
-    const formData = new FormData()
-    formData.append('attachment', this.state.selectedFileList)
-    // 提交所有信息
-    console.log(this.state.selectedFileList)
-    console.log(formData)
-    console.log(this.state.psword)
-    // this.props.login(formData, this.state.psword)
+    Sleep.sleep(200).then(() => {
+      FileHelper.readWalletFile(this.state.selectedFileList).then( ($walletFile) => {
+        if($walletFile) {
+          let info = GetWalletFileMsg.decryptWalletFile($walletFile, this.state.psword)
+          if(info.isGetInfo) {
+            const Address = info.ontid.substring(8)
+            const walletInfo = {
+              address: Address,
+              walletFile: this.state.selectedFileList,
+            }
+            this.props.setWalletInfo(walletInfo)
+            this.props.login(Address)
+
+          }else{
+            console.log(info)
+          }
+        }
+      })
+    })
   }
   render() {
     return (
@@ -119,7 +143,7 @@ class Login extends React.Component {
             </div>
             <input
               type="password"
-              placeholder="  请输入密码"
+              placeholder="请输入密码"
               value={this.state.psword}
               className={styles.input}
               onChange={this.handleChange}
@@ -174,14 +198,16 @@ class Login extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    loginInfo: state.loginInfo,
+    walletInfo: state.wallet.walletInfo,
+    personalInfo: state.login.personalInfo,
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    setWalletInfo: bindActionCreators(setWalletInfo, dispatch),
     login: bindActionCreators(login, dispatch),
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(Login))
+export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(HomePage))
