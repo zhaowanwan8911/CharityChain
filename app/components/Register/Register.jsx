@@ -13,20 +13,94 @@ class Register extends React.Component {
     super(props)
     this.state = {
       donate: true,
+      account: '',
+      name: '',
+      sex: '',
+      job: '',
+      contact: '',
+      address: '',
+      wallet_address: this.props.walletInfo.address,
+      role:'donator',
     }
   }
 
-  toRegister = () => {
+  // toRegister = () => {
+  //   const personalInfo = {
+  //     name:'Jayne',
+  //     role:'donator',
+  //     gender:'女',
+  //     profession: '程序员',
+  //     phone: '13145645876',
+  //     wallet_address: 'AL6YBSSi9rJwkxSHc3K6tq8Ze53Nji4aRP',
+  //     address:'北京市海淀区',
+  //   }
+  //   this.props.register(personalInfo)
+  // }
+  setAccount = (e) =>{
+    this.setState({
+      account: e.target.value,
+    })
+  }
+  setName = (e) =>{
+    this.setState({
+      name: e.target.value,
+    })
+  }
+  setSex = (e) =>{
+    this.setState({
+      sex: e.target.value,
+    })
+  }
+  setJob = (e) =>{
+    this.setState({
+      job: e.target.value,
+    })
+  }
+  setContact = (e) =>{
+    this.setState({
+      contact: e.target.value,
+    })
+  }
+  setAddress = (e) =>{
+    this.setState({
+      address: e.target.value,
+    })
+  }
+  submit = () => {
     const personalInfo = {
-      name:'Jayne',
-      role:'donator',
-      gender:'女',
-      profession: '程序员',
-      phone: '13145645876',
-      wallet_address: 'AL6YBSSi9rJwkxSHc3K6tq8Ze53Nji4aRP',
-      address:'北京市海淀区',
+      name:this.state.name,
+      role:this.state.role,
+      gender:this.state.sex,
+      profession: this.state.job,
+      phone: this.state.contact,
+      wallet_address: this.state.wallet_address,
+      address:this.state.address,
     }
     this.props.register(personalInfo)
+  }
+  setDonateTrue = () => {
+    this.setState({
+      donate: true,
+      role:'donator',
+      account: '',
+      name: '',
+      sex: '',
+      job: '',
+      contact: '',
+      address: '',
+    })
+  }
+  setDonateFalse = () => {
+    this.setState({
+      donate: false,
+      role:'recipient',
+      account: '',
+      name: '',
+      sex: '',
+      job: '',
+      contact: '',
+      address: '',
+    })
   }
   render() {
     return (
@@ -41,15 +115,14 @@ class Register extends React.Component {
                 })} onClick={this.setDonateTrue}>我是捐赠人</div>
                 <div className={styles.item2} onClick={this.setDonateFalse}>我是受益人</div>
               </div>
-              <form action="">
               <div className={styles.form}>
                 <div>
-                  <div>账户:<input type="text"/></div>
-                  <div>姓名:<input type="text"/></div>
-                  <div>性别:<input type="text"/></div>
-                  <div>职业:<input type="text"/></div>
-                  <div>联系方式:<input type="text"/></div>
-                  <div>联系地址:<input type="text"/></div>
+                  <div>账户: {this.state.wallet_address}</div>
+                  <div>姓名:<input type="text" onChange={this.setName}/></div>
+                  <div>性别:<input type="text" onChange={this.setSex}/></div>
+                  <div>职业:<input type="text" onChange={this.setJob}/></div>
+                  <div>联系方式:<input type="text" onChange={this.setContact}/></div>
+                  <div>联系地址:<input type="text" onChange={this.setAddress}/></div>
                 </div>
                 <div className={styles.upload}>
                   <input type="file" name="file" id="file" />
@@ -57,9 +130,7 @@ class Register extends React.Component {
                   <img src="" height="200" width="300" alt="Image preview..."/>
                 </div>
               </div>
-              <div className={styles.done} onClick={() => this.toRegister()}>完成</div>
-              </form>
-
+              <div className={styles.done} onClick={this.submit}>完成</div>
             </div>
             :
             <div className={styles.donate}>
@@ -68,17 +139,16 @@ class Register extends React.Component {
                 <div  className={classNames({
                   [styles.item1]: true,
                   [styles.checked]: this.state.donate === false,
-                })} >我是受益人</div>
+                })} onClick={this.setDonateFalse}>我是受益人</div>
               </div>
-              <form action="">
               <div className={styles.form}>
                 <div>
-                  <div>账户:<input type="text"/></div>
-                  <div>姓名:<input type="text"/></div>
-                  <div>性别:<input type="text"/></div>
-                  <div>职业:<input type="text"/></div>
-                  <div>联系方式:<input type="text"/></div>
-                  <div>联系地址:<input type="text"/></div>
+                  <div>账户:<input type="text" onChange={this.setAccount}/></div>
+                  <div>姓名:<input type="text" onChange={this.setName}/></div>
+                  <div>性别:<input type="text" onChange={this.setSex}/></div>
+                  <div>职业:<input type="text" onChange={this.setJob}/></div>
+                  <div>联系方式:<input type="text" onChange={this.setContact}/></div>
+                  <div>联系地址:<input type="text" onChange={this.setAddress}/></div>
                 </div>
                 <div className={styles.upload}>
                   <input type="file" name="file" id="file" />
@@ -86,11 +156,7 @@ class Register extends React.Component {
                   <img src="" height="200" width="300" alt="Image preview..."/>
                 </div>
               </div>
-                <div className={styles.done}>
-                  <input type="submit" value="完成" ></input>
-                </div>
-
-              </form>
+              <div className={styles.done} onClick={this.submit}>完成</div>
             </div>
         }
       </div>
@@ -100,6 +166,7 @@ class Register extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
+    walletInfo: state.wallet.walletInfo,
   }
 }
 
