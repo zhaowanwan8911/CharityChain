@@ -10,13 +10,30 @@
     justify-content: space-around;
     padding: 20px;
     box-sizing: border-box;
-    .item{
-      background: #a7a7a7;
+    .item1{
+      color: #fff;
       width: 200px;
       text-align: center;
       display: flex;
       justify-content: center;
       align-items: center;
+      border: 1px solid #fff;
+      border-radius: 30px;
+      cursor: pointer;
+    }
+    .item2{
+      color: black;
+      width: 200px;
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 1px solid black;
+      border-radius: 30px;
+      cursor: pointer;
+    }
+    .checked{
+      background: #1cabe2;
     }
   }
   .form{
@@ -37,6 +54,7 @@
         margin-top: 0px;
         text-align: center;
         line-height: 37px;
+        cursor: pointer;
       }
       img{
         border: 1px solid black;
@@ -53,5 +71,6 @@
     border-radius: 7px;
     text-align: center;
     line-height: 46px;
+    cursor: pointer;
   }
 }
