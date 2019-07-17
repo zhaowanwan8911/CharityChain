@@ -2,6 +2,7 @@ import React from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { injectIntl } from 'react-intl'
+import classNames from 'classnames'
 import { setWalletInfo } from '../../actions/wallet'
 import { login } from '../../actions/login'
 // import classNames from 'classnames'
@@ -24,7 +25,16 @@ class HomePage extends React.Component {
       psword: '',
       hideNav: false,
       success: true,
+      roleName: '捐赠者',
     }
+    this.list = [
+      {name: '捐赠者'},
+      {name: '求助者'},
+      {name: '慈善机构'},
+      {name: '执行机构'},
+      {name: '供应商'}
+    ]
+      
   }
 
   componentDidMount = () => {
@@ -95,6 +105,12 @@ class HomePage extends React.Component {
       psword: value,
     })
   }
+  // 选择角色
+  selectRole = (item) => {
+    this.setState({
+      roleName: item,
+    })
+  }
   // 登录
   login = () => {
     Sleep.sleep(200).then(() => {
@@ -148,8 +164,34 @@ class HomePage extends React.Component {
               className={styles.input}
               onChange={this.handleChange}
             />
-            <div className={styles.alert}>
+            {/* <div className={styles.alert}>
               <span style={this.state.success ? {display: 'none'} : {display: 'block'}}>密码错误，重新输入！</span>
+            </div> */}
+            <div className={styles.roleSelect}>
+              <ul>
+                {
+                  this.list.map((item, index) => {
+                    return(
+                      <li
+                        className={classNames({
+                          [styles.listItem]: true,
+                          [styles.itemActive]: this.state.roleName == item.name,
+                        })}
+                        key={index}
+                        onClick={() => {this.selectRole(item.name)}}
+                      >
+                        <div className={classNames({
+                          [styles.drow]: true,
+                          [styles.drowActive]: this.state.roleName == item.name,
+                        })}>
+                          &nbsp;
+                        </div>
+                        {item.name}
+                      </li>
+                    )
+                  })
+                }
+              </ul>
             </div>
             <div className={styles.submit} onClick={this.login}>登录</div>
           </div>
