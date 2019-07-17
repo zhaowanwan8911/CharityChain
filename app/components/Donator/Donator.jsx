@@ -94,7 +94,6 @@ class HelpSeeker extends React.Component {
           />
           <Account
             buttonName="捐款"
-            operate={this.operate}
           />
         </div>
         <div className={styles.recipientsRecord}>

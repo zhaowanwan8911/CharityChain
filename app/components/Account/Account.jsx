@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { injectIntl } from 'react-intl'
+import Swal from 'sweetalert2'
 
 import styles from './Account.scss'
 import {getBalance} from "../../actions/wallet";
@@ -24,6 +25,16 @@ class Account extends React.Component {
       this.setState({walletBalance: nextProps.walletBalance})
     }
   }
+  operate = () => {
+    switch (this.props.buttonName){
+      case '捐款':
+        this.donations()
+        break
+    }
+  }
+  donations = async () => {
+
+  }
   render() {
     return (
       <div className={styles.account}>
@@ -35,7 +46,7 @@ class Account extends React.Component {
         <div className={styles.accountInfo}>
           <span>{this.state.walletBalance}</span> ont
         </div>
-        <div className={styles.operate} onClick={() => {this.props.operate()}}>{this.props.buttonName}</div>
+        <div className={styles.operate} onClick={() => {this.operate()}}>{this.props.buttonName}</div>
       </div>
     )
   }
