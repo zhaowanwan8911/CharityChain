@@ -8,11 +8,13 @@ import classNames from 'classnames'
 import styles from './Register.scss'
 import {register} from "../../actions/login";
 
+//  wallet_address this.props.walletInfo.address
 class Register extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      roler: '捐赠者'
+      roler: '捐赠者',
+      wallet_address: this.props.walletInfo.address,
     }
     this.role = [ '捐赠者', '求助者' ]
   }
@@ -24,6 +26,7 @@ class Register extends React.Component {
   }
 
   submit = () => {
+    console.log(this.state.wallet_address)
     console.log(this.nameChange.value)
     console.log(this.sexChange.value)
     console.log(this.occupationChange.value)
@@ -40,6 +43,30 @@ class Register extends React.Component {
     //   address:'北京市海淀区',
     // }
     // this.props.register(personalInfo)
+  }
+  setDonateTrue = () => {
+    this.setState({
+      donate: true,
+      role:'donator',
+      account: '',
+      name: '',
+      sex: '',
+      job: '',
+      contact: '',
+      address: '',
+    })
+  }
+  setDonateFalse = () => {
+    this.setState({
+      donate: false,
+      role:'recipient',
+      account: '',
+      name: '',
+      sex: '',
+      job: '',
+      contact: '',
+      address: '',
+    })
   }
   render() {
     return (
@@ -64,7 +91,7 @@ class Register extends React.Component {
         </div>
         <div className={styles.form}>
           <div className={styles.info}>
-            <div className={styles.group}><label>账户:</label><span>1234567890</span></div>
+            <div className={styles.group}><label>账户:</label><span>{this.state.wallet_address}</span></div>
             <div className={styles.group}><label>姓名:</label><input type="text" placeholder="请输入您姓名" ref={input => this.nameChange = input} /></div>
             <div className={styles.group}><label>性别:</label><input type="text" placeholder="请输入您的性别" ref={input => this.sexChange = input} /></div>
             <div className={styles.group}><label>职业:</label><input type="text" placeholder="请输入您的职业" ref={input => this.occupationChange = input} /></div>
@@ -87,6 +114,7 @@ class Register extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
+    walletInfo: state.wallet.walletInfo,
   }
 }
 

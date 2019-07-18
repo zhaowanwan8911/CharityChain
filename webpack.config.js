@@ -7,6 +7,11 @@ const ProxyConfig = {
   changeOrigin: true,
   secure: false,
 }
+const ProxyConfig2 = {
+  target: 'http://10.112.104.226:20334',
+  changeOrigin: true,
+  secure: false,
+}
 
 module.exports = {
   entry: [
@@ -89,6 +94,7 @@ module.exports = {
       '/user/register/*': ProxyConfig,
       '/user/login/*': ProxyConfig,
       '/user/info/*': ProxyConfig,
+      '/api/v1/*': ProxyConfig2,
     },
   },
   plugins: [

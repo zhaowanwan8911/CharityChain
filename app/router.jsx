@@ -27,6 +27,14 @@ const Register = Loadable({
   loader: () => import('./components/Register/Register'),
   loading: Loading,
 })
+const RequesterWallet = Loadable({
+  loader: () => import('./components/RequesterWallet/RequesterWallet'),
+  loading: Loading,
+})
+const Donator = Loadable({
+  loader: () => import('./components/Donator/Donator'),
+  loading: Loading,
+})
 const Recipients = Loadable({
   loader: () => import('./components/Recipients/Recipients'),
   loading: Loading,
@@ -35,10 +43,8 @@ const RecipientContent = Loadable({
   loader: () => import('./components/RecipientContent/RecipientContent'),
   loading: Loading,
 })
-
-// 捐赠者捐款弹窗 DonationTemplate
-const DonationTemplate = Loadable({
-  loader: () => import('./components/DonationTemplate/DonationTemplate'),
+const BusinessDetail = Loadable({
+  loader: () => import('./components/BusinessDetail/BusinessDetail'),
   loading: Loading,
 })
 
@@ -48,10 +54,12 @@ const ChildRoute = () => (
     <Route exact path="/" component={HomePage} />
     <Route exact path="/wallet" component={Wallet} />
     <Route exact path="/register" component={Register} />
+    <Route exact path="/requesterwallet" component={RequesterWallet} />
+    <Route exact path="/Donator" component={Donator} />
     <Route exact path="/recipients" component={Recipients} />
     <Route exact path="/recipients/1" component={RecipientContent} />
     <Route exact path="/charity" component={Charity} />
-    <Route exact path="/DonationTemplate" component={DonationTemplate} />
+    <Route exact path="/business" component={BusinessDetail} />
     <Route path="*" component={Footer} />
   </div>
 )

@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { injectIntl } from 'react-intl'
 
 import TableList from '../TableList/TableList'
-import UserInfo from '../UserInfo/UserInfo' 
+import UserInfo from '../UserInfo/UserInfo'
 import Account from '../Account/Account'
 import Pagiation from '../Pagination/Pagination'
 import ReleaseHistory from '../ReleaseHistory/ReleaseHistory'
@@ -13,6 +13,8 @@ import ReleaseHistory from '../ReleaseHistory/ReleaseHistory'
 import styles from './Recipients.scss'
 
 import PIC from './pic.jpg'
+import {setWalletInfo} from "../../actions/wallet";
+import {login} from "../../actions/login";
 
 class HelpSeeker extends React.Component {
   constructor(props) {
@@ -47,7 +49,7 @@ class HelpSeeker extends React.Component {
       balance: 20,
       operateBtn: '发布申请',
     }
-    
+
     // 受助列表
     this.tableHeader = [
       {
@@ -72,25 +74,25 @@ class HelpSeeker extends React.Component {
         time: '2019-08-15',
         hashValue: '09e599ecde6eec18608bdecd0cf0a54b02bc9d55239e1b1bd291558e5a6ef3fa',
         walletAddress: 'A15NzM9iE3VT9X8SGk5h3dii6GPFQh2vme',
-        amount: '100 ont',
+        amount: '100',
       },
       {
         time: '2019-08-15',
         hashValue: '09e599ecde6eec18608bdecd0cf0a54b02bc9d55239e1b1bd291558e5a6ef3fa',
         walletAddress: 'A15NzM9iE3VT9X8SGk5h3dii6GPFQh2vme',
-        amount: '100 ont',
+        amount: '100',
       },
       {
         time: '2019-08-15',
         hashValue: '09e599ecde6eec18608bdecd0cf0a54b02bc9d55239e1b1bd291558e5a6ef3fa',
         walletAddress: 'A15NzM9iE3VT9X8SGk5h3dii6GPFQh2vme',
-        amount: '100 ont',
+        amount: '100',
       },
       {
         time: '2019-08-15',
         hashValue: '09e599ecde6eec18608bdecd0cf0a54b02bc9d55239e1b1bd291558e5a6ef3fa',
         walletAddress: 'A15NzM9iE3VT9X8SGk5h3dii6GPFQh2vme',
-        amount: '100 ont',
+        amount: '100',
       },
     ]
     this.sessionName = '受捐记录'
@@ -157,10 +159,9 @@ class HelpSeeker extends React.Component {
             个人钱包
           </div>
           <UserInfo
-            userInfo={this.userInfo}
           />
           <Account
-            account={this.account}
+            buttonName="发布申请"
             operate={this.operate}
           />
         </div>
@@ -194,6 +195,8 @@ class HelpSeeker extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
+    walletInfo: state.wallet.walletInfo,
+    personalInfo: state.login.personalInfo,
   }
 }
 

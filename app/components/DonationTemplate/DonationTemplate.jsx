@@ -12,9 +12,14 @@ class DonationTemplate extends React.Component {
     this.state = {}
   }
 
+  closeBord = () => {
+    this.props.hideBord(false)
+  }
+
   render() {
     return (
       <div className={styles.templateWraper}>
+        <span className={styles.closeBtn} onClick={this.closeBord}>x</span>
         <h1>爱心捐款</h1>
         <div className={styles.info}>
           <div>
@@ -31,7 +36,7 @@ class DonationTemplate extends React.Component {
             <input type="password"/>
           </div>
         </div>
-        <div className={styles.submit}>捐赠</div>
+        <div className={styles.submit}>捐款</div>
       </div>
     )
   }
