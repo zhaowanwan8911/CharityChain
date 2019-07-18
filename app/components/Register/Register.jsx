@@ -13,10 +13,19 @@ class Register extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      roler: '捐赠者',
+      roler: 'donator',
       wallet_address: this.props.walletInfo.address,
     }
-    this.role = [ '捐赠者', '求助者' ]
+    this.role = [ 
+      {
+        rolerCN: '捐助者',
+        rolerEN: 'donator',
+      },
+      {
+        rolerCN: '求助者',
+        rolerEN: 'recipient',
+      },
+    ]
   }
 
   roleChecked = (roler) => {
@@ -33,6 +42,15 @@ class Register extends React.Component {
     console.log(this.phoneChange.value)
     console.log(this.addressChange.value)
     console.log(this.state.roler)
+    const personalInfo = {
+      name:this.nameChange.value,
+      role:this.state.roler,
+      gender:this.sexChange.value,
+      profession: this.occupationChange.value,
+      phone: this.phoneChange.value,
+      wallet_address: 'abcasdsasa',
+      address:this.addressChange.value,
+    }
     // const personalInfo = {
     //   name:'Jayne',
     //   role:'donator',
@@ -42,7 +60,7 @@ class Register extends React.Component {
     //   wallet_address: 'AL6YBSSi9rJwkxSHc3K6tq8Ze53Nji4aRP',
     //   address:'北京市海淀区',
     // }
-    // this.props.register(personalInfo)
+    this.props.register(personalInfo)
   }
   setDonateTrue = () => {
     this.setState({
@@ -79,11 +97,11 @@ class Register extends React.Component {
                   key={index}
                   className={classNames({
                     [styles.roleSelect]: true,
-                    [styles.checked]: this.state.roler == item,
+                    [styles.checked]: this.state.roler == item.rolerEN,
                   })}
-                  onClick={() => {this.roleChecked(item)}}
+                  onClick={() => {this.roleChecked(item.rolerEN)}}
                 >
-                  {item}
+                  {item.rolerCN}
                 </div>
               )
             })
