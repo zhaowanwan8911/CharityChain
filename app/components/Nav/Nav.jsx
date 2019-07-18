@@ -14,6 +14,7 @@ class Nav extends React.Component {
     this.state = {
       hideNav: false,
       arr : [],
+      tabCheck: 0,
     }
     this.navList = [
       {
@@ -62,10 +63,8 @@ class Nav extends React.Component {
     }
   }
   tabClick = (index) => {
-    const arrCopy = new Array
-    arrCopy[index] = true
     this.setState({
-      arr: arrCopy,
+      tabCheck: index,
     })
   }
   render() {
@@ -79,7 +78,7 @@ class Nav extends React.Component {
             this.navList.map((item, index) => {
               return (
                 <div key={index} onClick={()=>this.tabClick(index)} className={classNames({
-                  [styles.tabBackground]: this.state.arr[index]
+                  [styles.tabBackground]: this.state.tabCheck === index
                 })}>
                   <NavLink to={item.url}>
                     {item.name}
