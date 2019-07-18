@@ -16,7 +16,7 @@ class Register extends React.Component {
       roler: 'donator',
       wallet_address: this.props.walletInfo.address,
     }
-    this.role = [ 
+    this.role = [
       {
         rolerCN: '捐助者',
         rolerEN: 'donator',
