@@ -132,7 +132,7 @@ class HomePage extends React.Component {
             }
             const walletInfo = {
               address: Address,
-              walletFile: this.state.selectedFileList,
+              walletFile: $walletFile,
               role: role
             }
             this.props.setWalletInfo(walletInfo)

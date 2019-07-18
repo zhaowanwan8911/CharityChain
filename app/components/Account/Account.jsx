@@ -6,7 +6,6 @@ import { injectIntl } from 'react-intl'
 // import Swal from 'sweetalert2'
 
 import DonationTemplate from '../DonationTemplate/DonationTemplate'
-
 import styles from './Account.scss'
 import {getBalance} from "../../actions/wallet";
 
