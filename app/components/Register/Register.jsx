@@ -16,7 +16,7 @@ class Register extends React.Component {
       roler: 'donator',
       wallet_address: this.props.walletInfo.address,
     }
-    this.role = [ 
+    this.role = [
       {
         rolerCN: '捐助者',
         rolerEN: 'donator',
@@ -48,7 +48,7 @@ class Register extends React.Component {
       gender:this.sexChange.value,
       profession: this.occupationChange.value,
       phone: this.phoneChange.value,
-      wallet_address: 'abcasdsasa',
+      wallet_address: this.state.wallet_address,
       address:this.addressChange.value,
     }
     // const personalInfo = {

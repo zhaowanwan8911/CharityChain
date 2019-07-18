@@ -5,15 +5,45 @@ import { connect } from 'react-redux'
 import { injectIntl } from 'react-intl'
 
 import styles from './DonationTemplate.scss'
+import {CHARITY_ADDRESS} from '../../constants/Address'
+import WalletTransaction from "../../constants/ont-wallet/transaction";
+import GetWalletFileMsg from "../../constants/ont-wallet/info";
+import TransactionSuccessTemplate from '../TransactionSuccessTemplate/TransactionSuccessTemplate'
 
 class DonationTemplate extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {}
+    this.state = {
+      password:'',
+      money:'',
+    }
   }
 
   closeBord = () => {
     this.props.hideBord(false)
+  }
+  showSuccessBord = () => {
+    this.props.showSuccessBord()
+  }
+  getTransHash = ($hash) => {
+    this.props.getTransHash($hash)
+  }
+  toTransaction = async() => {
+    let info = GetWalletFileMsg.decryptWalletFile(this.props.walletInfo.walletFile, this.state.password)
+    if(info.isGetInfo){
+      let msg = await WalletTransaction.sendTransaction(this.props.walletInfo.address,CHARITY_ADDRESS,info.privateKey,this.state.money )
+      if(msg.Desc === "SUCCESS") {
+        this.showSuccessBord()
+        this.getTransHash(msg.Result)
+      }
+    }
+
+  }
+  setPassword = (e) => {
+    this.setState({password: e.target.value})
+  }
+  setValue = (e) => {
+    this.setState({money: e.target.value})
   }
 
   render() {
@@ -24,19 +54,20 @@ class DonationTemplate extends React.Component {
         <div className={styles.info}>
           <div>
             <label>钱包地址：</label>
-            <span>123456789012345678901234567890</span>
+            <span>{this.props.walletInfo.address}</span>
           </div>
           <div>
             <label>捐款金额：</label>
-            <input type="text"/>
-            <span>余额：20 Ont</span>
+            <input type="text" onChange={this.setValue}/>
+            <span>余额：{this.props.walletBalance} Ont</span>
           </div>
           <div>
             <label>输入密码：</label>
-            <input type="password"/>
+            <input type="password" onChange={this.setPassword}/>
           </div>
         </div>
-        <div className={styles.submit}>捐款</div>
+        <div className={styles.submit} onClick={this.toTransaction}>捐款</div>
+
       </div>
     )
   }
@@ -44,6 +75,9 @@ class DonationTemplate extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
+    walletInfo: state.wallet.walletInfo,
+    personalInfo: state.login.personalInfo,
+    walletBalance: state.wallet.walletBalance,
   }
 }
 
