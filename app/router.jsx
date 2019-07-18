@@ -15,6 +15,10 @@ const Footer = Loadable({
   loader: () => import('./components/Footer/Footer'),
   loading: Loading,
 })
+const Charity = Loadable({
+  loader: () => import('./components/Charity/Charity'),
+  loading: Loading,
+})
 const Wallet = Loadable({
   loader: () => import('./components/Wallet/Wallet'),
   loading: Loading,
@@ -54,6 +58,7 @@ const ChildRoute = () => (
     <Route exact path="/Donator" component={Donator} />
     <Route exact path="/recipients" component={Recipients} />
     <Route exact path="/recipients/1" component={RecipientContent} />
+    <Route exact path="/charity" component={Charity} />
     <Route exact path="/business" component={BusinessDetail} />
     <Route path="*" component={Footer} />
   </div>
