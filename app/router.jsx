@@ -15,6 +15,10 @@ const Footer = Loadable({
   loader: () => import('./components/Footer/Footer'),
   loading: Loading,
 })
+const Charity = Loadable({
+  loader: () => import('./components/Charity/Charity'),
+  loading: Loading,
+})
 const Wallet = Loadable({
   loader: () => import('./components/Wallet/Wallet'),
   loading: Loading,
@@ -32,6 +36,12 @@ const RecipientContent = Loadable({
   loading: Loading,
 })
 
+// 捐赠者捐款弹窗 DonationTemplate
+const DonationTemplate = Loadable({
+  loader: () => import('./components/DonationTemplate/DonationTemplate'),
+  loading: Loading,
+})
+
 const ChildRoute = () => (
   <div>
     <Route path="*" component={Nav} />
@@ -40,6 +50,8 @@ const ChildRoute = () => (
     <Route exact path="/register" component={Register} />
     <Route exact path="/recipients" component={Recipients} />
     <Route exact path="/recipients/1" component={RecipientContent} />
+    <Route exact path="/charity" component={Charity} />
+    <Route exact path="/DonationTemplate" component={DonationTemplate} />
     <Route path="*" component={Footer} />
   </div>
 )

@@ -1,76 +1,99 @@
 .content{
-  width: 1000px;
+  width: 800px;
   height: 500px;
-  margin: 20px auto;
-  border: 1px solid black;
+  margin: 30px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  // border: 1px solid #f1f1f1;
+  border-radius: 4px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 1px 4px 1px;
   .title{
-    height: 100px;
+    // display: block;
+    height: 50px;
+    // width: 100%;
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
-    padding: 20px;
-    box-sizing: border-box;
-    .item1{
-      color: #fff;
-      width: 200px;
+    justify-content: center;
+    padding-top: 25px;
+    .roleSelect {
+      width: 350px;
+      color: #1cabe2;
+      background: #fff;
       text-align: center;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      border: 1px solid #fff;
-      border-radius: 30px;
+      line-height: 50px;
       cursor: pointer;
+      border: 1px solid #1cabe2;
+      box-sizing: border-box;
     }
-    .item2{
-      color: black;
-      width: 200px;
-      text-align: center;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      border: 1px solid black;
-      border-radius: 30px;
-      cursor: pointer;
+    :nth-child(1) {
+      border-bottom-left-radius: 4px;
+      border-top-left-radius: 4px;
+    }
+    :nth-child(2) {
+      border-bottom-right-radius: 4px;
+      border-top-right-radius: 4px;
     }
     .checked{
+      color: #fff;
       background: #1cabe2;
     }
   }
-  .form{
+  .form {
+    width: 700px;
+    margin-top: 40px;
     display: flex;
-    justify-content: space-around;
-    line-height: 50px;
-    .upload{
-      display: flex;
-      flex-direction: column;
-      input{
-        opacity: 0;
+    color: #666;
+    font-size: 14px;
+    .info {
+      width: 50%;
+      box-sizing: border-box;
+      padding-left: 20px;
+      .group {
+        margin-bottom: 20px;
+        label {
+          display: inline-block;
+          width: 66px;
+        }
       }
-      label{
-        height: 39px;
-        width: 121px;
-        border: 1px solid black;
-        border-radius: 6px;
-        margin-top: 0px;
+      input {
+        width: 200px;
+        height: 30px;
+        border: 1px solid #1cabe2;
+        padding-left: 5px;
+        border-radius: 4px;
+      }
+    }
+    .upload {
+      width: 50%;
+      box-sizing: border-box;
+      padding-left: 20px;
+      .uploadBtn {
+        background: #f1f1f1;
+        width: 100px;
+        height: 30px;
+        line-height: 30px;
         text-align: center;
-        line-height: 37px;
+        border-radius: 4px;
         cursor: pointer;
+        margin: 20px 0;
       }
-      img{
-        border: 1px solid black;
-        margin-top: 30px;
+      .showImg {
+        height: 180px;
+        width: 200px;
+        border: 1px dotted #c0c5c7;
       }
     }
   }
-  .done{
+  .submit {
+    background: #1cabe2;
+    color: #fff;
+    margin-top: 10px;
+    width: 240px;
     height: 50px;
-    width: 122px;
-    border: 1px solid black;
-    margin: 0 auto;
-    margin-top: 30px;
-    border-radius: 7px;
     text-align: center;
-    line-height: 46px;
+    line-height: 50px;
+    border-radius: 4px;
     cursor: pointer;
   }
 }
