@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { injectIntl } from 'react-intl'
 import logo from './logo.png'
+import classNames from 'classnames'
 
 import styles from './Nav.scss'
 
@@ -12,15 +13,16 @@ class Nav extends React.Component {
     super(props)
     this.state = {
       hideNav: false,
+      arr : [],
     }
     this.navList = [
       {
         name: '首页',
-        url: '',
+        url: '/',
       },
       {
         name: '交易详情',
-        url: '',
+        url: '/business',
       },
       {
         name: '影响力',
@@ -39,6 +41,11 @@ class Nav extends React.Component {
 
   componentDidMount = () => {
     window.addEventListener('scroll', this.handleScroll.bind(this))
+    const arrCopy = new Array
+    arrCopy[0] = true
+    this.setState({
+      arr: arrCopy,
+    })
   }
   componentWillUnmount = () => {
     window.removeEventListener('scroll', this.handleScroll.bind(this))
@@ -54,7 +61,13 @@ class Nav extends React.Component {
       })
     }
   }
-
+  tabClick = (index) => {
+    const arrCopy = new Array
+    arrCopy[index] = true
+    this.setState({
+      arr: arrCopy,
+    })
+  }
   render() {
     return (
       <div className={styles.navWraper} style={this.state.hideNav ? { height: '60px', position: 'fixed', top: '0', left: '0', zIndex: '999' } : { height: '160px' }}>
@@ -65,7 +78,9 @@ class Nav extends React.Component {
           {
             this.navList.map((item, index) => {
               return (
-                <div key={index}>
+                <div key={index} onClick={()=>this.tabClick(index)} className={classNames({
+                  [styles.tabBackground]: this.state.arr[index]
+                })}>
                   <NavLink to={item.url}>
                     {item.name}
                   </NavLink>
