@@ -3,7 +3,9 @@ import { NavLink } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { injectIntl } from 'react-intl'
-import Swal from 'sweetalert2'
+// import Swal from 'sweetalert2'
+
+import DonationTemplate from '../DonationTemplate/DonationTemplate'
 
 import styles from './Account.scss'
 import {getBalance} from "../../actions/wallet";
@@ -13,7 +15,8 @@ class Account extends React.Component {
     super(props)
     this.state = {
       walletInfo:'',
-      walletBalance:''
+      walletBalance:'',
+      showBord: false,
     }
   }
   componentDidMount = () => {
@@ -28,12 +31,19 @@ class Account extends React.Component {
   operate = () => {
     switch (this.props.buttonName){
       case '捐款':
-        this.donations()
+        this.showBord()
         break
     }
   }
-  donations = async () => {
-
+  showBord = () => {
+    this.setState({
+      showBord: true,
+    })
+  }
+  hideBord = (showBord) => {
+    this.setState({
+      showBord: showBord,
+    })
   }
   render() {
     return (
@@ -47,6 +57,7 @@ class Account extends React.Component {
           <span>{this.state.walletBalance}</span> ont
         </div>
         <div className={styles.operate} onClick={() => {this.operate()}}>{this.props.buttonName}</div>
+        {this.state.showBord && <DonationTemplate showBord={this.state.showBord} hideBord={this.hideBord} />}
       </div>
     )
   }

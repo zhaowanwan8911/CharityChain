@@ -3,26 +3,19 @@ import { NavLink } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { injectIntl } from 'react-intl'
-
-import TableList from '../TableList/TableList'
 import UserInfo from '../UserInfo/UserInfo'
+import TableList from '../TableList/TableList'
 import Account from '../Account/Account'
 import Pagiation from '../Pagination/Pagination'
-import ReleaseHistory from '../ReleaseHistory/ReleaseHistory'
 
-import styles from './Donator.scss'
+import styles from './Charity.scss'
 
-import PIC from './pic.jpg'
-import {setWalletInfo} from "../../actions/wallet"
-import {login} from "../../actions/login"
-
-class HelpSeeker extends React.Component {
+class Charity extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
       hideNav: false,
     }
-    // 受助列表
     this.tableHeader = [
       {
         name: '受捐时间',
@@ -41,6 +34,24 @@ class HelpSeeker extends React.Component {
         width: '',
       },
     ]
+    this.userInfo = {
+      name: {
+        key: '姓名',
+        value: '张之雅'
+      },
+      guardian: {
+        key: '监护人',
+        value: '张志国'
+      },
+      phone: {
+        key: '联系方式',
+        value: '18510601969'
+      },
+      homeAddress: {
+        key: '联系地址',
+        value: '北京市海淀区'
+      },
+    }
     this.tableData = [
       {
         time: '2019-08-15',
@@ -73,19 +84,10 @@ class HelpSeeker extends React.Component {
         amount: '100 ont',
       },
     ]
-    this.sessionName = '捐款记录'
-    // 发布历史记录
-  }
-  paging = (pageCurr) => {
-    //console.log(pageCurr)
-    // 获取受捐记录的数据（根据页数）
+    this.sessionName = '交易记录'
   }
   componentDidMount = () => {
-    // 监听滚动条事件
     window.addEventListener('scroll', this.handleScroll.bind(this))
-    // 获取受捐记录的数据（默认第一页）
-    // 获取个人钱包信息
-    // 获取个人钱包余额 ，捐款后再次触发获取余额
   }
   componentWillUnmount = () => {
     window.removeEventListener('scroll', this.handleScroll.bind(this))
@@ -101,26 +103,25 @@ class HelpSeeker extends React.Component {
       })
     }
   }
-  refreshList = () => {
-    // 获取受捐记录的数据（默认第一页）
+  paging = (pageCurr) => {
+    //console.log(pageCurr)
+    // 获取受捐记录的数据（根据页数）
   }
-  operate = () => {
-    // 发布信息的方法
-  }
+
   render() {
     return (
-      <div className={styles.recipientsInfo} style={this.state.hideNav ? { marginTop: '161px' } : { marginTop: '0' }}>
-        <div className={styles.recipients}>
-          <div className={styles.sessionName}>
-            个人钱包
+      <div className={styles.charityWraper} style={this.state.hideNav ? { marginTop: '161px' } : { marginTop: '0' }}>
+        <div className={styles.charityInfoBox}>
+          <div className={styles.charityInfo}>
+            <UserInfo userInfo={this.userInfo} />
           </div>
-          <UserInfo
-          />
-          <Account
-            buttonName="捐款"
-          />
+          <div className={styles.charityActive}>
+            <Account
+              buttonName="爱心助力"
+            />
+          </div>
         </div>
-        <div className={styles.recipientsRecord}>
+        <div className={styles.charityList}>
           <TableList
             tableHeader={this.tableHeader}
             tableData = {this.tableData}
@@ -141,8 +142,6 @@ class HelpSeeker extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    walletInfo: state.wallet.walletInfo,
-    personalInfo: state.login.personalInfo,
   }
 }
 
@@ -151,4 +150,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(HelpSeeker))
+export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(Charity))

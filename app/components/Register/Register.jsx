@@ -8,75 +8,41 @@ import classNames from 'classnames'
 import styles from './Register.scss'
 import {register} from "../../actions/login";
 
+//  wallet_address this.props.walletInfo.address
 class Register extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      donate: true,
-      account: '',
-      name: '',
-      sex: '',
-      job: '',
-      contact: '',
-      address: '',
+      roler: '捐赠者',
       wallet_address: this.props.walletInfo.address,
-      role:'donator',
     }
+    this.role = [ '捐赠者', '求助者' ]
   }
 
-  // toRegister = () => {
-  //   const personalInfo = {
-  //     name:'Jayne',
-  //     role:'donator',
-  //     gender:'女',
-  //     profession: '程序员',
-  //     phone: '13145645876',
-  //     wallet_address: 'AL6YBSSi9rJwkxSHc3K6tq8Ze53Nji4aRP',
-  //     address:'北京市海淀区',
-  //   }
-  //   this.props.register(personalInfo)
-  // }
-  setAccount = (e) =>{
+  roleChecked = (roler) => {
     this.setState({
-      account: e.target.value,
+      roler,
     })
   }
-  setName = (e) =>{
-    this.setState({
-      name: e.target.value,
-    })
-  }
-  setSex = (e) =>{
-    this.setState({
-      sex: e.target.value,
-    })
-  }
-  setJob = (e) =>{
-    this.setState({
-      job: e.target.value,
-    })
-  }
-  setContact = (e) =>{
-    this.setState({
-      contact: e.target.value,
-    })
-  }
-  setAddress = (e) =>{
-    this.setState({
-      address: e.target.value,
-    })
-  }
+
   submit = () => {
-    const personalInfo = {
-      name:this.state.name,
-      role:this.state.role,
-      gender:this.state.sex,
-      profession: this.state.job,
-      phone: this.state.contact,
-      wallet_address: this.state.wallet_address,
-      address:this.state.address,
-    }
-    this.props.register(personalInfo)
+    console.log(this.state.wallet_address)
+    console.log(this.nameChange.value)
+    console.log(this.sexChange.value)
+    console.log(this.occupationChange.value)
+    console.log(this.phoneChange.value)
+    console.log(this.addressChange.value)
+    console.log(this.state.roler)
+    // const personalInfo = {
+    //   name:'Jayne',
+    //   role:'donator',
+    //   gender:'女',
+    //   profession: '程序员',
+    //   phone: '13145645876',
+    //   wallet_address: 'AL6YBSSi9rJwkxSHc3K6tq8Ze53Nji4aRP',
+    //   address:'北京市海淀区',
+    // }
+    // this.props.register(personalInfo)
   }
   setDonateTrue = () => {
     this.setState({
@@ -105,60 +71,42 @@ class Register extends React.Component {
   render() {
     return (
       <div className={styles.content}>
-        {
-          this.state.donate ?
-            <div className={styles.donate}>
-              <div className={styles.title}>
-                <div className={classNames({
-                  [styles.item1]: true,
-                  [styles.checked]: this.state.donate === true,
-                })} onClick={this.setDonateTrue}>我是捐赠人</div>
-                <div className={styles.item2} onClick={this.setDonateFalse}>我是受益人</div>
-              </div>
-              <div className={styles.form}>
-                <div>
-                  <div>账户: {this.state.wallet_address}</div>
-                  <div>姓名:<input type="text" onChange={this.setName}/></div>
-                  <div>性别:<input type="text" onChange={this.setSex}/></div>
-                  <div>职业:<input type="text" onChange={this.setJob}/></div>
-                  <div>联系方式:<input type="text" onChange={this.setContact}/></div>
-                  <div>联系地址:<input type="text" onChange={this.setAddress}/></div>
+        <div className={styles.title}>
+          {
+            this.role.map((item, index) => {
+              return(
+                <div
+                  key={index}
+                  className={classNames({
+                    [styles.roleSelect]: true,
+                    [styles.checked]: this.state.roler == item,
+                  })}
+                  onClick={() => {this.roleChecked(item)}}
+                >
+                  {item}
                 </div>
-                <div className={styles.upload}>
-                  <input type="file" name="file" id="file" />
-                  <label for="file" >上传头像</label>
-                  <img src="" height="200" width="300" alt="Image preview..."/>
-                </div>
-              </div>
-              <div className={styles.done} onClick={this.submit}>完成</div>
+              )
+            })
+          }
+        </div>
+        <div className={styles.form}>
+          <div className={styles.info}>
+            <div className={styles.group}><label>账户:</label><span>{this.state.wallet_address}</span></div>
+            <div className={styles.group}><label>姓名:</label><input type="text" placeholder="请输入您姓名" ref={input => this.nameChange = input} /></div>
+            <div className={styles.group}><label>性别:</label><input type="text" placeholder="请输入您的性别" ref={input => this.sexChange = input} /></div>
+            <div className={styles.group}><label>职业:</label><input type="text" placeholder="请输入您的职业" ref={input => this.occupationChange = input} /></div>
+            <div className={styles.group}><label>联系方式:</label><input type="text" placeholder="请输入您的联系方式" ref={input => this.phoneChange = input} /></div>
+            <div className={styles.group}><label>联系地址:</label><input type="text" placeholder="请输入您的住址" ref={input => this.addressChange = input} /></div>
+          </div>
+          <div className={styles.upload}>
+            <h3>上传头像:</h3>
+            <div className={styles.uploadBtn}>请选择文件</div>
+            <div className={styles.showImg}>
+              <img src="" alt="Image preview..."/>
             </div>
-            :
-            <div className={styles.donate}>
-              <div className={styles.title}>
-              <div className={styles.item2} onClick={this.setDonateTrue}>我是捐赠人</div>
-                <div  className={classNames({
-                  [styles.item1]: true,
-                  [styles.checked]: this.state.donate === false,
-                })} onClick={this.setDonateFalse}>我是受益人</div>
-              </div>
-              <div className={styles.form}>
-                <div>
-                  <div>账户:<input type="text" onChange={this.setAccount}/></div>
-                  <div>姓名:<input type="text" onChange={this.setName}/></div>
-                  <div>性别:<input type="text" onChange={this.setSex}/></div>
-                  <div>职业:<input type="text" onChange={this.setJob}/></div>
-                  <div>联系方式:<input type="text" onChange={this.setContact}/></div>
-                  <div>联系地址:<input type="text" onChange={this.setAddress}/></div>
-                </div>
-                <div className={styles.upload}>
-                  <input type="file" name="file" id="file" />
-                  <label for="file" >上传头像</label>
-                  <img src="" height="200" width="300" alt="Image preview..."/>
-                </div>
-              </div>
-              <div className={styles.done} onClick={this.submit}>完成</div>
-            </div>
-        }
+          </div>
+        </div>
+        <div className={styles.submit} onClick={() => this.submit()}>登录</div>
       </div>
     )
   }
