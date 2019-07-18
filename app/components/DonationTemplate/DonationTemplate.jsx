@@ -8,6 +8,7 @@ import styles from './DonationTemplate.scss'
 import {CHARITY_ADDRESS} from '../../constants/Address'
 import WalletTransaction from "../../constants/ont-wallet/transaction";
 import GetWalletFileMsg from "../../constants/ont-wallet/info";
+import TransactionSuccessTemplate from '../TransactionSuccessTemplate/TransactionSuccessTemplate'
 
 class DonationTemplate extends React.Component {
   constructor(props) {
@@ -21,15 +22,20 @@ class DonationTemplate extends React.Component {
   closeBord = () => {
     this.props.hideBord(false)
   }
-
-  toTransaction = () => {
-    console.log(this.props.walletInfo.walletFile)
-    console.log(this.password)
+  showSuccessBord = () => {
+    this.props.showSuccessBord()
+  }
+  getTransHash = ($hash) => {
+    this.props.getTransHash($hash)
+  }
+  toTransaction = async() => {
     let info = GetWalletFileMsg.decryptWalletFile(this.props.walletInfo.walletFile, this.state.password)
-    console.log(info)
     if(info.isGetInfo){
-      let msg = WalletTransaction.sendTransaction(this.props.walletInfo.address,CHARITY_ADDRESS,info.privateKey,this.state.money )
-      console.log(msg)
+      let msg = await WalletTransaction.sendTransaction(this.props.walletInfo.address,CHARITY_ADDRESS,info.privateKey,this.state.money )
+      if(msg.Desc === "SUCCESS") {
+        this.showSuccessBord()
+        this.getTransHash(msg.Result)
+      }
     }
 
   }
@@ -39,6 +45,7 @@ class DonationTemplate extends React.Component {
   setValue = (e) => {
     this.setState({money: e.target.value})
   }
+
   render() {
     return (
       <div className={styles.templateWraper}>
@@ -60,6 +67,7 @@ class DonationTemplate extends React.Component {
           </div>
         </div>
         <div className={styles.submit} onClick={this.toTransaction}>捐款</div>
+
       </div>
     )
   }

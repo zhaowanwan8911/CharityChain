@@ -8,6 +8,7 @@ import { injectIntl } from 'react-intl'
 import DonationTemplate from '../DonationTemplate/DonationTemplate'
 import styles from './Account.scss'
 import {getBalance} from "../../actions/wallet";
+import TransactionSuccessTemplate from "../TransactionSuccessTemplate/TransactionSuccessTemplate";
 
 class Account extends React.Component {
   constructor(props) {
@@ -16,6 +17,8 @@ class Account extends React.Component {
       walletInfo:'',
       walletBalance:'',
       showBord: false,
+      showSuccessBord: '',
+      transactionHash:'',
     }
   }
   componentDidMount = () => {
@@ -44,6 +47,19 @@ class Account extends React.Component {
       showBord: showBord,
     })
   }
+  showSuccessBord = () => {
+    this.setState({
+      showSuccessBord: true,
+    })
+  }
+  hideSuccessBord = (showSuccessBord) => {
+    this.setState({
+      showSuccessBord: showSuccessBord,
+    })
+  }
+  getTransHash = ($hash) => {
+    this.setState({transactionHash: $hash})
+  }
   render() {
     return (
       <div className={styles.account}>
@@ -56,7 +72,8 @@ class Account extends React.Component {
           <span>{this.state.walletBalance}</span> ont
         </div>
         <div className={styles.operate} onClick={() => {this.operate()}}>{this.props.buttonName}</div>
-        {this.state.showBord && <DonationTemplate showBord={this.state.showBord} hideBord={this.hideBord} />}
+        {this.state.showBord && <DonationTemplate showBord={this.state.showBord} hideBord={this.hideBord} showSuccessBord={this.showSuccessBord} getTransHash={this.getTransHash} />}
+        {this.state.showSuccessBord && <TransactionSuccessTemplate showBord={this.state.showSuccessBord} hideBord={this.hideSuccessBord} transactionHash={this.state.transactionHash}/>}
       </div>
     )
   }
