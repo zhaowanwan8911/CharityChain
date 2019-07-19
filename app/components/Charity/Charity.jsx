@@ -34,24 +34,6 @@ class Charity extends React.Component {
         width: '',
       },
     ]
-    this.userInfo = {
-      name: {
-        key: '姓名',
-        value: '张之雅'
-      },
-      guardian: {
-        key: '监护人',
-        value: '张志国'
-      },
-      phone: {
-        key: '联系方式',
-        value: '18510601969'
-      },
-      homeAddress: {
-        key: '联系地址',
-        value: '北京市海淀区'
-      },
-    }
     this.tableData = [
       {
         time: '2019-08-15',
