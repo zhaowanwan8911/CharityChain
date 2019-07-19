@@ -8,6 +8,11 @@ const wallet = (state = {
   walletBalance: {
     ont:10000,
   },
+  transforHistory:'',
+  transforHistoryForDonator:'',
+  transforHistoryForCharity:'',
+  transforHistoryForActuator:'',
+  transforHistoryForProvider:'',
 }, action) => {
   const { type, payload } = action
   switch (type) {
@@ -15,6 +20,16 @@ const wallet = (state = {
       return Object.assign({}, state, { walletInfo: payload })
     case types.SET_WALLET_BALANCE:
       return Object.assign({}, state, { walletBalance: payload })
+    case types.SET_TRANSFOR_HISTORY:
+      return Object.assign({}, state, { transforHistory: payload })
+    case types.SET_TRANSFOR_HISTORY_FOR_DONATOR:
+      return Object.assign({}, state, { transforHistoryForDonator: payload })
+    case types.SET_TRANSFOR_HISTORY_FOR_CHARITY:
+      return Object.assign({}, state, { transforHistoryForCharity: payload })
+    case types.SET_TRANSFOR_HISTORY_FOR_ACTUATOR:
+      return Object.assign({}, state, { transforHistoryForActuator: payload })
+    case types.SET_TRANSFOR_HISTORY_FOR_PROVIDER:
+      return Object.assign({}, state, { transforHistoryForProvider: payload })
     default:
       return state
   }

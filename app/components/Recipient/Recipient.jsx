@@ -13,41 +13,15 @@ import ReleaseHistory from '../ReleaseHistory/ReleaseHistory'
 import styles from './Recipient.scss'
 
 import PIC from './pic.jpg'
-import {setWalletInfo} from "../../actions/wallet";
+import {getTransforHistory, setWalletInfo} from "../../actions/wallet";
 import {login} from "../../actions/login";
 
 class Recipient extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {}
-    // 用户信息
-    this.userInfo = {
-      name: {
-        key: '姓名',
-        value: '张之雅'
-
-      },
-      guardian: {
-        key: '监护人',
-        value: '张志国'
-
-      },
-      phone: {
-        key: '联系方式',
-        value: '18510601969'
-
-      },
-      homeAddress: {
-        key: '联系地址',
-        value: '北京市海淀区'
-
-      },
-    }
-    // 账户信息
-    this.account = {
-      walletAddress: '09e599ecde6eec18608bdecd0cf0a54b02b',
-      balance: 20,
-      operateBtn: '发布申请',
+    this.state = {
+      hideNav: false,
+      transforHistory:''
     }
 
     // 受助列表
@@ -67,32 +41,6 @@ class Recipient extends React.Component {
       {
         name: '数量',
         width: '',
-      },
-    ]
-    this.tableData = [
-      {
-        time: '2019-08-15',
-        hashValue: '09e599ecde6eec18608bdecd0cf0a54b02bc9d55239e1b1bd291558e5a6ef3fa',
-        walletAddress: 'A15NzM9iE3VT9X8SGk5h3dii6GPFQh2vme',
-        amount: '100',
-      },
-      {
-        time: '2019-08-15',
-        hashValue: '09e599ecde6eec18608bdecd0cf0a54b02bc9d55239e1b1bd291558e5a6ef3fa',
-        walletAddress: 'A15NzM9iE3VT9X8SGk5h3dii6GPFQh2vme',
-        amount: '100',
-      },
-      {
-        time: '2019-08-15',
-        hashValue: '09e599ecde6eec18608bdecd0cf0a54b02bc9d55239e1b1bd291558e5a6ef3fa',
-        walletAddress: 'A15NzM9iE3VT9X8SGk5h3dii6GPFQh2vme',
-        amount: '100',
-      },
-      {
-        time: '2019-08-15',
-        hashValue: '09e599ecde6eec18608bdecd0cf0a54b02bc9d55239e1b1bd291558e5a6ef3fa',
-        walletAddress: 'A15NzM9iE3VT9X8SGk5h3dii6GPFQh2vme',
-        amount: '100',
       },
     ]
     this.sessionName = '受捐记录'
@@ -141,12 +89,19 @@ class Recipient extends React.Component {
     // 获取受捐记录的数据（根据页数）
   }
   componentDidMount = () => {
-    // 获取受捐记录的数据（默认第一页）
-    // 获取个人钱包信息
-    // 获取个人钱包余额 ，捐款后再次触发获取余额
+    window.addEventListener('scroll', this.handleScroll.bind(this))
+    this.refreshList()
+  }
+  componentWillUnmount = () => {
+    window.removeEventListener('scroll', this.handleScroll.bind(this))
+  }
+  componentWillReceiveProps = (nextProps) => {
+    if (this.props.transforHistory !== nextProps.transforHistory) {
+      this.setState({transforHistory: nextProps.transforHistory})
+    }
   }
   refreshList = () => {
-    // 获取受捐记录的数据（默认第一页）
+    this.props.getTransforHistory(this.props.walletInfo.address,'remittee')
   }
   operate = () => {
     // 发布信息的方法
@@ -167,9 +122,12 @@ class Recipient extends React.Component {
         <div className={styles.recipientsRecord}>
           <TableList
             tableHeader={this.tableHeader}
-            tableData = {this.tableData}
+            tableData = {this.state.transforHistory}
             sessionName={this.sessionName}
             refreshList={this.refreshList}
+            type="payer"
+            plus="+"
+            address={this.props.walletInfo.address}
           />
           <Pagiation
             config = {{
@@ -196,11 +154,13 @@ const mapStateToProps = (state) => {
   return {
     walletInfo: state.wallet.walletInfo,
     personalInfo: state.login.personalInfo,
+    transforHistory: state.wallet.transforHistory,
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    getTransforHistory: bindActionCreators(getTransforHistory, dispatch),
   }
 }
 

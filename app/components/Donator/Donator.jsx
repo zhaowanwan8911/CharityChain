@@ -13,7 +13,7 @@ import ReleaseHistory from '../ReleaseHistory/ReleaseHistory'
 import styles from './Donator.scss'
 
 import PIC from './pic.jpg'
-import {setWalletInfo} from "../../actions/wallet"
+import {getTransforHistory} from "../../actions/wallet"
 import {login} from "../../actions/login"
 
 class HelpSeeker extends React.Component {
@@ -21,11 +21,12 @@ class HelpSeeker extends React.Component {
     super(props)
     this.state = {
       hideNav: false,
+      transforHistory:[]
     }
     // 受助列表
     this.tableHeader = [
       {
-        name: '受捐时间',
+        name: '捐助时间',
         width: '',
       },
       {
@@ -41,38 +42,6 @@ class HelpSeeker extends React.Component {
         width: '',
       },
     ]
-    this.tableData = [
-      {
-        time: '2019-08-15',
-        hashValue: '09e599ecde6eec18608bdecd0cf0a54b02bc9d55239e1b1bd291558e5a6ef3fa',
-        walletAddress: 'A15NzM9iE3VT9X8SGk5h3dii6GPFQh2vme',
-        amount: '100 ont',
-      },
-      {
-        time: '2019-08-15',
-        hashValue: '09e599ecde6eec18608bdecd0cf0a54b02bc9d55239e1b1bd291558e5a6ef3fa',
-        walletAddress: 'A15NzM9iE3VT9X8SGk5h3dii6GPFQh2vme',
-        amount: '100 ont',
-      },
-      {
-        time: '2019-08-15',
-        hashValue: '09e599ecde6eec18608bdecd0cf0a54b02bc9d55239e1b1bd291558e5a6ef3fa',
-        walletAddress: 'A15NzM9iE3VT9X8SGk5h3dii6GPFQh2vme',
-        amount: '100 ont',
-      },
-      {
-        time: '2019-08-15',
-        hashValue: '09e599ecde6eec18608bdecd0cf0a54b02bc9d55239e1b1bd291558e5a6ef3fa',
-        walletAddress: 'A15NzM9iE3VT9X8SGk5h3dii6GPFQh2vme',
-        amount: '100 ont',
-      },
-      {
-        time: '2019-08-15',
-        hashValue: '09e599ecde6eec18608bdecd0cf0a54b02bc9d55239e1b1bd291558e5a6ef3fa',
-        walletAddress: 'A15NzM9iE3VT9X8SGk5h3dii6GPFQh2vme',
-        amount: '100 ont',
-      },
-    ]
     this.sessionName = '捐款记录'
     // 发布历史记录
   }
@@ -81,14 +50,16 @@ class HelpSeeker extends React.Component {
     // 获取受捐记录的数据（根据页数）
   }
   componentDidMount = () => {
-    // 监听滚动条事件
     window.addEventListener('scroll', this.handleScroll.bind(this))
-    // 获取受捐记录的数据（默认第一页）
-    // 获取个人钱包信息
-    // 获取个人钱包余额 ，捐款后再次触发获取余额
+    this.refreshList()
   }
   componentWillUnmount = () => {
     window.removeEventListener('scroll', this.handleScroll.bind(this))
+  }
+  componentWillReceiveProps = (nextProps) => {
+    if (this.props.transforHistory !== nextProps.transforHistory) {
+      this.setState({transforHistory: nextProps.transforHistory})
+    }
   }
   handleScroll = (e) => {
     if (e.srcElement.scrollingElement.scrollTop > 100) {
@@ -102,7 +73,7 @@ class HelpSeeker extends React.Component {
     }
   }
   refreshList = () => {
-    // 获取受捐记录的数据（默认第一页）
+    this.props.getTransforHistory(this.props.walletInfo.address,'payer')
   }
   operate = () => {
     // 发布信息的方法
@@ -123,9 +94,12 @@ class HelpSeeker extends React.Component {
         <div className={styles.recipientsRecord}>
           <TableList
             tableHeader={this.tableHeader}
-            tableData = {this.tableData}
+            tableData = {this.state.transforHistory}
             sessionName={this.sessionName}
             refreshList={this.refreshList}
+            type="remittee"
+            plus="-"
+            address={this.props.walletInfo.address}
           />
           <Pagiation
             config = {{
@@ -143,11 +117,13 @@ const mapStateToProps = (state) => {
   return {
     walletInfo: state.wallet.walletInfo,
     personalInfo: state.login.personalInfo,
+    transforHistory: state.wallet.transforHistory,
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    getTransforHistory: bindActionCreators(getTransforHistory, dispatch),
   }
 }
 
