@@ -10,13 +10,13 @@ import Account from '../Account/Account'
 import Pagiation from '../Pagination/Pagination'
 import ReleaseHistory from '../ReleaseHistory/ReleaseHistory'
 
-import styles from './Recipients.scss'
+import styles from './Recipient.scss'
 
 import PIC from './pic.jpg'
 import {setWalletInfo} from "../../actions/wallet";
 import {login} from "../../actions/login";
 
-class HelpSeeker extends React.Component {
+class Recipient extends React.Component {
   constructor(props) {
     super(props)
     this.state = {}
@@ -162,7 +162,6 @@ class HelpSeeker extends React.Component {
           />
           <Account
             buttonName="发布申请"
-            operate={this.operate}
           />
         </div>
         <div className={styles.recipientsRecord}>
@@ -205,4 +204,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(HelpSeeker))
+export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(Recipient))
