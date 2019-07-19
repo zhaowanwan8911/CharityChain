@@ -9,41 +9,52 @@ import {CHARITY_ADDRESS} from '../../constants/Address'
 import WalletTransaction from "../../constants/ont-wallet/transaction";
 import GetWalletFileMsg from "../../constants/ont-wallet/info";
 import TransactionSuccessTemplate from '../TransactionSuccessTemplate/TransactionSuccessTemplate'
+import { creatRecipient } from '../../actions/recipient'
 
 class RecipientTemplate extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      password:'',
-      money:'',
+      money: '',
+      title: '',
+      content: '',
     }
   }
-
+  componentWillReceiveProps = (nextProps) => {
+    if (nextProps.recipientInfo.result === "success") {
+      // this.showSuccessBord()
+      // this.getTransHash(msg.Result)
+    }
+  }
   closeBord = () => {
     this.props.hideBord(false)
   }
+  toCreate = async() => {
+    const params = {
+      money: this.state.money,
+      title: this.state.title,
+      content: this.state.content,
+      wallet_address: this.props.walletInfo.address,
+      name: this.props.personalInfo.name,
+    }
+    this.props.creatRecipient(params)
+  }
+
   showSuccessBord = () => {
     this.props.showSuccessBord()
   }
   getTransHash = ($hash) => {
     this.props.getTransHash($hash)
   }
-  toTransaction = async() => {
-    let info = GetWalletFileMsg.decryptWalletFile(this.props.walletInfo.walletFile, this.state.password)
-    if(info.isGetInfo){
-      let msg = await WalletTransaction.sendTransaction(this.props.walletInfo.address,CHARITY_ADDRESS,info.privateKey,this.state.money )
-      if(msg.Desc === "SUCCESS") {
-        this.showSuccessBord()
-        this.getTransHash(msg.Result)
-      }
-    }
 
-  }
-  setPassword = (e) => {
-    this.setState({password: e.target.value})
-  }
   setValue = (e) => {
     this.setState({money: e.target.value})
+  }
+  setTitle = (e) => {
+    this.setState({title: e.target.value})
+  }
+  setContent = (e) => {
+    this.setState({content: e.target.value})
   }
 
   render() {
@@ -69,13 +80,12 @@ class RecipientTemplate extends React.Component {
           </div>
           <div className={styles.right}>
              <label>标题：</label>
-             <input type="text" placeholder="标题" />
+             <input type="text" placeholder="标题" onChange={this.setTitle} />
              <label>发声：</label>
-            <textarea name="" id="" cols="30" rows="10" placeholder="发声" />
+            <textarea name="" id="" cols="30" rows="10" placeholder="发声" onChange={this.setContent} />
           </div>
         </div>
-        <div className={styles.submit} onClick={this.toTransaction}>发布</div>
-
+        <div className={styles.submit} onClick={this.toCreate}>发布</div>
       </div>
     )
   }
@@ -85,11 +95,13 @@ const mapStateToProps = (state) => {
   return {
     walletInfo: state.wallet.walletInfo,
     personalInfo: state.login.personalInfo,
+    recipientInfo: state.recipient.recipientInfo,
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    creatRecipient: bindActionCreators(creatRecipient, dispatch),
   }
 }
 

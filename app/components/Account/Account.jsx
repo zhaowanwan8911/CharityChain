@@ -88,7 +88,7 @@ class Account extends React.Component {
         <div className={styles.operate} onClick={() => {this.operate()}}>{this.props.buttonName}</div>
         {this.state.showBord && <DonationTemplate showBord={this.state.showBord} hideBord={this.hideBord} showSuccessBord={this.showSuccessBord} getTransHash={this.getTransHash} />}
         {this.state.showSuccessBord && <TransactionSuccessTemplate showBord={this.state.showSuccessBord} hideBord={this.hideSuccessBord} transactionHash={this.state.transactionHash}/>}
-        {this.state.showRecipientBoard && <RecipientTemplate showBord={this.state.showRecipientBoard} hideBord={this.hideRecipientBoard}/>}
+        {this.state.showRecipientBoard && <RecipientTemplate showBord={this.state.showRecipientBoard} hideBord={this.hideRecipientBoard} />}
       </div>
     )
   }
