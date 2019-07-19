@@ -29,6 +29,9 @@ class Account extends React.Component {
     if (this.props.walletBalance !== nextProps.walletBalance) {
       this.setState({walletBalance: nextProps.walletBalance})
     }
+    if(this.props.walletInfo !== nextProps.walletInfo){
+      this.setState({walletInfo: this.props.walletInfo})
+    }
   }
   operate = () => {
     switch (this.props.buttonName){
