@@ -1,6 +1,7 @@
 .content{
   width: 1200px;
   margin: auto;
+  margin-top: 60px;
   .title{
     width: 800px;
     margin: auto;
@@ -10,6 +11,7 @@
     line-height: 60px;
     padding: 20px 0;
     text-align: center;
+    color: #333333;
   }
   .contentTop{
     box-shadow: rgba(0, 0, 0, 0.25) 1px 1px 2px 0px;
@@ -45,7 +47,7 @@
   .contentBottom{
     overflow: hidden;
     .reasonTitle{
-      color: #111;
+      color: #333333;
       font-size: 20px;
       font-family: PingFangSC-Regular, "Helvetica Neue", Helvetica, STHeiTi, Arial, sans-serif;
       margin: 20px 0;
@@ -55,6 +57,7 @@
       font-size:16px;
       font-weight:300;
       line-height: 30px;
+      color: #666666;
     }
     .imgs{
       margin: 40px 0;
