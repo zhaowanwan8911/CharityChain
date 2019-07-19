@@ -20,23 +20,22 @@ class RecipientTemplate extends React.Component {
       content: '',
     }
   }
+  componentWillReceiveProps = (nextProps) => {
+    if (nextProps.recipientInfo.result === "success") {
+      // this.showSuccessBord()
+      // this.getTransHash(msg.Result)
+    }
+  }
   closeBord = () => {
     this.props.hideBord(false)
   }
   toCreate = async() => {
-    // let info = GetWalletFileMsg.decryptWalletFile(this.props.walletInfo.walletFile, this.state.password)
-    // if(info.isGetInfo){
-    //   let msg = await WalletTransaction.sendTransaction(this.props.walletInfo.address,CHARITY_ADDRESS,info.privateKey,this.state.money )
-    //   if(msg.Desc === "SUCCESS") {
-    //     this.showSuccessBord()
-    //     this.getTransHash(msg.Result)
-    //   }
-    // }
     const params = {
       money: this.state.money,
       title: this.state.title,
-      contnet: this.state.content,
+      content: this.state.content,
       wallet_address: this.props.walletInfo.address,
+      name: this.props.personalInfo.name,
     }
     this.props.creatRecipient(params)
   }
@@ -87,7 +86,6 @@ class RecipientTemplate extends React.Component {
           </div>
         </div>
         <div className={styles.submit} onClick={this.toCreate}>发布</div>
-
       </div>
     )
   }
@@ -97,6 +95,7 @@ const mapStateToProps = (state) => {
   return {
     walletInfo: state.wallet.walletInfo,
     personalInfo: state.login.personalInfo,
+    recipientInfo: state.recipient.recipientInfo,
   }
 }
 
