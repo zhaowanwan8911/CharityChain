@@ -9,6 +9,7 @@ import {CHARITY_ADDRESS} from '../../constants/Address'
 import WalletTransaction from "../../constants/ont-wallet/transaction";
 import GetWalletFileMsg from "../../constants/ont-wallet/info";
 import TransactionSuccessTemplate from '../TransactionSuccessTemplate/TransactionSuccessTemplate'
+import CLOSE from './close.png'
 
 class DonationTemplate extends React.Component {
   constructor(props) {
@@ -48,27 +49,37 @@ class DonationTemplate extends React.Component {
 
   render() {
     return (
-      <div className={styles.templateWraper}>
-        <span className={styles.closeBtn} onClick={this.closeBord}>x</span>
-        <h1>爱心捐款</h1>
-        <div className={styles.info}>
-          <div>
-            <label>钱包地址：</label>
-            <span>{this.props.walletInfo.address}</span>
-          </div>
-          <div>
-            <label>捐款金额：</label>
-            <input type="text" onChange={this.setValue}/>
-            <span>余额：{this.props.walletBalance} Ont</span>
-          </div>
-          <div>
-            <label>输入密码：</label>
-            <input type="password" onChange={this.setPassword}/>
-          </div>
+      <div>
+        <div className={styles.templateDiv}>
         </div>
-        <div className={styles.submit} onClick={this.toTransaction}>捐款</div>
+        <div className={styles.templateWraper}>
+          <div className={styles.templateTop}>
+            <h1>爱心捐款</h1>
+          </div>
+          <span className={styles.closeBtn} onClick={this.closeBord}>
+            <img src={CLOSE}/>
+          </span>
 
+          <div className={styles.info}>
+            <div>
+              <label>钱包地址：</label>
+              <span>{this.props.walletInfo.address}</span>
+            </div>
+            <div>
+              <label>捐款金额：</label>
+              <input type="text" onChange={this.setValue}/>
+              <p className={styles.balanceText}>余额：{this.props.walletBalance} Ont</p>
+            </div>
+            <div>
+              <label>输入密码：</label>
+              <input type="password" onChange={this.setPassword}/>
+            </div>
+          </div>
+          <div className={styles.submit} onClick={this.toTransaction}>捐款</div>
+
+        </div>
       </div>
+
     )
   }
 }
