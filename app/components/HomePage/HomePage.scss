@@ -18,7 +18,7 @@
         border-radius: 4px;
         overflow: hidden;
         .browseBtn {
-          background: #1cabe2;
+          background: rgb(41, 94, 164);
           width: 118px;
           line-height: 50px;
           text-align: center;
@@ -51,7 +51,7 @@
       }
       .submit {
         margin: 0 auto;
-        background: #1cabe2;
+        background: rgb(41, 94, 164);
         height: 50px;
         width: 200px;
         text-align: center;
@@ -115,7 +115,7 @@
             // color: #1cabe2;
           }
           .drowActive {
-            background: #1cabe2 !important;
+            background: rgb(41, 94, 164) !important;
           }
         }
       }
@@ -154,7 +154,7 @@
         }
         .more {
           position: absolute;
-          color: #1cabe2;
+          color: rgb(41, 94, 164);
           left: 20px;
           bottom: 20px;
         }
@@ -191,7 +191,7 @@
         }
         .more {
           position: absolute;
-          color: #1cabe2;
+          color: rgb(41, 94, 164);
           left: 20px;
           bottom: 20px;
         }
@@ -228,7 +228,7 @@
         }
         .more {
           position: absolute;
-          color: #1cabe2;
+          color: rgb(41, 94, 164);
           left: 20px;
           bottom: 20px;
         }
@@ -239,7 +239,7 @@
     box-sizing: border-box;
     border-radius: 4px;
     box-shadow: 0 1px 4px 1px rgba(0,0,0,.25);
-    background: #1cabe2;
+    background: rgb(41, 94, 164);
     display: flex;
     overflow: hidden;
     cursor: pointer;

@@ -95,7 +95,8 @@ module.exports = {
       '/user/login/*': ProxyConfig,
       '/user/info/*': ProxyConfig,
       '/api/v1/*': ProxyConfig2,
-      '/project/*': ProxyConfig2,
+      '/project/create/*': ProxyConfig,
+      '/project/list/*': ProxyConfig,
     },
   },
   plugins: [

@@ -6,17 +6,24 @@ import { injectIntl } from 'react-intl'
 
 import styles from './CharityReleaseTemplate.scss'
 import {CHARITY_ADDRESS} from '../../constants/Address'
-import WalletTransaction from "../../constants/ont-wallet/transaction";
-import GetWalletFileMsg from "../../constants/ont-wallet/info";
-import TransactionSuccessTemplate from '../TransactionSuccessTemplate/TransactionSuccessTemplate'
+import {getRecipientProjectList} from "../../actions/recipient";
 
 class CharityReleaseTemplate extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
+      recipientProjectList:''
     }
   }
-
+  componentDidMount = () => {
+    const params = { type: 'in_process' }
+    this.props.getRecipientProjectList(params)
+  }
+  componentWillReceiveProps = (nextProps) => {
+    if (this.props.recipientProjectList !== nextProps.recipientProjectList) {
+      this.setState({recipientProjectList: nextProps.recipientProjectList})
+    }
+  }
   closeBord = () => {
     this.props.hideBord(false)
   }
@@ -38,13 +45,13 @@ class CharityReleaseTemplate extends React.Component {
 const mapStateToProps = (state) => {
   return {
     walletInfo: state.wallet.walletInfo,
-    personalInfo: state.login.personalInfo,
-    walletBalance: state.wallet.walletBalance,
+    recipientProjectList: state.recipient.recipientProjectList,
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    getRecipientProjectList: bindActionCreators(getRecipientProjectList, dispatch),
   }
 }
 
