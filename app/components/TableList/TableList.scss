@@ -9,7 +9,7 @@
     margin: auto;
     .sessionName{
       float: left;
-      color: #595757;
+      color: #333333;
       font-family: SourceSansPro-Regular,Helvetica Neue,Arial,sans-serif;
       font-size: 24px;
       font-weight: 400;
@@ -17,7 +17,7 @@
       margin-bottom: 10px;
     }
     .refresh{
-      background: #1cabe2;
+      background: rgb(41, 94, 164);
       font-family:Roboto, "Heiti SC", "Microsoft Yahei", simsun, sans-serif;
       font-size:14px;
       font-weight:500;
@@ -30,7 +30,7 @@
       cursor: pointer;
       clear: both;
       &:hover{
-        background: #0e95ca;
+        background: rgb(48, 120, 200);
       }
     }
     .tableList{
@@ -46,7 +46,7 @@
             font-family:SourceSansPro-Regular, "Helvetica Neue", Arial, sans-serif;
             font-size:16px;
             padding: 12px;
-            background: #1cabe2;
+            background: rgb(54, 122, 189);
           }
         }
         tbody tr{
@@ -58,6 +58,7 @@
             font-size:14px;
             font-weight:400;
             padding: 12px;
+            color: #666666;
           }
           &:hover{
             background: rgba(0,0,0,.075);

@@ -10,6 +10,7 @@ import RecipientTemplate from '../RecipientTemplate/RecipientTemplate'
 import styles from './Account.scss'
 import {getBalance} from "../../actions/wallet";
 import TransactionSuccessTemplate from "../TransactionSuccessTemplate/TransactionSuccessTemplate";
+import CharityReleaseTemplate from "../CharityReleaseTemplate/CharityReleaseTemplate"
 
 class Account extends React.Component {
   constructor(props) {
@@ -19,6 +20,7 @@ class Account extends React.Component {
       walletBalance:'',
       showBord: false,
       showRecipientBoard: false,
+      showCharityReleaseBoard: false,
       showSuccessBord: '',
       transactionHash:'',
     }
@@ -31,14 +33,21 @@ class Account extends React.Component {
     if (this.props.walletBalance !== nextProps.walletBalance) {
       this.setState({walletBalance: nextProps.walletBalance})
     }
+    if(this.props.walletInfo !== nextProps.walletInfo){
+      this.setState({walletInfo: this.props.walletInfo})
+    }
   }
   operate = () => {
     switch (this.props.buttonName){
       case '捐款':
         this.showBord()
         break
+      case '爱心助力':
+        this.showCharityReleaseBoard()
+        break
       case '发布申请':
         this.showRecipientBoard()
+        break
     }
   }
   showBord = () => {
@@ -71,6 +80,16 @@ class Account extends React.Component {
       showRecipientBoard: showRecipientBoard,
     })
   }
+  showCharityReleaseBoard = () => {
+    this.setState({
+      showCharityReleaseBoard: true,
+    })
+  }
+  hideCharityReleaseBoard = (showCharityReleaseBoard) => {
+    this.setState({
+      showCharityReleaseBoard: showCharityReleaseBoard,
+    })
+  }
   getTransHash = ($hash) => {
     this.setState({transactionHash: $hash})
   }
@@ -88,6 +107,7 @@ class Account extends React.Component {
         <div className={styles.operate} onClick={() => {this.operate()}}>{this.props.buttonName}</div>
         {this.state.showBord && <DonationTemplate showBord={this.state.showBord} hideBord={this.hideBord} showSuccessBord={this.showSuccessBord} getTransHash={this.getTransHash} />}
         {this.state.showSuccessBord && <TransactionSuccessTemplate showBord={this.state.showSuccessBord} hideBord={this.hideSuccessBord} transactionHash={this.state.transactionHash}/>}
+        {this.state.showCharityReleaseBoard && <CharityReleaseTemplate showBord={this.state.showCharityReleaseBoard} hideBord={this.hideCharityReleaseBoard}/>}
         {this.state.showRecipientBoard && <RecipientTemplate showBord={this.state.showRecipientBoard} hideBord={this.hideRecipientBoard} />}
       </div>
     )
