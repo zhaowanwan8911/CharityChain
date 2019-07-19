@@ -15,20 +15,15 @@ class RecipientTemplate extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      password:'',
-      money:'',
+      money: '',
+      title: '',
+      content: '',
     }
   }
   closeBord = () => {
     this.props.hideBord(false)
   }
-  showSuccessBord = () => {
-    this.props.showSuccessBord()
-  }
-  getTransHash = ($hash) => {
-    this.props.getTransHash($hash)
-  }
-  toTransaction = async() => {
+  toCreate = async() => {
     // let info = GetWalletFileMsg.decryptWalletFile(this.props.walletInfo.walletFile, this.state.password)
     // if(info.isGetInfo){
     //   let msg = await WalletTransaction.sendTransaction(this.props.walletInfo.address,CHARITY_ADDRESS,info.privateKey,this.state.money )
@@ -38,18 +33,29 @@ class RecipientTemplate extends React.Component {
     //   }
     // }
     const params = {
-      money: 200,
-      title: '求助',
-      contnet: '希望工程',
-      wallet_address: 'AL6YBSSi9rJwkxSHc3K6tq8Zy53Nji4aRP',
+      money: this.state.money,
+      title: this.state.title,
+      contnet: this.state.content,
+      wallet_address: this.props.walletInfo.address,
     }
     this.props.creatRecipient(params)
   }
-  setPassword = (e) => {
-    this.setState({password: e.target.value})
+
+  showSuccessBord = () => {
+    this.props.showSuccessBord()
   }
+  getTransHash = ($hash) => {
+    this.props.getTransHash($hash)
+  }
+
   setValue = (e) => {
     this.setState({money: e.target.value})
+  }
+  setTitle = (e) => {
+    this.setState({title: e.target.value})
+  }
+  setContent = (e) => {
+    this.setState({content: e.target.value})
   }
 
   render() {
@@ -75,12 +81,12 @@ class RecipientTemplate extends React.Component {
           </div>
           <div className={styles.right}>
              <label>标题：</label>
-             <input type="text" placeholder="标题" />
+             <input type="text" placeholder="标题" onChange={this.setTitle} />
              <label>发声：</label>
-            <textarea name="" id="" cols="30" rows="10" placeholder="发声" />
+            <textarea name="" id="" cols="30" rows="10" placeholder="发声" onChange={this.setContent} />
           </div>
         </div>
-        <div className={styles.submit} onClick={this.toTransaction}>发布</div>
+        <div className={styles.submit} onClick={this.toCreate}>发布</div>
 
       </div>
     )
