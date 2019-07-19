@@ -8,7 +8,7 @@ const ProxyConfig = {
   secure: false,
 }
 const ProxyConfig2 = {
-  target: 'http://10.112.104.226:20334',
+  target: 'http://10.0.0.249:20334',
   changeOrigin: true,
   secure: false,
 }

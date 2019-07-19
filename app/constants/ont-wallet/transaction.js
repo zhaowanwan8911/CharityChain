@@ -1,8 +1,9 @@
 let Ont = require('ontology-ts-sdk');
 import {RestClient} from 'ontology-ts-sdk';
+import {BLOCK_CHAIN_URL} from '../API'
 export default {
   sendTransaction: async function ($walletAddress, $toAddress, $privateKey, $money) {
-    const restClient = new RestClient('http://127.0.0.1:20334');
+    const restClient = new RestClient(BLOCK_CHAIN_URL);
     const walletAddress = new Ont.Crypto.Address($walletAddress);
     const walletPrivateKey = new Ont.Crypto.PrivateKey($privateKey);
 
