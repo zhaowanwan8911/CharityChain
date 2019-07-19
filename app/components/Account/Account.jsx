@@ -6,6 +6,7 @@ import { injectIntl } from 'react-intl'
 // import Swal from 'sweetalert2'
 
 import DonationTemplate from '../DonationTemplate/DonationTemplate'
+import RecipientTemplate from '../RecipientTemplate/RecipientTemplate'
 import styles from './Account.scss'
 import {getBalance} from "../../actions/wallet";
 import TransactionSuccessTemplate from "../TransactionSuccessTemplate/TransactionSuccessTemplate";
@@ -17,6 +18,7 @@ class Account extends React.Component {
       walletInfo:'',
       walletBalance:'',
       showBord: false,
+      showRecipientBoard: false,
       showSuccessBord: '',
       transactionHash:'',
     }
@@ -38,6 +40,8 @@ class Account extends React.Component {
       case '捐款':
         this.showBord()
         break
+      case '发布申请':
+        this.showRecipientBoard()
     }
   }
   showBord = () => {
@@ -60,6 +64,16 @@ class Account extends React.Component {
       showSuccessBord: showSuccessBord,
     })
   }
+  showRecipientBoard = () => {
+    this.setState({
+      showRecipientBoard: true,
+    })
+  }
+  hideRecipientBoard = (showRecipientBoard) => {
+    this.setState({
+      showRecipientBoard: showRecipientBoard,
+    })
+  }
   getTransHash = ($hash) => {
     this.setState({transactionHash: $hash})
   }
@@ -77,6 +91,7 @@ class Account extends React.Component {
         <div className={styles.operate} onClick={() => {this.operate()}}>{this.props.buttonName}</div>
         {this.state.showBord && <DonationTemplate showBord={this.state.showBord} hideBord={this.hideBord} showSuccessBord={this.showSuccessBord} getTransHash={this.getTransHash} />}
         {this.state.showSuccessBord && <TransactionSuccessTemplate showBord={this.state.showSuccessBord} hideBord={this.hideSuccessBord} transactionHash={this.state.transactionHash}/>}
+        {this.state.showRecipientBoard && <RecipientTemplate showBord={this.state.showRecipientBoard} hideBord={this.hideRecipientBoard}/>}
       </div>
     )
   }

@@ -8,13 +8,13 @@ import styles from './UserInfo.scss'
 import {getPersonalInfo} from "../../actions/login";
 
 // import PHOTO from './photo.jpg'
-gender: "女"
-homeAddress: "北京市海淀区"
-name: "Jayne"
-phone: "13145645876"
-profession: "程序员"
-role: "donator"
-walletAddress: "AL6YBSSi9rJwkxSHc3K6tq8Zy53Nji4aRP"
+// gender: "女"
+// homeAddress: "北京市海淀区"
+// name: "Jayne"
+// phone: "13145645876"
+// profession: "程序员"
+// role: "donator"
+// walletAddress: "AL6YBSSi9rJwkxSHc3K6tq8Zy53Nji4aRP"
 class UserInfo extends React.Component {
   constructor(props) {
     super(props)
