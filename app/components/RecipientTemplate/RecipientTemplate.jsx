@@ -9,6 +9,7 @@ import {CHARITY_ADDRESS} from '../../constants/Address'
 import WalletTransaction from "../../constants/ont-wallet/transaction";
 import GetWalletFileMsg from "../../constants/ont-wallet/info";
 import TransactionSuccessTemplate from '../TransactionSuccessTemplate/TransactionSuccessTemplate'
+import { creatRecipient } from '../../actions/recipient'
 
 class RecipientTemplate extends React.Component {
   constructor(props) {
@@ -18,7 +19,6 @@ class RecipientTemplate extends React.Component {
       money:'',
     }
   }
-
   closeBord = () => {
     this.props.hideBord(false)
   }
@@ -29,15 +29,21 @@ class RecipientTemplate extends React.Component {
     this.props.getTransHash($hash)
   }
   toTransaction = async() => {
-    let info = GetWalletFileMsg.decryptWalletFile(this.props.walletInfo.walletFile, this.state.password)
-    if(info.isGetInfo){
-      let msg = await WalletTransaction.sendTransaction(this.props.walletInfo.address,CHARITY_ADDRESS,info.privateKey,this.state.money )
-      if(msg.Desc === "SUCCESS") {
-        this.showSuccessBord()
-        this.getTransHash(msg.Result)
-      }
+    // let info = GetWalletFileMsg.decryptWalletFile(this.props.walletInfo.walletFile, this.state.password)
+    // if(info.isGetInfo){
+    //   let msg = await WalletTransaction.sendTransaction(this.props.walletInfo.address,CHARITY_ADDRESS,info.privateKey,this.state.money )
+    //   if(msg.Desc === "SUCCESS") {
+    //     this.showSuccessBord()
+    //     this.getTransHash(msg.Result)
+    //   }
+    // }
+    const params = {
+      money: 200,
+      title: '求助',
+      contnet: '希望工程',
+      wallet_address: 'AL6YBSSi9rJwkxSHc3K6tq8Zy53Nji4aRP',
     }
-
+    this.props.creatRecipient(params)
   }
   setPassword = (e) => {
     this.setState({password: e.target.value})
@@ -90,6 +96,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    creatRecipient: bindActionCreators(creatRecipient, dispatch),
   }
 }
 
