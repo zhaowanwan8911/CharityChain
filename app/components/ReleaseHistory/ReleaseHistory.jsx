@@ -8,6 +8,7 @@ import { confirmApply } from '../../actions/recipient'
 
 import styles from './ReleaseHistory.scss'
 import PIC from '../ReleaseHistory/pic.jpg'
+import classnames from 'classnames';
 
 class Account extends React.Component {
   constructor(props) {
@@ -23,8 +24,9 @@ class Account extends React.Component {
     this.props.confirmApply(id)
   }
   render() {
+    console.log(this.props.type)
     return (
-      <div>
+      <div className={this.props.type === 'small' ? styles.contentWrapperSmall : styles.contentWrapper}>
         {
           this.props.info.state === 'Create' ?
             <div className={styles.releaseItem}>
