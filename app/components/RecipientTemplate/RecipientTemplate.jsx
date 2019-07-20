@@ -37,6 +37,7 @@ class RecipientTemplate extends React.Component {
       name: this.props.personalInfo.name,
     }
     this.props.creatRecipient(params)
+    this.closeBord()
   }
 
   showSuccessBord = () => {

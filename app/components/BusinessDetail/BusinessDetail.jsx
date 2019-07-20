@@ -8,12 +8,19 @@ import TableList from '../TableList/TableList'
 import Pagiation from '../Pagination/Pagination'
 
 import styles from './BusinessDetail.scss'
+import {getTransforHistory} from "../../actions/wallet";
+
+import {CHARITY_ADDRESS,ACTUATOR_ADDRESS,PROVIDER_ADDRESS} from '../../constants/Address'
 
 class BusinessDetail extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
       activeIndex: 0,
+      transforHistoryForDonator:[],
+      transforHistoryForCharity:[],
+      transforHistoryForActuator:[],
+      transforHistoryForProvider:[],
     }
     this.tabs = [
       '慈善机构交易面板',
@@ -39,35 +46,30 @@ class BusinessDetail extends React.Component {
         width: '',
       },
     ]
-    this.tableData1 = [
-      {
-        time: '2019-08-15',
-        hashValue: '09e599ecde6eec18608bdecd0cf0a54b02bc9d55239e1b1bd291558e5a6ef3fa',
-        walletAddress: 'A15NzM9iE3VT9X8SGk5h3dii6GPFQh2vme',
-        amount: '100',
-      },
-      {
-        time: '2019-08-15',
-        hashValue: '09e599ecde6eec18608bdecd0cf0a54b02bc9d55239e1b1bd291558e5a6ef3fa',
-        walletAddress: 'A15NzM9iE3VT9X8SGk5h3dii6GPFQh2vme',
-        amount: '100',
-      },
-      {
-        time: '2019-08-15',
-        hashValue: '09e599ecde6eec18608bdecd0cf0a54b02bc9d55239e1b1bd291558e5a6ef3fa',
-        walletAddress: 'A15NzM9iE3VT9X8SGk5h3dii6GPFQh2vme',
-        amount: '100',
-      },
-      {
-        time: '2019-08-15',
-        hashValue: '09e599ecde6eec18608bdecd0cf0a54b02bc9d55239e1b1bd291558e5a6ef3fa',
-        walletAddress: 'A15NzM9iE3VT9X8SGk5h3dii6GPFQh2vme',
-        amount: '100',
-      },
-    ]
     this.sessionName2 = '受捐记录'
   }
+  componentDidMount = () => {
+    this.refreshList1()
+  }
+  componentWillReceiveProps = (nextProps) => {
+    if (this.props.transforHistoryForDonator !== nextProps.transforHistoryForDonator) {
+      this.setState({transforHistoryForDonator: nextProps.transforHistoryForDonator})
+    }
+    if (this.props.transforHistoryForCharity !== nextProps.transforHistoryForCharity) {
+      this.setState({transforHistoryForCharity: nextProps.transforHistoryForCharity})
+    }
+    if (this.props.transforHistoryForActuator !== nextProps.transforHistoryForActuator) {
+      this.setState({transforHistoryForActuator: nextProps.transforHistoryForActuator})
+    }
+    if (this.props.transforHistoryForProvider !== nextProps.transforHistoryForProvider) {
+      this.setState({transforHistoryForProvider: nextProps.transforHistoryForProvider})
+    }
+  }
   refreshList1 = () => {
+    this.props.getTransforHistory(CHARITY_ADDRESS,'remittee','donator')
+    this.props.getTransforHistory(CHARITY_ADDRESS,'all','charity')
+    this.props.getTransforHistory(ACTUATOR_ADDRESS,'all','actuator')
+    this.props.getTransforHistory(PROVIDER_ADDRESS,'all','provider')
   }
   refreshList2 = () => {
   }
@@ -84,28 +86,34 @@ class BusinessDetail extends React.Component {
       case 0 :
         return (
           <TableList
-          tableHeader={this.tableHeader1}
-          tableData = {this.tableData1}
-          refreshList={this.refreshList1}
-          hideRefresh
+            tableHeader={this.tableHeader1}
+            tableData = {this.state.transforHistoryForCharity.slice(0,10)}
+            refreshList={this.refreshList1}
+            type="all"
+            plus="all"
+            address={CHARITY_ADDRESS}
           />
         )
       case 1 :
         return (
           <TableList
-          tableHeader={this.tableHeader1}
-          tableData = {this.tableData1}
-          refreshList={this.refreshList1}
-          hideRefresh
+            tableHeader={this.tableHeader1}
+            tableData = {this.state.transforHistoryForActuator.slice(0,10)}
+            refreshList={this.refreshList1}
+            type="all"
+            plus="all"
+            address={ACTUATOR_ADDRESS}
           />
         )
       case 2 :
         return (
           <TableList
-          tableHeader={this.tableHeader1}
-          tableData = {this.tableData1}
-          refreshList={this.refreshList1}
-          hideRefresh
+            tableHeader={this.tableHeader1}
+            tableData = {this.state.transforHistoryForProvider.slice(0,10)}
+            refreshList={this.refreshList1}
+            type="all"
+            plus="all"
+            address={PROVIDER_ADDRESS}
           />
         )
       default:
@@ -121,18 +129,23 @@ class BusinessDetail extends React.Component {
         </div>
         <TableList
           tableHeader={this.tableHeader1}
-          tableData = {this.tableData1}
+          tableData = {this.state.transforHistoryForDonator.slice(0,10)}
           sessionName={this.sessionName1}
           refreshList={this.refreshList1}
-          colorClass="green"
+          type="payer"
+          plus="-"
+          address={CHARITY_ADDRESS}
         />
         <TableList
           tableHeader={this.tableHeader1}
-          tableData = {this.tableData1}
-          sessionName={this.sessionName2}
+          tableData = {this.state.transforHistoryForDonator.slice(0,10)}
+          sessionName={this.sessionName1}
           refreshList={this.refreshList1}
-          colorClass="red"
+          type="payer"
+          plus="-"
+          address={CHARITY_ADDRESS}
         />
+
         <div className={styles.tabsWraper}>
           <div className={styles.tabs}>
             {
@@ -167,11 +180,16 @@ class BusinessDetail extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
+    transforHistoryForDonator: state.wallet.transforHistoryForDonator,
+    transforHistoryForCharity:state.wallet.transforHistoryForCharity,
+    transforHistoryForActuator:state.wallet.transforHistoryForActuator,
+    transforHistoryForProvider:state.wallet.transforHistoryForProvider,
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    getTransforHistory: bindActionCreators(getTransforHistory, dispatch),
   }
 }
 

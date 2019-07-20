@@ -2,7 +2,8 @@ import * as types from '../constants/ActionTypes'
 
 const recipient = (state = {
   recipientInfo: {},
-  recipientProjectList: {}
+  recipientProjectList: {},
+  recipientContent: {}
 }, action) => {
   const { type, payload } = action
   switch (type) {
@@ -10,6 +11,8 @@ const recipient = (state = {
       return Object.assign({}, state, { recipientInfo: payload })
     case types.GET_RECIPENT_LIST:
       return Object.assign({}, state, { recipientProjectList: payload })
+    case types.GET_RECIPENT_CONTENT:
+      return Object.assign({}, state, { recipientContent: payload })
     default:
       return state
   }

@@ -3,12 +3,12 @@ const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 const ProxyConfig = {
-  target: 'http://10.120.115.232:9999',
+  target: 'http://127.0.0.1:9999',
   changeOrigin: true,
   secure: false,
 }
 const ProxyConfig2 = {
-  target: 'http://10.0.0.249:20334',
+  target: 'http://127.0.0.1:20334',
   changeOrigin: true,
   secure: false,
 }
@@ -97,6 +97,8 @@ module.exports = {
       '/api/v1/*': ProxyConfig2,
       '/project/create/*': ProxyConfig,
       '/project/list/*': ProxyConfig,
+      '/transaction/list/*': ProxyConfig,
+      '/project/detail/*': ProxyConfig,
     },
   },
   plugins: [
