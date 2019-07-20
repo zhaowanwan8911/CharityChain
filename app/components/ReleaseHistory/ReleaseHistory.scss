@@ -57,5 +57,25 @@ a{
       color: #e34e09;
       border: 1px solid #e34e09;
     }
+    .checks {
+      position: absolute;
+      bottom: 8px;
+      right: 20px;
+      span{
+        display: inline-block;
+        border-radius: 2px;
+        padding: 2px 4px;
+        cursor: pointer;
+      }
+      span:nth-child(1){
+        color: #367abd;
+        border: 1px solid #367abd;
+      }
+      span:nth-child(2){
+        color: #f71c1c;
+        border: 1px solid #f71c1c;
+        margin-left: 10px;
+      }
+    }
   }
 }

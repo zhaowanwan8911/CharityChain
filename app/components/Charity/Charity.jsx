@@ -7,9 +7,11 @@ import UserInfo from '../UserInfo/UserInfo'
 import TableList from '../TableList/TableList'
 import Account from '../Account/Account'
 import Pagiation from '../Pagination/Pagination'
+import ReleaseHistory from '../ReleaseHistory/ReleaseHistory'
 
 import styles from './Charity.scss'
 import {getTransforHistory} from "../../actions/wallet";
+import { getAllApplyProjectList } from "../../actions/recipient"
 
 class Charity extends React.Component {
   constructor(props) {
@@ -41,6 +43,11 @@ class Charity extends React.Component {
   componentDidMount = () => {
     window.addEventListener('scroll', this.handleScroll.bind(this))
     this.refreshList()
+    const params = {
+      address: this.props.walletInfo.address,
+      type: "create",
+    }
+    this.props.getAllApplyProjectList(params)
   }
   componentWillUnmount = () => {
     window.removeEventListener('scroll', this.handleScroll.bind(this))
@@ -68,7 +75,13 @@ class Charity extends React.Component {
     //console.log(pageCurr)
     // 获取受捐记录的数据（根据页数）
   }
-
+  changeApplyProjectList = () => {
+    const params = {
+      address: this.props.walletInfo.address,
+      type: "create",
+    }
+    this.props.getAllApplyProjectList(params)
+  }
   render() {
     return (
       <div className={styles.charityWraper} style={this.state.hideNav ? { marginTop: '161px' } : { marginTop: '0' }}>
@@ -83,6 +96,22 @@ class Charity extends React.Component {
             />
           </div>
         </div>
+        {
+          this.props.allApplyProjectList.length > 0 ?
+            <div className={styles.checkWraper}>
+              <p>审核申请</p>
+              <div className={styles.releaseHistory}>
+                {
+                  this.props.allApplyProjectList.map((item, index) => {
+                    return (
+                      <ReleaseHistory info={item} key={index} changeApplyProjectList={this.changeApplyProjectList} />
+                    )
+                  })
+                }
+              </div>
+            </div> :
+            null
+        }
         <div className={styles.charityList}>
           <TableList
             tableHeader={this.tableHeader}
@@ -110,12 +139,14 @@ const mapStateToProps = (state) => {
     walletInfo: state.wallet.walletInfo,
     personalInfo: state.login.personalInfo,
     transforHistory: state.wallet.transforHistory,
+    allApplyProjectList: state.recipient.allApplyProjectList,
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
     getTransforHistory: bindActionCreators(getTransforHistory, dispatch),
+    getAllApplyProjectList: bindActionCreators(getAllApplyProjectList, dispatch),
   }
 }
 
