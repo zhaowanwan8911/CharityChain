@@ -73,6 +73,10 @@ class Nav extends React.Component {
         <div className={styles.logo} style={this.state.hideNav ? { display: 'none' } : { display: 'block' }}>
           <img src={logo} alt="嘿！朋友" className={styles.logoImg}/>
         </div>
+        <div className={styles.kindsOrgan}>
+          <span>供应商机构</span>
+          <span>执行机构</span>
+        </div>
         <div className={styles.navTop}>
           {
             this.navList.map((item, index) => {

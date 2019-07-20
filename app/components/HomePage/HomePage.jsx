@@ -6,8 +6,8 @@ import classNames from 'classnames'
 import { setWalletInfo } from '../../actions/wallet'
 import { login } from '../../actions/login'
 // import classNames from 'classnames'
-import newsImg from './news.jpeg';
-import blogImg from './blog.jpg';
+import newsImg from './news.jpg';
+import blogImg from './blog.png';
 import videoImg from './video.jpg';
 
 import styles from './HomePage.scss'
@@ -215,9 +215,10 @@ class HomePage extends React.Component {
               <img src={newsImg} alt=""/>
             </div>
             <div className={styles.newInfo}>
-              <h4>图片+新闻篇</h4>
-              <span className={styles.time}>2019.09.09</span>
-              <h3>银河系基金会大使侯旭辉探访河南孟州</h3>
+              {/* <h4>图片+新闻篇</h4> */}
+              <span className={styles.time}>2018-07-13</span>
+              <h3>非洲儿童的生活现状, 饿得骨瘦如柴, 最大的愿望是活下去</h3>
+              <p className={styles.text}>在非洲，有许多的非洲儿童至今都还没有解决温饱问题，大多数贫困家庭的非洲儿童因为没有充足的食物，导致他们身体营养不良，从而被饿得骨瘦如柴。</p>
               <span className={styles.more}>> 阅读新闻</span>
             </div>
           </div>
@@ -226,11 +227,11 @@ class HomePage extends React.Component {
               <img src={blogImg} alt=""/>
             </div>
             <div className={styles.blogInfo}>
-              <h4>图片+博客篇</h4>
-              <span className={styles.time}>2019.09.09</span>
-              <h3>银河系基金会大使侯旭辉的博客</h3>
-              <p className={styles.text}>你是我患失患得的梦，我是你可有可无的人。毕竟这穿越山河的箭，刺的都是用情致疾的人。</p>
-              <span className={styles.more}>> 阅读故事</span>
+              {/* <h4>图片+博客篇</h4> */}
+              <span className={styles.time}>2019-01-24</span>
+              <h3>币安慈善倡议“非洲儿童午餐计划”</h3>
+              <p className={styles.text}>币安慈善机构推出一种旨在解决非洲贫困地区儿童饥饿以及初等教育相关问题的区块链解决方案。</p>
+              <span className={styles.more}>> 阅读新闻</span>
             </div>
           </div>
           <div className={styles.videoWrapper}>
@@ -238,11 +239,11 @@ class HomePage extends React.Component {
               <img src={videoImg} alt=""/>
             </div>
             <div className={styles.videoInfo}>
-              <h4>图片+视频篇</h4>
-              <span className={styles.time}>2019.09.09</span>
-              <h3>银河系基金会大使侯旭辉的爱心之旅</h3>
-              <p className={styles.text}>我都寂寞多久了，还是没好，感觉全世界都在窃窃嘲笑，我能有多骄傲，不堪一击好不好，一碰到你我就被撂倒。</p>
-              <span className={styles.more}>> 观看视频</span>
+              {/* <h4>图片+视频篇</h4> */}
+              <span className={styles.time}>2016-11-02</span>
+              <h3>“携手中非：青少年非洲公益行动”启动</h3>
+              <p className={styles.text}>10月31日，由中非民间商会和中华社会救助基金会爱加艾减公益基金主办的“携手发展，增进友谊，共创未来”主题公益活动和“携手中非：青少年非洲公益行动”启动仪式在北京大学附属中学举行。</p>
+              <span className={styles.more}>> 阅读新闻</span>
             </div>
           </div>
         </div>
