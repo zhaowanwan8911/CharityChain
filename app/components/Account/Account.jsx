@@ -25,7 +25,7 @@ class Account extends React.Component {
       showRecipientBoard: false,
       showCharityReleaseBoard: false,
       showCharityTransforBoard:false,
-      showSuccessBord: '',
+      showSuccessBord: true,
       showRecipientSuccessBoard: '',
       transactionHash:'',
       CharityReleaseTemplateAddress:'',

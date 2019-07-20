@@ -17,7 +17,6 @@ class Charity extends React.Component {
     this.state = {
       hideNav: false,
       transforHistory:[],
-      role: '',
     }
     this.tableHeader = [
       {
@@ -50,9 +49,6 @@ class Charity extends React.Component {
     if (this.props.transforHistory !== nextProps.transforHistory) {
       this.setState({transforHistory: nextProps.transforHistory})
     }
-    if (this.props.personalInfo !== nextProps.personalInfo) {
-      this.setState({role: nextProps.personalInfo.role})
-    }
   }
   refreshList = () => {
     this.props.getTransforHistory(this.props.walletInfo.address,'all')
@@ -78,7 +74,7 @@ class Charity extends React.Component {
       <div className={styles.charityWraper} style={this.state.hideNav ? { marginTop: '161px' } : { marginTop: '0' }}>
         <div className={styles.charityInfoBox}>
           <div className={styles.charityInfo}>
-            <UserInfo userInfo={this.userInfo} type={this.state.role} />
+            <UserInfo userInfo={this.userInfo} />
           </div>
           <div className={styles.charityActive}>
             <Account
