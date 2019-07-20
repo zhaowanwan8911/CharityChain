@@ -96,14 +96,14 @@ class Charity extends React.Component {
           </div>
         </div>
         {
-          this.props.allApplyProjectList.length > 0 ?
+          this.props.personalInfo.role && this.props.personalInfo.role === "charity" && this.props.allApplyProjectList.length > 0 ?
             <div className={styles.checkWraper}>
               <p>审核申请</p>
               <div className={styles.releaseHistory}>
                 {
                   this.props.allApplyProjectList.map((item, index) => {
                     return (
-                      <ReleaseHistory info={item} key={index} changeApplyProjectList={this.changeApplyProjectList} />
+                      <ReleaseHistory info={item} key={index} changeApplyProjectList={this.changeApplyProjectList} charity />
                     )
                   })
                 }

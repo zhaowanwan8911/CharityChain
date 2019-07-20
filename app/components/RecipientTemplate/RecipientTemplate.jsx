@@ -22,7 +22,7 @@ class RecipientTemplate extends React.Component {
   }
   componentWillReceiveProps = (nextProps) => {
     if (nextProps.recipientInfo.result === "success") {
-      this.showSuccessBord()
+      this.updateList()
     }
   }
   closeBord = () => {
@@ -37,11 +37,11 @@ class RecipientTemplate extends React.Component {
       name: this.props.personalInfo.name,
     }
     this.props.creatRecipient(params)
-    this.closeBord()
   }
 
-  showSuccessBord = () => {
-    this.props.showSuccessBord()
+  updateList = () => {
+    this.props.updateList()
+    this.closeBord()
   }
   getTransHash = ($hash) => {
     this.props.getTransHash($hash)
