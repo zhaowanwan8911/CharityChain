@@ -12,6 +12,8 @@ import {getBalance} from "../../actions/wallet";
 import TransactionSuccessTemplate from "../TransactionSuccessTemplate/TransactionSuccessTemplate";
 import CharityReleaseTemplate from "../CharityReleaseTemplate/CharityReleaseTemplate"
 import CharityTransforBoard from "../CharityTransforTemplate/CharityTransforTemplate"
+import RecipientSuccessTemplate from "../RecipientSuccessTemplate/RecipientSuccessTemplate"
+
 
 class Account extends React.Component {
   constructor(props) {
@@ -24,6 +26,7 @@ class Account extends React.Component {
       showCharityReleaseBoard: false,
       showCharityTransforBoard:false,
       showSuccessBord: '',
+      showRecipientSuccessBoard: '',
       transactionHash:'',
       CharityReleaseTemplateAddress:'',
       CharityReleaseTemplateMoney:'',
@@ -84,6 +87,16 @@ class Account extends React.Component {
       showRecipientBoard: showRecipientBoard,
     })
   }
+  showRecipientSuccessBoard = () => {
+    this.setState({
+      showRecipientSuccessBoard: true,
+    })
+  }
+  hideRecipientSuccessBoard = (showRecipientSuccessBoard) => {
+    this.setState({
+      showRecipientSuccessBoard: showRecipientSuccessBoard,
+    })
+  }
   showCharityReleaseBoard = () => {
     this.setState({
       showCharityReleaseBoard: true,
@@ -132,7 +145,8 @@ class Account extends React.Component {
                               money={this.state.CharityReleaseTemplateMoney}
                               showSuccessBord={this.showSuccessBord}
                               getTransHash={this.getTransHash}/>}
-        </div>
+        {this.state.showRecipientSuccessBoard && <RecipientSuccessTemplate showBord={this.state.showRecipientSuccessBoard} hideBord={this.hideRecipientSuccessBoard} />}
+      </div>
     )
   }
 }
