@@ -11,6 +11,7 @@ import styles from './Account.scss'
 import {getBalance} from "../../actions/wallet";
 import TransactionSuccessTemplate from "../TransactionSuccessTemplate/TransactionSuccessTemplate";
 import CharityReleaseTemplate from "../CharityReleaseTemplate/CharityReleaseTemplate"
+import RecipientSuccessTemplate from "../RecipientSuccessTemplate/RecipientSuccessTemplate"
 
 class Account extends React.Component {
   constructor(props) {
@@ -22,6 +23,7 @@ class Account extends React.Component {
       showRecipientBoard: false,
       showCharityReleaseBoard: false,
       showSuccessBord: '',
+      showRecipientSuccessBoard: '',
       transactionHash:'',
     }
   }
@@ -80,6 +82,16 @@ class Account extends React.Component {
       showRecipientBoard: showRecipientBoard,
     })
   }
+  showRecipientSuccessBoard = () => {
+    this.setState({
+      showRecipientSuccessBoard: true,
+    })
+  }
+  hideRecipientSuccessBoard = (showRecipientSuccessBoard) => {
+    this.setState({
+      showRecipientSuccessBoard: showRecipientSuccessBoard,
+    })
+  }
   showCharityReleaseBoard = () => {
     this.setState({
       showCharityReleaseBoard: true,
@@ -108,7 +120,8 @@ class Account extends React.Component {
         {this.state.showBord && <DonationTemplate showBord={this.state.showBord} hideBord={this.hideBord} showSuccessBord={this.showSuccessBord} getTransHash={this.getTransHash} />}
         {this.state.showSuccessBord && <TransactionSuccessTemplate showBord={this.state.showSuccessBord} hideBord={this.hideSuccessBord} transactionHash={this.state.transactionHash}/>}
         {this.state.showCharityReleaseBoard && <CharityReleaseTemplate showBord={this.state.showCharityReleaseBoard} hideBord={this.hideCharityReleaseBoard}/>}
-        {this.state.showRecipientBoard && <RecipientTemplate showBord={this.state.showRecipientBoard} hideBord={this.hideRecipientBoard} />}
+        {this.state.showRecipientBoard && <RecipientTemplate showBord={this.state.showRecipientBoard} hideBord={this.hideRecipientBoard} showSuccessBord={this.showRecipientSuccessBoard} />}
+        {this.state.showRecipientSuccessBoard && <RecipientSuccessTemplate showBord={this.state.showRecipientSuccessBoard} hideBord={this.hideRecipientSuccessBoard} />}
       </div>
     )
   }
