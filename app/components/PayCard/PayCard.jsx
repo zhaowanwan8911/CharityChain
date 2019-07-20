@@ -62,9 +62,9 @@ class PayCard extends React.Component {
   }
   buy = () => {
     const params = {
-      numbers: this.state.number,
-      password: this.state.password,
-      sy: sy,
+      info: this.state.number,
+      wallet_address: this.props.walletInfo.address,
+      encode_private: this.state.password,
     }
     this.props.cardPay(params)
     this.setState({
@@ -136,6 +136,7 @@ class PayCard extends React.Component {
 const mapStateToProps = (state) => {
   return {
     cardPayResult: state.login.cardPayResult,
+    walletInfo: state.wallet.walletInfo,
   }
 }
 
