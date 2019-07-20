@@ -3,10 +3,22 @@ import { NavLink } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { injectIntl } from 'react-intl'
+import classNames from 'classnames'
 
 import styles from './UserInfo.scss'
 import {getPersonalInfo} from "../../actions/login";
-
+// Beneficiary 非洲儿童
+import Beneficiary1 from "./img/Beneficiary1.jpg"
+import Beneficiary2 from "./img/Beneficiary2.jpg"
+import Beneficiary3 from "./img/Beneficiary3.jpg"
+// 慈善机构
+import helpRoxiWalk from "./img/helpRoxiWalk.png"
+import knitForLife from "./img/knitForLife.png"
+import prayer from "./img/prayer.png"
+// 侯旭辉
+import houxh1 from "./img/houxh1.jpeg"
+import houxh2 from "./img/houxh2.jpeg"
+import houxh3 from "./img/houxh3.jpeg"
 // import PHOTO from './photo.jpg'
 // gender: "女"
 // homeAddress: "北京市海淀区"
@@ -19,39 +31,95 @@ class UserInfo extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      personalInfo:''
+      personalInfo: '',
+      headImg: '',
     }
+    this.Beneficiary = [Beneficiary1, Beneficiary2, Beneficiary3]
+    this.Charity = [helpRoxiWalk, knitForLife, prayer]
+    this.houxh = [houxh1, houxh2, houxh3]
   }
   componentDidMount = () => {
     this.props.getPersonalInfo(this.props.walletInfo.address,this.props.walletInfo.role,)
+   
   }
   componentWillReceiveProps = (nextProps) => {
     if (this.props.personalInfo !== nextProps.personalInfo) {
       this.setState({personalInfo: nextProps.personalInfo})
     }
+    if (this.props.type !== nextProps.type) {
+      switch(nextProps.type) {
+        case 'recipient':
+            this.setState({
+              headImg: this.Beneficiary[Math.floor(Math.random()*3)],
+            })
+          break
+        case 'charity':
+          this.setState({
+            headImg: this.Charity[0],
+          })
+          break
+        case 'provider':
+          this.setState({
+            headImg: this.Charity[1],
+          })
+          break
+        case 'actuator':
+          this.setState({
+            headImg: this.Charity[2],
+          })
+          break
+        case 'donator':
+          this.setState({
+            headImg: this.houxh[Math.floor(Math.random()*3)]
+          })
+          break
+        default:
+          break
+      }
+    }
   }
   render() {
+    if(!this.props.type) return null
     return (
       <div className={styles.user}>
         <div className={styles.photoWraper}>
-          {/* <img src={PHOTO} alt="" className={styles.photo}/> */}
+          <img
+            src={this.state.headImg}
+            alt=""
+            className={classNames({
+              [styles.photo]: true,
+              [styles.photoCharity]: this.props.type === 'charity' || this.props.type === 'provider' || this.props.type === 'actuator',
+            })}
+          />
         </div>
         <div className={styles.userInfo}>
           <div className={styles.edit}>
             <span>编辑</span>
           </div>
           <p>
-            <span>姓名:</span>
+            <span>名称:</span>
             <span>{this.state.personalInfo.name}</span>
           </p>
-          <p>
-            <span>性别:</span>
-            <span>{this.state.personalInfo.gender}</span>
-          </p>
-          <p>
-            <span>职业:</span>
-            <span>{this.state.personalInfo.profession}</span>
-          </p>
+          {
+            (this.props.type === 'donator' || this.props.type === 'recipient') &&
+            <div>
+              <p>
+                <span>性别:</span>
+                <span>{this.state.personalInfo.gender}</span>
+              </p>
+              <p>
+                <span>职业:</span>
+                <span>{this.state.personalInfo.profession}</span>
+              </p>
+            </div>
+          }
+          {
+            (this.props.type === 'Charity' || this.props.type === 'provider' || this.props.type === 'actuator') &&
+            <div className={styles.description}>
+              <span>机构描述:</span>
+              <span className={styles.descriptionInfo}>{this.state.personalInfo.description}</span>
+            </div>
+          }
           <p>
             <span>联系方式:</span>
             <span>{this.state.personalInfo.phone}</span>
