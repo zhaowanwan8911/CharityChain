@@ -44,17 +44,21 @@ class Account extends React.Component {
       this.setState({walletInfo: this.props.walletInfo})
     }
   }
-  operate = () => {
-    switch (this.props.buttonName){
-      case '捐款':
-        this.showBord()
-        break
-      case '爱心助力':
-        this.showCharityReleaseBoard()
-        break
-      case '发布申请':
-        this.showRecipientBoard()
-        break
+  operate = ($buttonName2) => {
+    if($buttonName2) {
+      this.showBord()
+    }else {
+      switch (this.props.buttonName){
+        case '捐款':
+          this.showBord()
+          break
+        case '爱心助力':
+          this.showCharityReleaseBoard()
+          break
+        case '发布申请':
+          this.showRecipientBoard()
+          break
+      }
     }
   }
   showBord = () => {
@@ -134,6 +138,11 @@ class Account extends React.Component {
           <span>{this.state.walletBalance}</span> ont
         </div>
         <div className={styles.operate} onClick={() => {this.operate()}}>{this.props.buttonName}</div>
+        {
+          ((this.props.buttonName2) && (this.props.personalInfo.role!=='provider')) ?
+            (<div className={styles.operate} onClick={() => {this.operate(this.props.buttonName)}}>{this.props.buttonName2}</div>):''
+        }
+
         {this.state.showBord && <DonationTemplate showBord={this.state.showBord} hideBord={this.hideBord} showSuccessBord={this.showSuccessBord} getTransHash={this.getTransHash} />}
         {this.state.showSuccessBord && <TransactionSuccessTemplate showBord={this.state.showSuccessBord} hideBord={this.hideSuccessBord} transactionHash={this.state.transactionHash}/>}
         {this.state.showCharityReleaseBoard && <CharityReleaseTemplate showBord={this.state.showCharityReleaseBoard} hideBord={this.hideCharityReleaseBoard} showCharityTransforBoard={this.showCharityTransforBoard}/>}

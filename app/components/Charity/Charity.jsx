@@ -83,6 +83,7 @@ class Charity extends React.Component {
           <div className={styles.charityActive}>
             <Account
               buttonName="爱心助力"
+              buttonName2="转给机构"
             />
           </div>
         </div>

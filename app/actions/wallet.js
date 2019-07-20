@@ -32,7 +32,6 @@ export const getTransforHistory = ($address,$type,$table) => {
     wallet_address: $address,
     type: $type
   }
-  console.log(params)
   return async (dispatch) => {
     try {
       const result = await RestfulAPIUtils.get(API_GET_TRANSFOR_HISTORY, { params: params })
