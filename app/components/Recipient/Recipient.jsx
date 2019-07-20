@@ -18,6 +18,7 @@ class Recipient extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
+      hideNav: false,
       transforHistory:[],
       recipientProjectList:[],
     }
@@ -43,19 +44,14 @@ class Recipient extends React.Component {
     ]
     this.sessionName = '受捐记录'
   }
-  paging = (pageCurr) => {
-    console.log(pageCurr)
-    // 获取受捐记录的数据（根据页数）
-  }
   componentDidMount = () => {
+    window.addEventListener('scroll', this.handleScroll.bind(this))
     this.refreshList()
     const params = {
       type:'single',
       address: this.props.walletInfo.address
     }
     this.props.getRecipientProjectList(params)
-  }
-  componentWillUnmount = () => {
   }
   componentWillReceiveProps = (nextProps) => {
     if (this.props.transforHistory !== nextProps.transforHistory) {
@@ -65,6 +61,24 @@ class Recipient extends React.Component {
       this.setState({recipientProjectList: nextProps.recipientProjectList})
     }
   }
+  componentWillUnmount = () => {
+    window.removeEventListener('scroll', this.handleScroll.bind(this))
+  }
+  handleScroll = (e) => {
+    if (e.srcElement.scrollingElement.scrollTop > 100) {
+      this.setState({
+        hideNav: true,
+      })
+    } else {
+      this.setState({
+        hideNav: false,
+      })
+    }
+  }
+  paging = (pageCurr) => {
+    console.log(pageCurr)
+    // 获取受捐记录的数据（根据页数）
+  }
   refreshList = () => {
     this.props.getTransforHistory(this.props.walletInfo.address,'remittee')
   }
@@ -73,7 +87,7 @@ class Recipient extends React.Component {
   }
   render() {
     return (
-      <div className={styles.recipientsInfo}>
+      <div className={styles.recipientsInfo} style={this.state.hideNav ? { marginTop: '161px' } : { marginTop: '0' }}>
         <div className={styles.recipients}>
           <div className={styles.sessionName}>
             个人钱包
