@@ -1,7 +1,8 @@
 .navWraper{
   width: 100%;
   // background: rgb(76, 178, 212);
-  background: #1cabe2;
+  // background: #1cabe2;
+  background: #295ea4;
   margin: auto;
   overflow: hidden;
   height: 160px;
@@ -9,22 +10,29 @@
   position: relative;
   .logo {
     box-sizing: border-box;
-    padding: 20px;
+    padding: 0 60px;
     height: 100px;
-    .logoImg {
-      height: 60px;
-    }
-  }
-  .kindsOrgan{
-    color: white;
-    position: absolute;
-    top: 40px;
-    right: 20px;
-    line-height: 30px;
-    span{
-      display: inline-block;
-      margin-right: 40px;
-      cursor: pointer;
+    .flex {
+      display: flex;
+      justify-content: space-between;
+      font-size: 14px;
+      .logoImg {
+        height: 90px;
+      }
+      .kindsOrgan{
+        color: white;
+        p {
+          margin: 40px 0 10px 0;
+        }
+        span{
+          display: inline-block;
+          margin-left: 40px;
+          cursor: pointer;
+        }
+        :nth-child(2) {
+          margin-left: 0;
+        }
+      }
     }
   }
   .navTop{
@@ -51,7 +59,8 @@
     //   border-bottom: 5px solid #1cabe2;
     // }
     .tabBackground{
-      border-bottom: 5px solid #1cabe2;
+      // border-bottom: 5px solid #1cabe2;
+      border-bottom: 5px solid #295ea4;
     }
   }
   .navBto{
