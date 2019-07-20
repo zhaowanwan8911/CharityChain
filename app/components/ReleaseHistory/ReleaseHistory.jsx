@@ -21,7 +21,7 @@ class Account extends React.Component {
             <img src={PIC} alt=""/>
           </div>
           <div className={styles.releaseInfo}>
-            <h3>{this.props.info.title}</h3>
+            <h3>{this.props.info.title.length>30 ? this.props.info.title.substring(0,30)+'...' : this.props.info.title}</h3>
             <span className={styles.time}>姓名：{this.props.info.name}</span>
             <span className={styles.time}>金额：{this.props.info.money}</span>
             {this.props.info.state === 'In process' ? <span className={styles.inProgess}>进行中</span>
