@@ -153,7 +153,7 @@ class Account extends React.Component {
         {this.state.showBord && <DonationTemplate showBord={this.state.showBord} hideBord={this.hideBord} showSuccessBord={this.showSuccessBord} getTransHash={this.getTransHash} />}
         {this.state.showSuccessBord && <TransactionSuccessTemplate showBord={this.state.showSuccessBord} hideBord={this.hideSuccessBord} transactionHash={this.state.transactionHash}/>}
         {this.state.showCharityReleaseBoard && <CharityReleaseTemplate showBord={this.state.showCharityReleaseBoard} hideBord={this.hideCharityReleaseBoard} showCharityTransforBoard={this.showCharityTransforBoard}/>}
-        {this.state.showRecipientBoard && <RecipientTemplate showBord={this.state.showRecipientBoard} hideBord={this.hideRecipientBoard}/>}
+        {this.state.showRecipientBoard && <RecipientTemplate showBord={this.state.showRecipientBoard} hideBord={this.hideRecipientBoard} updateList={this.props.updateList} />}
         {this.state.showCharityTransforBoard &&
         <CharityTransforBoard showBord={this.state.showCharityTransforBoard}
                               hideBord={this.hideCharityTransforBoard}

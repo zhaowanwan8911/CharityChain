@@ -85,6 +85,13 @@ class Recipient extends React.Component {
   operate = () => {
     // 发布信息的方法
   }
+  updateList = () => {
+    const params = {
+      type:'single',
+      address: this.props.walletInfo.address
+    }
+    this.props.getRecipientProjectList(params)
+  }
   render() {
     return (
       <div className={styles.recipientsInfo} style={this.state.hideNav ? { marginTop: '161px' } : { marginTop: '0' }}>
@@ -96,6 +103,7 @@ class Recipient extends React.Component {
           />
           <Account
             buttonName="发布申请"
+            updateList={this.updateList}
           />
         </div>
         <div className={styles.recipientsRecord}>

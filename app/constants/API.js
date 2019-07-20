@@ -13,3 +13,6 @@ export const API_GET_RECIPENT_LIST = '/project/list'
 export const API_GET_RECIPENT_CONTENT = '/project/detail'
 export const API_GET_ALL_APPLY_LIST = '/project/list'
 export const API_GET_CONFIRM_APPLY = '/project/confirm'
+
+export const API_POST_CARD_PAY = '/api'
+
