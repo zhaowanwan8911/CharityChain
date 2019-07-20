@@ -20,9 +20,7 @@ class TableList extends React.Component {
           {
             this.props.sessionName ? <div className={styles.sessionName}>{this.props.sessionName}</div> : null
           }
-          {
-            !this.props.hideRefresh ? <div className={styles.refresh} onClick={() => {this.props.refreshList}}> 刷新 </div> : null
-          }
+          <div className={styles.refresh} onClick={this.props.refreshList}> 刷新 </div>
           <div className={styles.tableList}>
             <table cellSpacing="0" cellPadding="0">
               <thead>
@@ -41,13 +39,22 @@ class TableList extends React.Component {
                   this.props.tableData.map((item, index) => {
                     return (
                       <tr key={index} className={this.props.colorClass === "green" ? styles.green : this.props.colorClass === "red" ? styles.red : null}>
-                        {
+{/*                        {
                           Object.keys(item).map((item1,index1) => {
                             return (
                               item1 === "amount" ? <td key={index1}>{item[item1]} ont</td> : <td key={index1}>{item[item1]}</td>
                             )
                           })
-                        }
+                        }*/}
+                        <td>{item.trans_time}</td>
+                        <td>{item.txhash}</td>
+                        <td>{this.props.type === 'payer' ? item.payer : this.props.type === 'remittee' ? item.remittee :
+                          item.payer === this.props.address ? item.remittee : item.payer}</td>
+                        <td className={this.props.plus === '+' ? styles.green : this.props.plus === '-'? styles.red :
+                          item.payer === this.props.address ? styles.red : styles.green}>
+                          {this.props.plus === '-' ? "-"+item.amount : this.props.plus === '+' ? "+"+item.amount :
+                            item.payer === this.props.address ? "-"+item.amount : "+"+item.amount}
+                          </td>
                       </tr>
                     )
                   })
@@ -63,6 +70,7 @@ class TableList extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
+    walletInfo: state.wallet.walletInfo,
   }
 }
 

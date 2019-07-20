@@ -1,4 +1,5 @@
 .BusinessDetail{
+  padding-top: 60px;
   overflow: hidden;
   .search{
     width: 1200px;
@@ -20,7 +21,7 @@
     }
     .btn{
       display: inline-block;
-      background: #1cabe2;
+      background: rgb(41, 94, 164);
       width: 150px;
       line-height: 50px;
       text-align: center;
@@ -49,7 +50,7 @@
           cursor: pointer;
         }
         .active{
-          border-bottom: 3px solid #1cabe2;
+          border-bottom: 3px solid rgb(76, 178, 212);
         }
       }
     }

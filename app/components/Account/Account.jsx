@@ -6,9 +6,12 @@ import { injectIntl } from 'react-intl'
 // import Swal from 'sweetalert2'
 
 import DonationTemplate from '../DonationTemplate/DonationTemplate'
-
+import RecipientTemplate from '../RecipientTemplate/RecipientTemplate'
 import styles from './Account.scss'
 import {getBalance} from "../../actions/wallet";
+import TransactionSuccessTemplate from "../TransactionSuccessTemplate/TransactionSuccessTemplate";
+import CharityReleaseTemplate from "../CharityReleaseTemplate/CharityReleaseTemplate"
+import RecipientSuccessTemplate from "../RecipientSuccessTemplate/RecipientSuccessTemplate"
 
 class Account extends React.Component {
   constructor(props) {
@@ -17,6 +20,11 @@ class Account extends React.Component {
       walletInfo:'',
       walletBalance:'',
       showBord: false,
+      showRecipientBoard: false,
+      showCharityReleaseBoard: false,
+      showSuccessBord: '',
+      showRecipientSuccessBoard: '',
+      transactionHash:'',
     }
   }
   componentDidMount = () => {
@@ -27,11 +35,20 @@ class Account extends React.Component {
     if (this.props.walletBalance !== nextProps.walletBalance) {
       this.setState({walletBalance: nextProps.walletBalance})
     }
+    if(this.props.walletInfo !== nextProps.walletInfo){
+      this.setState({walletInfo: this.props.walletInfo})
+    }
   }
   operate = () => {
     switch (this.props.buttonName){
       case '捐款':
         this.showBord()
+        break
+      case '爱心助力':
+        this.showCharityReleaseBoard()
+        break
+      case '发布申请':
+        this.showRecipientBoard()
         break
     }
   }
@@ -45,6 +62,49 @@ class Account extends React.Component {
       showBord: showBord,
     })
   }
+  showSuccessBord = () => {
+    this.setState({
+      showSuccessBord: true,
+    })
+  }
+  hideSuccessBord = (showSuccessBord) => {
+    this.setState({
+      showSuccessBord: showSuccessBord,
+    })
+  }
+  showRecipientBoard = () => {
+    this.setState({
+      showRecipientBoard: true,
+    })
+  }
+  hideRecipientBoard = (showRecipientBoard) => {
+    this.setState({
+      showRecipientBoard: showRecipientBoard,
+    })
+  }
+  showRecipientSuccessBoard = () => {
+    this.setState({
+      showRecipientSuccessBoard: true,
+    })
+  }
+  hideRecipientSuccessBoard = (showRecipientSuccessBoard) => {
+    this.setState({
+      showRecipientSuccessBoard: showRecipientSuccessBoard,
+    })
+  }
+  showCharityReleaseBoard = () => {
+    this.setState({
+      showCharityReleaseBoard: true,
+    })
+  }
+  hideCharityReleaseBoard = (showCharityReleaseBoard) => {
+    this.setState({
+      showCharityReleaseBoard: showCharityReleaseBoard,
+    })
+  }
+  getTransHash = ($hash) => {
+    this.setState({transactionHash: $hash})
+  }
   render() {
     return (
       <div className={styles.account}>
@@ -57,7 +117,11 @@ class Account extends React.Component {
           <span>{this.state.walletBalance}</span> ont
         </div>
         <div className={styles.operate} onClick={() => {this.operate()}}>{this.props.buttonName}</div>
-        {this.state.showBord && <DonationTemplate showBord={this.state.showBord} hideBord={this.hideBord} />}
+        {this.state.showBord && <DonationTemplate showBord={this.state.showBord} hideBord={this.hideBord} showSuccessBord={this.showSuccessBord} getTransHash={this.getTransHash} />}
+        {this.state.showSuccessBord && <TransactionSuccessTemplate showBord={this.state.showSuccessBord} hideBord={this.hideSuccessBord} transactionHash={this.state.transactionHash}/>}
+        {this.state.showCharityReleaseBoard && <CharityReleaseTemplate showBord={this.state.showCharityReleaseBoard} hideBord={this.hideCharityReleaseBoard}/>}
+        {this.state.showRecipientBoard && <RecipientTemplate showBord={this.state.showRecipientBoard} hideBord={this.hideRecipientBoard} showSuccessBord={this.showRecipientSuccessBoard} />}
+        {this.state.showRecipientSuccessBoard && <RecipientSuccessTemplate showBord={this.state.showRecipientSuccessBoard} hideBord={this.hideRecipientSuccessBoard} />}
       </div>
     )
   }

@@ -7,7 +7,7 @@
   box-sizing: border-box;
   flex-shrink: 0;
   &:hover{
-    box-shadow: rgba(0, 0, 0, 0.25) 1px 4px 14px 1px;
+    box-shadow: rgba(0, 0, 0, 0.25) 1px 2px 7px 1px;
   }
   .accountTitle{
     font-family: Roboto, "Heiti SC", "Microsoft Yahei", simsun, sans-serif;
@@ -16,12 +16,13 @@
     font-weight: 400;
     display: flex;
     align-items: center;
+    color:#333333;
     &::before {
       content: '\2002';
       display: inline-block;
       width: 5px;
       height: 20px;
-      background: #1cabe2;
+      background: rgb(54, 122, 189);
       margin-right: 20px;
     }
   }
@@ -36,7 +37,7 @@
     }
   }
   .operate{
-    background: #1cabe2;
+    background: rgb(41, 94, 164);
     color: white;
     padding: 7px 20px;
     border-radius: 4px;
@@ -46,7 +47,7 @@
     float: right;
     cursor: pointer;
     &:hover{
-      background: #0e95ca;
+      background: rgb(48, 120, 200);
     }
   }
 }

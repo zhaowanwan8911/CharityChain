@@ -1,10 +1,10 @@
 .navWraper{
   width: 100%;
-  background: #1cabe2;
+  background: rgb(76, 178, 212);
   margin: auto;
   overflow: hidden;
   height: 160px;
-  box-shadow: 0 10px 8px 0 rgba(0,0,0,.1);
+  box-shadow: 0 3px 2px 0 rgba(0,0,0,.1);
   .logo {
     box-sizing: border-box;
     padding: 20px;
@@ -21,7 +21,7 @@
       display: inline-block;
       margin-left: 100px;
       a{
-        color: #000;
+        color: #333333;
         font-size: 18px;
         text-decoration: none;
         line-height: 50px;
@@ -33,7 +33,10 @@
         }
       }
     }
-    div:nth-child(1) {
+    // div:nth-child(1) {
+    //   border-bottom: 5px solid #1cabe2;
+    // }
+    .tabBackground{
       border-bottom: 5px solid #1cabe2;
     }
   }

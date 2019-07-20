@@ -46,7 +46,7 @@ class HomePage extends React.Component {
         if(this.state.roleName === this.list[0].name){
           path = "donator"
         }else if (this.state.roleName === this.list[1].name){
-          path = "recipients"
+          path = "recipient"
         }else {
           path = "charity"
         }
@@ -126,13 +126,13 @@ class HomePage extends React.Component {
             if(this.state.roleName === this.list[0].name){
               role = "donator"
             }else if (this.state.roleName === this.list[1].name){
-              role = "recipients"
+              role = "recipient"
             }else {
               role = "charity"
             }
             const walletInfo = {
               address: Address,
-              walletFile: this.state.selectedFileList,
+              walletFile: $walletFile,
               role: role
             }
             this.props.setWalletInfo(walletInfo)

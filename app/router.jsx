@@ -35,8 +35,8 @@ const Donator = Loadable({
   loader: () => import('./components/Donator/Donator'),
   loading: Loading,
 })
-const Recipients = Loadable({
-  loader: () => import('./components/Recipients/Recipients'),
+const Recipient = Loadable({
+  loader: () => import('./components/Recipient/Recipient'),
   loading: Loading,
 })
 const RecipientContent = Loadable({
@@ -56,8 +56,8 @@ const ChildRoute = () => (
     <Route exact path="/register" component={Register} />
     <Route exact path="/requesterwallet" component={RequesterWallet} />
     <Route exact path="/Donator" component={Donator} />
-    <Route exact path="/recipients" component={Recipients} />
-    <Route exact path="/recipients/1" component={RecipientContent} />
+    <Route exact path="/recipient" component={Recipient} />
+    <Route exact path="/recipient/:id" component={RecipientContent} />
     <Route exact path="/charity" component={Charity} />
     <Route exact path="/business" component={BusinessDetail} />
     <Route path="*" component={Footer} />
