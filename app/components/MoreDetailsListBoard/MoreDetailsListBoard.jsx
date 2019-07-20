@@ -51,18 +51,23 @@ class MoreDetailsListBoard extends React.Component {
     switch (name) {
       case 'donator':
         this.sessionName = '捐款记录'
+        this.setState({data:this.props.transforHistoryForCharity})
         break
-      case 'donator':
+      case 'recipient':
           this.sessionName = '受捐记录'
+        this.setState({data:this.props.transforHistoryForVested})
         break
       case 'charity':
           this.sessionName = '慈善机构交易面板'
+        this.setState({data:this.props.transforHistoryForCharity})
         break
       case 'actuator':
           this.sessionName = '执行机构交易面板'
+        this.setState({data:this.props.transforHistoryForActuator})
         break
       case 'provider':
           this.sessionName = '供应商交易面板'
+        this.setState({data:this.props.transforHistoryForProvider})
         break
       default:
         break
@@ -113,8 +118,8 @@ class MoreDetailsListBoard extends React.Component {
           tableData = {this.state.data}
           sessionName={this.sessionName}
           refreshList={this.refreshList1}
-          type="payer"
-          plus="-"
+          type={parseURLQuery().name === "donator" ? "payer" :"all"}
+          plus={parseURLQuery().name === "donator" ? "-" :"all"}
           address={CHARITY_ADDRESS}
           moreList={true}
         />
@@ -126,6 +131,7 @@ class MoreDetailsListBoard extends React.Component {
 const mapStateToProps = (state) => {
   return {
     transforHistoryForDonator: state.wallet.transforHistoryForDonator,
+    transforHistoryForVested: state.wallet.transforHistoryForVested,
     transforHistoryForCharity:state.wallet.transforHistoryForCharity,
     transforHistoryForActuator:state.wallet.transforHistoryForActuator,
     transforHistoryForProvider:state.wallet.transforHistoryForProvider,

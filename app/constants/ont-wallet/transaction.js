@@ -3,11 +3,14 @@ import {RestClient} from 'ontology-ts-sdk';
 import {BLOCK_CHAIN_URL} from '../API'
 export default {
   sendTransaction: async function ($walletAddress, $toAddress, $privateKey, $money) {
+    console.log($walletAddress)
+    console.log($toAddress)
     const restClient = new RestClient(BLOCK_CHAIN_URL);
     const walletAddress = new Ont.Crypto.Address($walletAddress);
     const walletPrivateKey = new Ont.Crypto.PrivateKey($privateKey);
 
     const toAddress = new Ont.Crypto.Address($toAddress);
+
 
     var tx = Ont.OntAssetTxBuilder.makeTransferTx('ONT', walletAddress, toAddress, $money, 0, 20000, walletAddress);
     Ont.TransactionBuilder.signTransaction(tx, walletPrivateKey);
@@ -17,7 +20,7 @@ export default {
     return res
   },
 
-  sendTransactionBySmartContract: async function () {
+  sendTransactionByJson: async function () {
     const restClient = new RestClient('http://127.0.0.1:20334');
     const adminPrivateKey = new Ont.Crypto.PrivateKey('57a4fdfdcd5e114853e782e1c3346a8118ad4bd60963eb4d237ba1cb23a90666');
     const json = {
@@ -35,11 +38,11 @@ export default {
             },
               {
                 "name": "arg1-to",
-                "value": "Address:ANXP8bef6zDMnCWCKHgybHJusi4sXsHqqp"
+                "value": "Address:AUz5BAASDNfv7gvgRsncMjM9cSjmDon5if"
               },
               {
                 "name": "arg2-amount",
-                "value": "Long:5"
+                "value": "Long:100000"
               }
             ]
           }],
@@ -54,12 +57,13 @@ export default {
     const res = await restClient.sendRawTransaction(txs[0].serialize(), false);
     console.log(res);
 
-  }
-}
-
-/*    const walletAddress =  new Ont.Crypto.Address('AL6YBSSi9rJwkxSHc3K6tq8Zy53Nji4aRP');
+  },
+  sendTransactionBySmartContract: async function () {
+    const restClient = new RestClient('http://127.0.0.1:20334');
+    const walletAddress =  new Ont.Crypto.Address('AL6YBSSi9rJwkxSHc3K6tq8Zy53Nji4aRP');
     const walletPrivateKey = new Ont.Crypto.PrivateKey('57a4fdfdcd5e114853e782e1c3346a8118ad4bd60963eb4d237ba1cb23a90666');
     const walletPublicKey = walletPrivateKey.getPublicKey()
+    console.log(walletPublicKey)
 
     const toAddress = new Ont.Crypto.Address('ANXP8bef6zDMnCWCKHgybHJusi4sXsHqqp');
 
@@ -76,12 +80,13 @@ export default {
 
     console.log(functionParam)
     let tx
-    try {
+    // noinspection JSAnnotator
+
       //make transaction
       //const tx = TransactionBuilder.makeInvokeTransaction(funcName, [p1, p2], contractAddr, gasPrice, gasLimit,payerAddr)
-      tx = Ont.TransactionBuilder.makeInvokeTransaction(functionName, functionParam, contractAddr, '0','20000', walletAddress)
+      tx = Ont.TransactionBuilder.makeInvokeTransaction(functionName, functionParam, contractAddr, '0', '20000', walletAddress)
       console.log(tx)
-      Ont.TransactionBuilder.signTransaction(tx,walletPrivateKey)
+      Ont.TransactionBuilder.signTransaction(tx, walletPrivateKey)
       console.log(tx)
       const res = await restClient.sendRawTransaction(tx.serialize(), false, false);
       //Ont.TransactionBuilder.signTx(tx,2,[walletPublicKey,bbsPublicKey],bbsPrivateKey)
@@ -89,4 +94,9 @@ export default {
       //let txParam = Ont.TransactionBuilder.buildTxParam(tx)
       //console.log(txParam)
       //WalletTransaction.askReward(txParam)
-      console.log(res)*/
+      console.log(res)
+
+  }
+}
+
+

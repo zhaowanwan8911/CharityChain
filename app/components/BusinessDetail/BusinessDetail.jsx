@@ -8,7 +8,7 @@ import TableList from '../TableList/TableList'
 import Pagiation from '../Pagination/Pagination'
 
 import styles from './BusinessDetail.scss'
-import {getTransforHistory} from "../../actions/wallet";
+import {getTransforHistory,getVestedTransforHistory} from "../../actions/wallet";
 
 import {CHARITY_ADDRESS,ACTUATOR_ADDRESS,PROVIDER_ADDRESS} from '../../constants/Address'
 
@@ -19,6 +19,7 @@ class BusinessDetail extends React.Component {
       hideNav: false,
       activeIndex: 0,
       transforHistoryForDonator:[],
+      transforHistoryForVested:[],
       transforHistoryForCharity:[],
       transforHistoryForActuator:[],
       transforHistoryForProvider:[],
@@ -57,6 +58,9 @@ class BusinessDetail extends React.Component {
     if (this.props.transforHistoryForDonator !== nextProps.transforHistoryForDonator) {
       this.setState({transforHistoryForDonator: nextProps.transforHistoryForDonator})
     }
+    if (this.props.transforHistoryForVested !== nextProps.transforHistoryForVested) {
+      this.setState({transforHistoryForVested: nextProps.transforHistoryForVested})
+    }
     if (this.props.transforHistoryForCharity !== nextProps.transforHistoryForCharity) {
       this.setState({transforHistoryForCharity: nextProps.transforHistoryForCharity})
     }
@@ -86,6 +90,7 @@ class BusinessDetail extends React.Component {
     this.props.getTransforHistory(CHARITY_ADDRESS,'all','charity')
     this.props.getTransforHistory(ACTUATOR_ADDRESS,'all','actuator')
     this.props.getTransforHistory(PROVIDER_ADDRESS,'all','provider')
+    this.props.getVestedTransforHistory()
   }
   refreshList2 = () => {
   }
@@ -158,13 +163,13 @@ class BusinessDetail extends React.Component {
         />
         <TableList
           tableHeader={this.tableHeader1}
-          tableData = {this.state.transforHistoryForDonator.slice(0,10)}
-          sessionName={this.sessionName1}
+          tableData = {this.state.transforHistoryForVested.slice(0,10)}
+          sessionName={this.sessionName2}
           refreshList={this.refreshList1}
-          type="payer"
-          plus="-"
+          type="remittee"
+          plus="+"
           address={CHARITY_ADDRESS}
-          name="donator"
+          name="recipient"
         />
 
         <div className={styles.tabsWraper}>
@@ -202,6 +207,7 @@ class BusinessDetail extends React.Component {
 const mapStateToProps = (state) => {
   return {
     transforHistoryForDonator: state.wallet.transforHistoryForDonator,
+    transforHistoryForVested: state.wallet.transforHistoryForVested,
     transforHistoryForCharity:state.wallet.transforHistoryForCharity,
     transforHistoryForActuator:state.wallet.transforHistoryForActuator,
     transforHistoryForProvider:state.wallet.transforHistoryForProvider,
@@ -211,6 +217,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     getTransforHistory: bindActionCreators(getTransforHistory, dispatch),
+    getVestedTransforHistory: bindActionCreators(getVestedTransforHistory, dispatch),
   }
 }
 

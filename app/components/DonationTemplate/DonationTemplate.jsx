@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { injectIntl } from 'react-intl'
 
 import styles from './DonationTemplate.scss'
-import {CHARITY_ADDRESS} from '../../constants/Address'
+import {CHARITY_ADDRESS,ACTUATOR_ADDRESS,PROVIDER_ADDRESS} from '../../constants/Address'
 import WalletTransaction from "../../constants/ont-wallet/transaction";
 import GetWalletFileMsg from "../../constants/ont-wallet/info";
 import TransactionSuccessTemplate from '../TransactionSuccessTemplate/TransactionSuccessTemplate'
@@ -30,9 +30,21 @@ class DonationTemplate extends React.Component {
     this.props.getTransHash($hash)
   }
   toTransaction = async() => {
+    let toAddress
+    switch(this.props.personalInfo.role){
+      case 'donator':
+        toAddress = CHARITY_ADDRESS
+        break
+      case 'charity':
+        toAddress = ACTUATOR_ADDRESS
+        break
+      case 'actuator':
+        toAddress = PROVIDER_ADDRESS
+    }
+
     let info = GetWalletFileMsg.decryptWalletFile(this.props.walletInfo.walletFile, this.state.password)
     if(info.isGetInfo){
-      let msg = await WalletTransaction.sendTransaction(this.props.walletInfo.address,CHARITY_ADDRESS,info.privateKey,this.state.money )
+      let msg = await WalletTransaction.sendTransaction(this.props.walletInfo.address,toAddress,info.privateKey,this.state.money )
       if(msg.Desc === "SUCCESS") {
         this.showSuccessBord()
         this.getTransHash(msg.Result)

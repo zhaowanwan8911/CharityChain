@@ -100,6 +100,7 @@ module.exports = {
       '/transaction/list/*': ProxyConfig,
       '/project/detail/*': ProxyConfig,
       '/project/confirm/*': ProxyConfig,
+      '/transaction/vested/*':ProxyConfig
     },
   },
   plugins: [
