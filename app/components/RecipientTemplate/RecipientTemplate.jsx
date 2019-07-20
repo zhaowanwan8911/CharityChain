@@ -10,6 +10,7 @@ import WalletTransaction from "../../constants/ont-wallet/transaction";
 import GetWalletFileMsg from "../../constants/ont-wallet/info";
 import TransactionSuccessTemplate from '../TransactionSuccessTemplate/TransactionSuccessTemplate'
 import { creatRecipient } from '../../actions/recipient'
+import Beneficiary1 from './Beneficiary1.jpg'
 
 class RecipientTemplate extends React.Component {
   constructor(props) {
@@ -61,7 +62,7 @@ class RecipientTemplate extends React.Component {
     return (
       <div className={styles.templateWraper}>
         <span className={styles.closeBtn} onClick={this.closeBord}>x</span>
-        <h1>发布捐助信息</h1>
+        <h1>填写信息</h1>
         <div className={styles.info}>
           <div>
             <label>钱包地址：</label>
@@ -70,13 +71,13 @@ class RecipientTemplate extends React.Component {
           <div>
             <label>筹款数量：</label>
             <input type="text" onChange={this.setValue}/>
-            <span>Ont</span>
+            <span style={{ lineHeight:'20px' }}>Ont</span>
           </div>
         </div>
         <div className={styles.recipientInfo}>
           <div className={styles.left}>
             <p>视频/照片上传</p>
-            <img src="" alt="Image preview..."/>
+            <img src={Beneficiary1} alt="Image preview..."/>
           </div>
           <div className={styles.right}>
              <label>标题：</label>

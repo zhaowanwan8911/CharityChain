@@ -13,6 +13,9 @@ class TableList extends React.Component {
     super(props)
     this.state = {}
   }
+  moreClick = () => {
+    // console.log(this.router)
+  }
   render() {
     return (
       <div className={styles.tableWraper}>
@@ -63,6 +66,17 @@ class TableList extends React.Component {
             </table>
           </div>
         </div>
+        {
+          !this.props.moreList &&
+          <span className={styles.more} onClick={this.moreClick}>
+            <NavLink
+              to={{
+                pathname: `/list`,
+                search: `?name=${this.props.name}`,
+              }}
+            >了解更多 >></NavLink>
+          </span>
+        }
       </div>
     )
   }

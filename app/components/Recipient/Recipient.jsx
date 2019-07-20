@@ -116,12 +116,12 @@ class Recipient extends React.Component {
             plus="+"
             address={this.props.walletInfo.address}
           />
-          <Pagiation
+          {/* <Pagiation
             config = {{
               totalPage: 18,
               paging: this.paging,
             }}
-          />
+          /> */}
         </div>
         <div className={styles.releaseHistory}>
           {
