@@ -11,7 +11,9 @@ import styles from './Account.scss'
 import {getBalance} from "../../actions/wallet";
 import TransactionSuccessTemplate from "../TransactionSuccessTemplate/TransactionSuccessTemplate";
 import CharityReleaseTemplate from "../CharityReleaseTemplate/CharityReleaseTemplate"
+import CharityTransforBoard from "../CharityTransforTemplate/CharityTransforTemplate"
 import RecipientSuccessTemplate from "../RecipientSuccessTemplate/RecipientSuccessTemplate"
+
 
 class Account extends React.Component {
   constructor(props) {
@@ -22,9 +24,12 @@ class Account extends React.Component {
       showBord: false,
       showRecipientBoard: false,
       showCharityReleaseBoard: false,
+      showCharityTransforBoard:false,
       showSuccessBord: '',
       showRecipientSuccessBoard: '',
       transactionHash:'',
+      CharityReleaseTemplateAddress:'',
+      CharityReleaseTemplateMoney:'',
     }
   }
   componentDidMount = () => {
@@ -105,6 +110,18 @@ class Account extends React.Component {
   getTransHash = ($hash) => {
     this.setState({transactionHash: $hash})
   }
+  showCharityTransforBoard = ($address,$money) => {
+    this.setState({
+      showCharityTransforBoard: true,
+      CharityReleaseTemplateAddress:$address,
+      CharityReleaseTemplateMoney:$money,
+    })
+  }
+  hideCharityTransforBoard = (showCharityTransforBoard) => {
+    this.setState({
+      showCharityTransforBoard: showCharityTransforBoard,
+    })
+  }
   render() {
     return (
       <div className={styles.account}>
@@ -119,8 +136,15 @@ class Account extends React.Component {
         <div className={styles.operate} onClick={() => {this.operate()}}>{this.props.buttonName}</div>
         {this.state.showBord && <DonationTemplate showBord={this.state.showBord} hideBord={this.hideBord} showSuccessBord={this.showSuccessBord} getTransHash={this.getTransHash} />}
         {this.state.showSuccessBord && <TransactionSuccessTemplate showBord={this.state.showSuccessBord} hideBord={this.hideSuccessBord} transactionHash={this.state.transactionHash}/>}
-        {this.state.showCharityReleaseBoard && <CharityReleaseTemplate showBord={this.state.showCharityReleaseBoard} hideBord={this.hideCharityReleaseBoard}/>}
-        {this.state.showRecipientBoard && <RecipientTemplate showBord={this.state.showRecipientBoard} hideBord={this.hideRecipientBoard} showSuccessBord={this.showRecipientSuccessBoard} />}
+        {this.state.showCharityReleaseBoard && <CharityReleaseTemplate showBord={this.state.showCharityReleaseBoard} hideBord={this.hideCharityReleaseBoard} showCharityTransforBoard={this.showCharityTransforBoard}/>}
+        {this.state.showRecipientBoard && <RecipientTemplate showBord={this.state.showRecipientBoard} hideBord={this.hideRecipientBoard}/>}
+        {this.state.showCharityTransforBoard &&
+        <CharityTransforBoard showBord={this.state.showCharityTransforBoard}
+                              hideBord={this.hideCharityTransforBoard}
+                              recipientAddress={this.state.CharityReleaseTemplateAddress}
+                              money={this.state.CharityReleaseTemplateMoney}
+                              showSuccessBord={this.showSuccessBord}
+                              getTransHash={this.getTransHash}/>}
         {this.state.showRecipientSuccessBoard && <RecipientSuccessTemplate showBord={this.state.showRecipientSuccessBoard} hideBord={this.hideRecipientSuccessBoard} />}
       </div>
     )

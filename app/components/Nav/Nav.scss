@@ -1,16 +1,30 @@
 .navWraper{
   width: 100%;
-  background: rgb(76, 178, 212);
+  // background: rgb(76, 178, 212);
+  background: #1cabe2;
   margin: auto;
   overflow: hidden;
   height: 160px;
   box-shadow: 0 3px 2px 0 rgba(0,0,0,.1);
+  position: relative;
   .logo {
     box-sizing: border-box;
     padding: 20px;
     height: 100px;
     .logoImg {
       height: 60px;
+    }
+  }
+  .kindsOrgan{
+    color: white;
+    position: absolute;
+    top: 40px;
+    right: 20px;
+    line-height: 30px;
+    span{
+      display: inline-block;
+      margin-right: 40px;
+      cursor: pointer;
     }
   }
   .navTop{
