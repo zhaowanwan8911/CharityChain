@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import { injectIntl } from 'react-intl'
 
 import styles from './ReleaseHistory.scss'
+import PIC from '../ReleaseHistory/pic.jpg'
 
 class Account extends React.Component {
   constructor(props) {
@@ -14,15 +15,18 @@ class Account extends React.Component {
 
   render() {
     return (
-      <NavLink to="">
+      <NavLink to={"/recipient/"+this.props.info.id}>
         <div className={styles.releaseItem}>
           <div className={styles.img}>
-            <img src={this.props.info.pic} alt=""/>
+            <img src={PIC} alt=""/>
           </div>
           <div className={styles.releaseInfo}>
             <h3>{this.props.info.title}</h3>
-            <span className={styles.time}>时间：{this.props.info.time}</span>
-            {this.props.info.status === 0 ? <span className={styles.inProgess}>进行中</span> : <span className={styles.complete}>已完成</span>}
+            <span className={styles.time}>姓名：{this.props.info.name}</span>
+            <span className={styles.time}>金额：{this.props.info.money}</span>
+            {this.props.info.state === 'In process' ? <span className={styles.inProgess}>进行中</span>
+              : this.props.info.state === 'Finish' ? <span className={styles.complete}>已完成</span>
+                : <span className={styles.complete}>审核中</span>}
           </div>
         </div>
       </NavLink>

@@ -1,6 +1,7 @@
 import {
   API_POST_CREAT_PROJECT,
-  API_GET_RECIPENT_LIST, API_LOGIN
+  API_GET_RECIPENT_LIST,
+  API_GET_RECIPENT_CONTENT,
 } from '../constants/API'
 import RestfulAPIUtils from '../Utils/RestfuAPIUtils'
 import * as types from '../constants/ActionTypes'
@@ -24,6 +25,21 @@ export const getRecipientProjectList = ($params) => {
       const result = await RestfulAPIUtils.get(API_GET_RECIPENT_LIST, { params: $params })
       if (result.status === 200) {
         dispatch({ type: types.GET_RECIPENT_LIST, payload: result.data })
+      } else {
+        throw result.status.message
+      }
+    } catch (e) {
+      console.error(e)
+    }
+  }
+}
+
+export const getRecipientProjectContent = ($params) => {
+  return async (dispatch) => {
+    try {
+      const result = await RestfulAPIUtils.get(API_GET_RECIPENT_CONTENT, { params: $params })
+      if (result.status === 200) {
+        dispatch({ type: types.GET_RECIPENT_CONTENT, payload: result.data })
       } else {
         throw result.status.message
       }
