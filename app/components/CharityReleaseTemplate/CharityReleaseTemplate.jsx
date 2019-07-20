@@ -30,6 +30,10 @@ class CharityReleaseTemplate extends React.Component {
   closeBord = () => {
     this.props.hideBord(false)
   }
+  showCharityTransforBoard = ($address,$money) => {
+    this.props.showCharityTransforBoard($address,$money)
+    this.closeBord()
+  }
 
   render() {
     return (
@@ -49,12 +53,13 @@ class CharityReleaseTemplate extends React.Component {
               {
                 this.state.recipientProjectList.map((item, index) => {
                   return (
-                    <div className={styles.releaseItem}>
+                    <div key={index} className={styles.releaseItem} onClick={() => this.showCharityTransforBoard(item.walletAddress,item.money)}>
                       <img src={PIC} alt=""/>
                       <div className={styles.releaseItemText}>
-                        <p>{item.title}</p>
+                        <p>{item.title.length>10 ? item.title.substring(0,10)+'...' : item.title}</p>
                         <p className={styles.releaseItemSmall}>姓名：{item.name}</p>
                         <p className={styles.releaseItemSmall}>金额：{item.money}</p>
+                        <span className={styles.inProgess}>进行中</span>
                       </div>
 
                     </div>
