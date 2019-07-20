@@ -22,8 +22,7 @@ class RecipientTemplate extends React.Component {
   }
   componentWillReceiveProps = (nextProps) => {
     if (nextProps.recipientInfo.result === "success") {
-      // this.showSuccessBord()
-      // this.getTransHash(msg.Result)
+      this.showSuccessBord()
     }
   }
   closeBord = () => {
