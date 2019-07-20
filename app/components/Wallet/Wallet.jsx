@@ -43,7 +43,7 @@ class Login extends React.Component {
     })
   }
   toTransaction = () => {
-    WalletTransaction.sendTransaction()
+    WalletTransaction.sendTransactionByJson()
   }
   render() {
     return (

@@ -3,6 +3,7 @@ export const API_REGISTER = '/user/register'
 export const API_GET_PERSONAL_INFO = '/user/info'
 export const API_GET_BALANCE = '/api/v1/balance/'
 export const API_GET_TRANSFOR_HISTORY = '/transaction/list'
+export const API_GET_TRANSFOR_VESTED = '/transaction/vested'
 
 
 export const BLOCK_CHAIN_URL = 'http://10.0.0.249:20334'

@@ -32,6 +32,7 @@ class CharityTransforTemplate extends React.Component {
   toTransaction = async() => {
     let info = GetWalletFileMsg.decryptWalletFile(this.props.walletInfo.walletFile, this.state.password)
     if(info.isGetInfo){
+      console.log(info)
       let msg = await WalletTransaction.sendTransaction(this.props.walletInfo.address,this.props.recipientAddress,info.privateKey,this.state.money )
       if(msg.Desc === "SUCCESS") {
         this.showSuccessBord()

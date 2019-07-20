@@ -30,8 +30,8 @@ class TransactionSuccessTemplate extends React.Component {
           <div>
             <h3 style={{ color: '#367abd', marginBottom: '40px', }}>感谢您的爱心助力!</h3>
             <p style={{ color: '#367abd', marginBottom: '20px' }}>交易哈希：</p>
-            <p style={{ color: '#666', cursor: 'pointer', marginBottom: '60px' }}>AL6YBSSi9rJwkxSHc3K6tq8Zy53Nji4aRP</p>
-            <span>{this.props.transactionHash}</span>
+            <div className={styles.hashText} style={{ color: '#666', cursor: 'pointer', marginBottom: '60px' }}>
+              {this.props.transactionHash}</div>
           </div>
           <div className={styles.submit} onClick={this.closeBord}>确定</div>
         </div>

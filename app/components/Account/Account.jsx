@@ -8,11 +8,12 @@ import { injectIntl } from 'react-intl'
 import DonationTemplate from '../DonationTemplate/DonationTemplate'
 import RecipientTemplate from '../RecipientTemplate/RecipientTemplate'
 import styles from './Account.scss'
-import {getBalance} from "../../actions/wallet";
+import {getBalance, getTransforHistory} from "../../actions/wallet";
 import TransactionSuccessTemplate from "../TransactionSuccessTemplate/TransactionSuccessTemplate";
 import CharityReleaseTemplate from "../CharityReleaseTemplate/CharityReleaseTemplate"
 import CharityTransforBoard from "../CharityTransforTemplate/CharityTransforTemplate"
 import RecipientSuccessTemplate from "../RecipientSuccessTemplate/RecipientSuccessTemplate"
+import Sleep from "../../constants/ont-wallet/sleep";
 
 
 class Account extends React.Component {
@@ -41,7 +42,7 @@ class Account extends React.Component {
       this.setState({walletBalance: nextProps.walletBalance})
     }
     if(this.props.walletInfo !== nextProps.walletInfo){
-      this.setState({walletInfo: this.props.walletInfo})
+      this.setState({walletInfo: nextProps.walletInfo})
     }
   }
   operate = ($buttonName2) => {
@@ -75,6 +76,11 @@ class Account extends React.Component {
     this.setState({
       showSuccessBord: true,
     })
+    Sleep.sleep(8000).then(() => {
+      console.log("mmm")
+      this.props.getTransforHistory(this.props.walletInfo.address,'payer')
+    })
+
   }
   hideSuccessBord = (showSuccessBord) => {
     this.setState({
@@ -127,6 +133,7 @@ class Account extends React.Component {
     })
   }
   render() {
+
     return (
       <div className={styles.account}>
         <h2 className={styles.accountTitle}>钱包地址</h2>
@@ -171,6 +178,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     getBalance: bindActionCreators(getBalance, dispatch),
+    getTransforHistory: bindActionCreators(getTransforHistory, dispatch),
   }
 }
 
