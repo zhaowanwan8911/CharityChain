@@ -98,6 +98,7 @@ module.exports = {
       '/project/create/*': ProxyConfig,
       '/project/list/*': ProxyConfig,
       '/transaction/list/*': ProxyConfig,
+      '/project/detail/*': ProxyConfig,
     },
   },
   plugins: [

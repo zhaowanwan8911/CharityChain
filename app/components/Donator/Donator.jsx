@@ -98,7 +98,7 @@ class HelpSeeker extends React.Component {
             sessionName={this.sessionName}
             refreshList={this.refreshList}
             type="remittee"
-            plus="-"
+            plus="+"
             address={this.props.walletInfo.address}
           />
           <Pagiation

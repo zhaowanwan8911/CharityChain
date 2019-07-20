@@ -9,19 +9,17 @@ import UserInfo from '../UserInfo/UserInfo'
 import Account from '../Account/Account'
 import Pagiation from '../Pagination/Pagination'
 import ReleaseHistory from '../ReleaseHistory/ReleaseHistory'
-
 import styles from './Recipient.scss'
-
-import PIC from './pic.jpg'
 import {getTransforHistory, setWalletInfo} from "../../actions/wallet";
 import {login} from "../../actions/login";
+import {getRecipientProjectList} from "../../actions/recipient";
 
 class Recipient extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      hideNav: false,
-      transforHistory:''
+      transforHistory:[],
+      recipientProjectList:[],
     }
 
     // 受助列表
@@ -44,60 +42,27 @@ class Recipient extends React.Component {
       },
     ]
     this.sessionName = '受捐记录'
-    // 发布历史记录
-    this.releaseHistory = [
-      {
-        pic: PIC,
-        title: '大卫·贝克汉姆探访了位于上海市郊的香花桥幼儿园',
-        time: '2019.09.09',
-        status: 0,
-      },
-      {
-        pic: PIC,
-        title: '大卫·贝克汉姆探访了位于上海市郊的香花桥幼儿园',
-        time: '2019.09.09',
-        status: 0,
-      },
-      {
-        pic: PIC,
-        title: '大卫·贝克汉姆探访了位于上海市郊的香花桥幼儿园',
-        time: '2019.09.09',
-        status: 0,
-      },
-      {
-        pic: PIC,
-        title: '大卫·贝克汉姆探访了位于上海市郊的香花桥幼儿园',
-        time: '2019.09.09',
-        status: 0,
-      },
-      {
-        pic: PIC,
-        title: '大卫·贝克汉姆探访了位于上海市郊的香花桥幼儿园',
-        time: '2019.09.09',
-        status: 1,
-      },
-      {
-        pic: PIC,
-        title: '大卫·贝克汉姆探访了位于上海市郊的香花桥幼儿园',
-        time: '2019.09.09',
-        status: 0,
-      },
-    ]
   }
   paging = (pageCurr) => {
     console.log(pageCurr)
     // 获取受捐记录的数据（根据页数）
   }
   componentDidMount = () => {
-    window.addEventListener('scroll', this.handleScroll.bind(this))
     this.refreshList()
+    const params = {
+      type:'single',
+      address: this.props.walletInfo.address
+    }
+    this.props.getRecipientProjectList(params)
   }
   componentWillUnmount = () => {
-    window.removeEventListener('scroll', this.handleScroll.bind(this))
   }
   componentWillReceiveProps = (nextProps) => {
     if (this.props.transforHistory !== nextProps.transforHistory) {
       this.setState({transforHistory: nextProps.transforHistory})
+    }
+    if (this.props.recipientProjectList !== nextProps.recipientProjectList) {
+      this.setState({recipientProjectList: nextProps.recipientProjectList})
     }
   }
   refreshList = () => {
@@ -138,7 +103,7 @@ class Recipient extends React.Component {
         </div>
         <div className={styles.releaseHistory}>
           {
-            this.releaseHistory.map((item, index) => {
+            this.state.recipientProjectList.map((item, index) => {
               return (
                 <ReleaseHistory info={item} key={index}/>
               )
@@ -155,12 +120,14 @@ const mapStateToProps = (state) => {
     walletInfo: state.wallet.walletInfo,
     personalInfo: state.login.personalInfo,
     transforHistory: state.wallet.transforHistory,
+    recipientProjectList: state.recipient.recipientProjectList
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
     getTransforHistory: bindActionCreators(getTransforHistory, dispatch),
+    getRecipientProjectList: bindActionCreators(getRecipientProjectList, dispatch),
   }
 }
 

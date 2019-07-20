@@ -28,7 +28,7 @@ a{
     padding: 0 10px;
     position: relative;
     .time {
-      position: absolute;
+      margin-top: 8px;
       display: block;
       font-size: 14px;
       color: #666;
@@ -50,8 +50,8 @@ a{
       padding: 2px 4px;
     }
     .complete{
-      color: #1cabe2;
-      border: 1px solid #1cabe2;
+      color: #999999;
+      border: 1px solid #999999;
     }
     .inProgess{
       color: #e34e09;

@@ -57,7 +57,7 @@ const ChildRoute = () => (
     <Route exact path="/requesterwallet" component={RequesterWallet} />
     <Route exact path="/Donator" component={Donator} />
     <Route exact path="/recipient" component={Recipient} />
-    <Route exact path="/recipient/1" component={RecipientContent} />
+    <Route exact path="/recipient/:id" component={RecipientContent} />
     <Route exact path="/charity" component={Charity} />
     <Route exact path="/business" component={BusinessDetail} />
     <Route path="*" component={Footer} />

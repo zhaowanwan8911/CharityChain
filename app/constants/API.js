@@ -9,3 +9,4 @@ export const BLOCK_CHAIN_URL = 'http://127.0.0.1:20334'
 
 export const API_POST_CREAT_PROJECT = '/project/create'
 export const API_GET_RECIPENT_LIST = '/project/list'
+export const API_GET_RECIPENT_CONTENT = '/project/detail'
