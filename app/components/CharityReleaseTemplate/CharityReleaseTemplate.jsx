@@ -7,12 +7,15 @@ import { injectIntl } from 'react-intl'
 import styles from './CharityReleaseTemplate.scss'
 import {CHARITY_ADDRESS} from '../../constants/Address'
 import {getRecipientProjectList} from "../../actions/recipient";
+import CLOSE from "../DonationTemplate/close.png";
+import ReleaseHistory from "../ReleaseHistory/ReleaseHistory";
+import PIC from "../ReleaseHistory/pic.jpg";
 
 class CharityReleaseTemplate extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      recipientProjectList:''
+      recipientProjectList:[]
     }
   }
   componentDidMount = () => {
@@ -30,13 +33,38 @@ class CharityReleaseTemplate extends React.Component {
 
   render() {
     return (
-      <div className={styles.templateWraper}>
-        <span className={styles.closeBtn} onClick={this.closeBord}>x</span>
-        <h1>助力项目</h1>
-        <div className={styles.info}>
+      <div>
+        <div className={styles.templateDiv}>
+        </div>
+        <div className={styles.templateWraper}>
+          <div className={styles.templateTop}>
+            <h1>爱心助力</h1>
+          </div>
+          <span className={styles.closeBtn} onClick={this.closeBord}>
+            <img src={CLOSE}/>
+          </span>
+
+          <div className={styles.info}>
+            <div className={styles.releaseHistory}>
+              {
+                this.state.recipientProjectList.map((item, index) => {
+                  return (
+                    <div className={styles.releaseItem}>
+                      <img src={PIC} alt=""/>
+                      <div className={styles.releaseItemText}>
+                        <p>{item.title}</p>
+                        <p className={styles.releaseItemSmall}>姓名：{item.name}</p>
+                        <p className={styles.releaseItemSmall}>金额：{item.money}</p>
+                      </div>
+
+                    </div>
+                  )
+                })
+              }
+            </div>
+          </div>
 
         </div>
-
       </div>
     )
   }
