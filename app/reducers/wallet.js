@@ -10,6 +10,7 @@ const wallet = (state = {
   },
   transforHistory:'',
   transforHistoryForDonator:'',
+  transforHistoryForVested:'',
   transforHistoryForCharity:'',
   transforHistoryForActuator:'',
   transforHistoryForProvider:'',
@@ -24,6 +25,8 @@ const wallet = (state = {
       return Object.assign({}, state, { transforHistory: payload })
     case types.SET_TRANSFOR_HISTORY_FOR_DONATOR:
       return Object.assign({}, state, { transforHistoryForDonator: payload })
+    case types.SET_TRANSFOR_HISTORY_FOR_VESTED:
+      return Object.assign({}, state, { transforHistoryForVested: payload })
     case types.SET_TRANSFOR_HISTORY_FOR_CHARITY:
       return Object.assign({}, state, { transforHistoryForCharity: payload })
     case types.SET_TRANSFOR_HISTORY_FOR_ACTUATOR:

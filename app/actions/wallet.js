@@ -1,6 +1,7 @@
 import {
   API_GET_BALANCE,
-  API_GET_TRANSFOR_HISTORY
+  API_GET_TRANSFOR_HISTORY,
+  API_GET_TRANSFOR_VESTED
 } from '../constants/API'
 import RestfulAPIUtils from '../Utils/RestfuAPIUtils'
 import * as types from '../constants/ActionTypes'
@@ -32,11 +33,9 @@ export const getTransforHistory = ($address,$type,$table) => {
     wallet_address: $address,
     type: $type
   }
-  console.log(params)
   return async (dispatch) => {
     try {
       const result = await RestfulAPIUtils.get(API_GET_TRANSFOR_HISTORY, { params: params })
-      console.log(result)
       if (result.status === 200) {
         if ($table) {
           switch($table) {
@@ -57,6 +56,20 @@ export const getTransforHistory = ($address,$type,$table) => {
           dispatch({ type: types.SET_TRANSFOR_HISTORY, payload: result.data })
         }
 
+      } else {
+        throw result.status.message
+      }
+    } catch (e) {
+      console.error(e)
+    }
+  }
+}
+export const getVestedTransforHistory = () => {
+  return async (dispatch) => {
+    try {
+      const result = await RestfulAPIUtils.get(API_GET_TRANSFOR_VESTED)
+      if (result.status === 200) {
+          dispatch({ type: types.SET_TRANSFOR_HISTORY_FOR_VESTED, payload: result.data })
       } else {
         throw result.status.message
       }

@@ -92,6 +92,7 @@ class Charity extends React.Component {
           <div className={styles.charityActive}>
             <Account
               buttonName="爱心助力"
+              buttonName2="转给机构"
             />
           </div>
         </div>
@@ -114,7 +115,7 @@ class Charity extends React.Component {
         <div className={styles.charityList}>
           <TableList
             tableHeader={this.tableHeader}
-            tableData = {this.state.transforHistory}
+            tableData = {this.state.transforHistory.slice(0,10)}
             sessionName={this.sessionName}
             refreshList={this.refreshList}
             type="all"

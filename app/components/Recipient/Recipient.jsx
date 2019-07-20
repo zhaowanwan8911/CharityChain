@@ -109,7 +109,7 @@ class Recipient extends React.Component {
         <div className={styles.recipientsRecord}>
           <TableList
             tableHeader={this.tableHeader}
-            tableData = {this.state.transforHistory}
+            tableData = {this.state.transforHistory.slice(0,10)}
             sessionName={this.sessionName}
             refreshList={this.refreshList}
             type="payer"

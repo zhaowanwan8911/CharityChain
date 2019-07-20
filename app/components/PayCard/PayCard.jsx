@@ -20,7 +20,7 @@ class PayCard extends React.Component {
       password: '',
       showBoard: false,
       hideNav: false,
-      costNumber: 8,
+      costNumber: 0,
     }
   }
   componentDidMount = () => {
@@ -45,7 +45,7 @@ class PayCard extends React.Component {
       number: e.target.value,
     })
   }
-  changePassword = () => {
+  changePassword = (e) => {
     this.setState({
       password: e.target.value,
     })
@@ -67,14 +67,15 @@ class PayCard extends React.Component {
       encode_private: this.state.password,
     }
     this.props.cardPay(params)
+
     this.setState({
       showBoard: false,
     })
   }
   showBread = () => {
-    // this.props.cardPayResult.num
+    const lens = this.props.cardPayResult.result && this.props.cardPayResult.result * 1
     const breadArr = []
-    for ( let i = 0 ; i < this.state.costNumber ; i++) {
+    for ( let i = 0 ; i < lens ; i++) {
       breadArr.push(<img src={BREAD} alt="" key={i}/>)
     }
     return breadArr
@@ -93,7 +94,7 @@ class PayCard extends React.Component {
        <div className={styles.right}>
           <div className={styles.number}>
             <label>购买数量（个）:</label>
-            <input type="text" onChange={() => {this.changeNumber}}/>
+            <input type="text" onChange={this.changeNumber}/>
             <p onClick={this.payCard}>刷卡</p>
           </div>
           <div className={styles.invoice}>
@@ -118,7 +119,7 @@ class PayCard extends React.Component {
                 <div className={styles.info}>
                   <div className={styles.password}>
                     <label>密码:</label>
-                    <input type="password" onChange={() => {this.changePassword}}/>
+                    <input type="password" onChange={this.changePassword}/>
                   </div>
                 </div>
                 <div className={styles.btnWraper}>

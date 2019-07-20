@@ -58,9 +58,8 @@ export const cardPay = ($params) => {
   return async (dispatch) => {
     try {
       const result = await RestfulAPIUtils.post( API_POST_CARD_PAY, $params)
-      console.log(result)
       if (result.status === 200) {
-        dispatch({ type: POST_CARD_PAY, payload: result.data })
+        dispatch({ type: types.POST_CARD_PAY, payload: {result: result.data} })
       } else {
         throw result.status.message
       }
