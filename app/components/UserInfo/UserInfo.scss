@@ -12,11 +12,16 @@
     width: 200px;
     height: 300px;
     text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     .photo{
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
-      margin-top: 65px;
+      width: 140px;
+      border-radius: 4px;
+    }
+    .photoCharity {
+      width: 180px;
+      border-radius: 4px;
     }
   }
   .userInfo{
@@ -44,6 +49,21 @@
         display: inline-block;
         margin-right: 4px;
         color: #333333;
+      }
+    }
+    .description {
+      display: flex;
+      font-family:Roboto, "Heiti SC", "Microsoft Yahei", simsun, sans-serif;
+      font-size:16px;
+      line-height:24px;
+      margin: 10px 0;
+      span {
+        display: block;
+        width: 76px;
+      }
+      .descriptionInfo {
+        display: block;
+        flex: 1;
       }
     }
   }

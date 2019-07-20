@@ -30,7 +30,9 @@ class HomePage extends React.Component {
     this.list = [
       {name: '捐赠者'},
       {name: '求助者'},
-      {name: '机构'},
+      {name: '慈善机构'},
+      {name: '供应商'},
+      {name: '执行机构'},
     ]
 
   }
@@ -127,8 +129,12 @@ class HomePage extends React.Component {
               role = "donator"
             }else if (this.state.roleName === this.list[1].name){
               role = "recipient"
-            }else {
+            }else if (this.state.roleName === this.list[2].name){
               role = "charity"
+            }else if (this.state.roleName === this.list[3].name){
+              role = "provider"
+            }else if (this.state.roleName === this.list[4].name){
+              role = "actuator"
             }
             const walletInfo = {
               address: Address,
