@@ -28,7 +28,7 @@ class Account extends React.Component {
     return (
       <div className={this.props.type === 'small' ? styles.contentWrapperSmall : styles.contentWrapper}>
         {
-          this.props.info.state === 'Create' ?
+          this.props.info.state === 'Create' && this.props.charity ?
             <div className={styles.releaseItem}>
               <div className={styles.img}>
                 <img src={PIC} alt=""/>

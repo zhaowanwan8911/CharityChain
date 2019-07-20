@@ -51,6 +51,10 @@ const Message = Loadable({
   loader: () => import('./components/Message/Message'),
   loading: Loading,
 })
+const PayCard = Loadable({
+  loader: () => import('./components/PayCard/PayCard'),
+  loading: Loading,
+})
 const MoreDetailsListBoard = Loadable({
   loader: () => import('./components/MoreDetailsListBoard/MoreDetailsListBoard'),
   loading: Loading,
@@ -71,6 +75,7 @@ const ChildRoute = () => (
     <Route exact path="/recipient" component={Recipient} />
     <Route exact path="/recipient/:id" component={RecipientContent} />
     <Route exact path="/charity" component={Charity} />
+    <Route exact path="/paycard" component={PayCard} /> 
     <Route exact path="/business" component={BusinessDetail} />
     <Route exact path="/list" component={MoreDetailsListBoard} />
     <Route exact path="/effect" component={Effect} />
