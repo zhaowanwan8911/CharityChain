@@ -27,7 +27,7 @@ class Nav extends React.Component {
       },
       {
         name: '影响力',
-        url: '',
+        url: '/effect',
       },
       {
         name: '相关机构',
@@ -71,11 +71,15 @@ class Nav extends React.Component {
     return (
       <div className={styles.navWraper} style={this.state.hideNav ? { height: '60px', position: 'fixed', top: '0', left: '0', zIndex: '999' } : { height: '160px' }}>
         <div className={styles.logo} style={this.state.hideNav ? { display: 'none' } : { display: 'block' }}>
-          <img src={logo} alt="嘿！朋友" className={styles.logoImg}/>
-        </div>
-        <div className={styles.kindsOrgan}>
-          <span>供应商机构</span>
-          <span>执行机构</span>
+          <div className={styles.flex}>
+            <img src={logo} alt="I Link" className={styles.logoImg}/>
+            <div className={styles.kindsOrgan}>
+              <p>快速通道：</p>
+              <span>慈善机构</span>
+              <span>供应商机构</span>
+              <span>执行机构</span>
+            </div>
+          </div>
         </div>
         <div className={styles.navTop}>
           {

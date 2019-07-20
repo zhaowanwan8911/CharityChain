@@ -122,12 +122,6 @@ class Charity extends React.Component {
             plus="all"
             address={this.props.walletInfo.address}
           />
-          <Pagiation
-            config = {{
-              totalPage: 3,
-              paging: this.paging,
-            }}
-          />
         </div>
       </div>
     )
