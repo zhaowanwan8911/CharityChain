@@ -77,6 +77,21 @@
       }
     }
   }
+  .more {
+    display: block;
+    width:1200px;
+    height: 30px;
+    overflow: hidden;
+    margin: auto;
+    line-height: 20px;
+    text-align: right;
+    color: #367abd;
+    cursor: pointer;
+  }
+  a {
+    text-decoration: none;
+    color: #367abd;
+  }
 }
 .green{
     color: green !important;

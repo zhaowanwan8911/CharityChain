@@ -16,6 +16,7 @@ class BusinessDetail extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
+      hideNav: false,
       activeIndex: 0,
       transforHistoryForDonator:[],
       transforHistoryForCharity:[],
@@ -49,6 +50,7 @@ class BusinessDetail extends React.Component {
     this.sessionName2 = '受捐记录'
   }
   componentDidMount = () => {
+    window.addEventListener('scroll', this.handleScroll.bind(this))
     this.refreshList1()
   }
   componentWillReceiveProps = (nextProps) => {
@@ -63,6 +65,20 @@ class BusinessDetail extends React.Component {
     }
     if (this.props.transforHistoryForProvider !== nextProps.transforHistoryForProvider) {
       this.setState({transforHistoryForProvider: nextProps.transforHistoryForProvider})
+    }
+  }
+  componentWillUnmount = () => {
+    window.removeEventListener('scroll', this.handleScroll.bind(this))
+  }
+  handleScroll = (e) => {
+    if (e.srcElement.scrollingElement.scrollTop > 100) {
+      this.setState({
+        hideNav: true,
+      })
+    } else {
+      this.setState({
+        hideNav: false,
+      })
     }
   }
   refreshList1 = () => {
@@ -92,6 +108,7 @@ class BusinessDetail extends React.Component {
             type="all"
             plus="all"
             address={CHARITY_ADDRESS}
+            name="charity"
           />
         )
       case 1 :
@@ -103,6 +120,7 @@ class BusinessDetail extends React.Component {
             type="all"
             plus="all"
             address={ACTUATOR_ADDRESS}
+            name="actuator"
           />
         )
       case 2 :
@@ -114,6 +132,7 @@ class BusinessDetail extends React.Component {
             type="all"
             plus="all"
             address={PROVIDER_ADDRESS}
+            name="provider"
           />
         )
       default:
@@ -122,7 +141,7 @@ class BusinessDetail extends React.Component {
   }
   render() {
     return (
-      <div className={styles.BusinessDetail}>
+      <div className={styles.BusinessDetail} style={this.state.hideNav ? { marginTop: '161px' } : { marginTop: '0' }}>
         <div className={styles.search}>
           <input type="text" placeholder="搜索"/>
           <div className={styles.btn}>搜索</div>
@@ -135,6 +154,7 @@ class BusinessDetail extends React.Component {
           type="payer"
           plus="-"
           address={CHARITY_ADDRESS}
+          name="donator"
         />
         <TableList
           tableHeader={this.tableHeader1}
@@ -144,6 +164,7 @@ class BusinessDetail extends React.Component {
           type="payer"
           plus="-"
           address={CHARITY_ADDRESS}
+          name="donator"
         />
 
         <div className={styles.tabsWraper}>
@@ -166,12 +187,12 @@ class BusinessDetail extends React.Component {
           {
             this.showTable(this.state.activeIndex)
           }
-          <Pagiation
+          {/* <Pagiation
             config = {{
               totalPage: 18,
               paging: this.paging,
             }}
-          />
+          /> */}
         </div>
       </div>
     )
