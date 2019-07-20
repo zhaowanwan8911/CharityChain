@@ -45,9 +45,7 @@ class UserInfo extends React.Component {
   componentWillReceiveProps = (nextProps) => {
     if (this.props.personalInfo !== nextProps.personalInfo) {
       this.setState({personalInfo: nextProps.personalInfo})
-    }
-    if (this.props.type !== nextProps.type) {
-      switch(nextProps.type) {
+      switch(nextProps.personalInfo.role) {
         case 'recipient':
             this.setState({
               headImg: this.Beneficiary[Math.floor(Math.random()*3)],
@@ -79,7 +77,6 @@ class UserInfo extends React.Component {
     }
   }
   render() {
-    if(!this.props.type) return null
     return (
       <div className={styles.user}>
         <div className={styles.photoWraper}>
@@ -88,7 +85,7 @@ class UserInfo extends React.Component {
             alt=""
             className={classNames({
               [styles.photo]: true,
-              [styles.photoCharity]: this.props.type === 'charity' || this.props.type === 'provider' || this.props.type === 'actuator',
+              [styles.photoCharity]: this.state.personalInfo.role === 'charity' || this.state.personalInfo.role === 'provider' || this.state.personalInfo.role === 'actuator',
             })}
           />
         </div>
@@ -101,7 +98,7 @@ class UserInfo extends React.Component {
             <span>{this.state.personalInfo.name}</span>
           </p>
           {
-            (this.props.type === 'donator' || this.props.type === 'recipient') &&
+            (this.state.personalInfo.role === 'donator' || this.state.personalInfo.role === 'recipient') &&
             <div>
               <p>
                 <span>性别:</span>
@@ -114,7 +111,7 @@ class UserInfo extends React.Component {
             </div>
           }
           {
-            (this.props.type === 'Charity' || this.props.type === 'provider' || this.props.type === 'actuator') &&
+            (this.state.personalInfo.role === 'Charity' || this.state.personalInfo.role === 'provider' || this.state.personalInfo.role === 'actuator') &&
             <div className={styles.description}>
               <span>机构描述:</span>
               <span className={styles.descriptionInfo}>{this.state.personalInfo.description}</span>
